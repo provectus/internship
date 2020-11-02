@@ -5,6 +5,7 @@
 * Each test block consists of questions and code task 
 * You need to answer questions and complete the code task
     * Code task result must be on Stackblitz or Github
+    * Answers could be in Russian or English language
 * The result of the entire code task must be on Google Docks or Github
 
 ## Task
