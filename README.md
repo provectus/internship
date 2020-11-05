@@ -1,35 +1,35 @@
-# Provectus internship programm test task
+# Provectus Internship Program test assignment
 
-## How to do
+## Instructions
 
-* Each test block consists of questions and code task 
-* You need to answer questions and complete the code task
-    * Code task result must be on Stackblitz or Github
-    * Answers could be in Russian or English language
-* The result of the entire code task must be on Google Docks or Github
+* Each test block consists of questions, and a code exercise
+* You need to answer questions and complete the code exercise
+    * Code exercise result must be on Stackblitz or Github
+    * Answers can be in Russian or English language
+* The result of the entire code exercise must be on Google Docks or Github
 
-## Task
+## Assignment
 #### Block 1: Common
     1. What are primitives? How can developers use them?
     2. What does keyword `this` mean?
-    3. How would you explain what callback is?
-    4. What is function declaration and how do its types differ?
+    3. What are callbacks?
+    4. What is a function declaration and how are its types different?
     5. Compare spread and rest operators.
-#### [Code task](https://stackblitz.com/edit/js-v99jvs)
+#### [Code exercise](https://stackblitz.com/edit/js-v99jvs)
 
 #### Block 2: Async
     1. JavaScript, is it synchronous or not?
     2. What is the key principle of Call Stack?
     3. What does AJAX mean?
     4. Promise hell. How would you solve it?
-    5. How would you handle exceptions in JS? Two options.
-    6. What framework would you choose for development? Explain why.
-#### [Code task](https://stackblitz.com/edit/js-llr1ac-async-task)
+    5. How would you handle exceptions in JS? List two options.
+    6. Which framework would you choose for a new project? Explain why.
+#### [Code exercise](https://stackblitz.com/edit/js-llr1ac-async-task-xqvfc5)
 
 #### Block 3: TypeScript
     1. Is it possible to check types in runtime? If so, how?
-    2. How do private and protected fields differ?
+    2. What is the difference between private and protected fields?
     3. How do interfaces help in development?
-    4. How would you pass arguments into Class?  
-#### [Code task](https://stackblitz.com/edit/typescript-jdeo47)
+    4. How would you pass arguments into a Class?
+#### [Code exercise](https://stackblitz.com/edit/typescript-2xfiqk)
 
