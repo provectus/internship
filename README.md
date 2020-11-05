@@ -6,7 +6,7 @@
 * You need to answer questions and complete the code exercise
     * Code exercise result must be on Stackblitz or Github
     * Answers can be in Russian or English language
-* The result of the entire code exercise must be on Google Docks or Github
+* The result of the entire assignment must be on Google Docs or Github
 
 ## Assignment
 #### Block 1: Common
