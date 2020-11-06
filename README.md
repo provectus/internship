@@ -15,7 +15,7 @@
     3. What are callbacks?
     4. What is a function declaration and how are its types different?
     5. Compare spread and rest operators.
-#### [Code exercise](https://stackblitz.com/edit/js-v99jvs)
+#### [Code exercise](https://stackblitz.com/edit/js-block1?file=task.js)
 
 #### Block 2: Async
     1. JavaScript, is it synchronous or not?
