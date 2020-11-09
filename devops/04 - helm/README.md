@@ -1,10 +1,10 @@
-Prerequsite:
+## Prerequsite:
 
 * Minikube v1.6.2 or greater with ingress plugin enabled
 
 * Helm 3.2.3 or greater
 
-Вопросы
+## Вопросы
 
 1 Что такое kubernetes и для чего он нужен?
 
@@ -17,7 +17,7 @@ Prerequsite:
 5 Что такое umbrella chart?
 
 
-Задания
+## Задания
 
 * create helm charts for applications from [docker-compose](../03%20-%20docker-compose) task (use ingress to provide access for web-ui service)
 

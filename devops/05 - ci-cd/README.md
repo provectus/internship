@@ -1,4 +1,4 @@
-Prerequsite:
+## Prerequsite:
 
 * Minikube v1.6.2 or greater
 
@@ -6,7 +6,7 @@ Prerequsite:
 
 * Git 2.28 or greater
 
-Вопросы
+## Вопросы
 
 1 Что такое gitflow и его разновидности?
 
@@ -21,7 +21,7 @@ Prerequsite:
 `*` 6 Опишите как код с компьютера разработчика доходит до production окружения? Какие этапы вы бы настроили?
 
 
-Задания
+## Задания
 
 * deploy jenkins and registry helm to you minikube and configure it
 
