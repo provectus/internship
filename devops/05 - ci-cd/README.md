@@ -8,27 +8,27 @@ Prerequsite:
 
 Вопросы
 
-1 Что такое Continuous integration ?
+1 Что такое gitflow и его разновидности?
 
-2 Что такое gitflow и его основные виды?
+2 Что такое Continuous integration ?
 
 3 Что такое Continuous deployment ?
 
-4 Какие виды deployment можете назвать и дать их описание ? (Green-blue, canary, etc.)
+4 Какие виды deployment можете назвать и дать их описание ? (Green-blue, etc.)
 
-5 Какие виды тестирования вы знаете?
+5 Какие виды тестирования вы знаете? В чем их суть?
 
-6 Опишите как код с компьютера разработчика доходит до production окружения? Какие этапы вы бы настроили?
+`*` 6 Опишите как код с компьютера разработчика доходит до production окружения? Какие этапы вы бы настроили?
 
 
 Задания
 
-build you dockerfile from dockerfile test
+* deploy jenkins and registry helm to you minikube and configure it
 
-update you docker-compose to new tag
+* create pipeline for:
 
-update you helm chart
+ * build you [dockerfile](../02%20-%20dockerfile/Dockerfile) with new version tag and store in into registry
 
-run test env
+ `*` update you [docker-compose](../03%20-%20docker-compose/example/docker-compose.yaml) to new tag and create new release with changelog
 
-git commit and tag - release
+ `*` update you helm charts and umbrella helm chart, redeploy umbrella helm chart to minikube
