@@ -13,7 +13,7 @@ Questiens:
 
 Задания:
 
-1 Dockerfile - Helo ${ENV}, где env - ip address 
+* Dockerfile - Helo ${ENV}, где env - ip address 
 
-2 Multistage build - пример реализации сборки фронта
+* Multistage build - пример реализации сборки фронта
 

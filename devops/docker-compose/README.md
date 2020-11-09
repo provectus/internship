@@ -11,12 +11,12 @@
 
 Задания
 
-Docker-compose with some bug - invistigate
+* Docker-compose with some bug - invistigate
 
-Docker-compose with environment file
+* Docker-compose with environment file
 
-Prepare for next test - create from scratch dockder-compose with jenkins, docker-registry and minio
+* Prepare for next test - create from scratch dockder-compose with jenkins, docker-registry and minio
 
-* Изменить докер композ на запуск через docker stack с переиспользованием кода (do not repeat you self)
+`*` Изменить докер композ на запуск через docker stack с переиспользованием кода (do not repeat you self)
 
-* Настроить jenkins через JCasC плагин
+`*` Настроить jenkins через JCasC плагин
