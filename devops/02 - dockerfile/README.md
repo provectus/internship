@@ -1,4 +1,8 @@
-Дано:
+Prerequsite:
+
+* Docker 19.03 or greater
+
+Legend:
 
 Приложение на react которое выводит Hello word! Есть dockerfile и код приложения в example/app.js. 
 Необходимо оптимизировать Dockerfile исправив или добавив шаги, переписать код чтобы выводило Hello ${ENV}, где ${ENV} задается через ENV dockerfile и подставляет ip адресс запущеного контейнера.

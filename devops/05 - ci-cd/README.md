@@ -1,3 +1,11 @@
+Prerequsite:
+
+* Minikube v1.6.2 or greater
+
+* Docker 19.03 or greater
+
+* Git 2.28 or greater
+
 Вопросы
 
 1 Что такое Continuous integration ?
