@@ -1,12 +1,15 @@
-Prerequsite:
+##Prerequsite:
 
 Docker 19.03 or grather
 
 Docker-compose 1.26 or grather
 
-Legend:
+##Legend:
 
-Докер композ с 3 приложениями (фронт + бек + БД). 
+Докер композ с 3 приложениями (фронт + бек + БД).
+
+###Инструкция по запуску
+
 1 Bootstrap the DB:
 
 `docker-compose up -d db`
@@ -19,7 +22,7 @@ Legend:
 
 3 Browse to localhost:8080 to see the app in action.
 
-Вопросы
+##Вопросы
 
 1 Чем отличается докер композ от докерфайла? Для чего нужен compose?
 
@@ -32,7 +35,7 @@ Legend:
 `*` 5 Как сохранить изменения сделанные внутри контейнера?
 
 
-Задания
+##Задания
 
 * Docker-compose with some bug - invistigate it! what you improve?
 
