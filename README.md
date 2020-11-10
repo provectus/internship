@@ -24,7 +24,7 @@
     4. Promise hell. How would you solve it?
     5. How would you handle exceptions in JS? List two options.
     6. Which framework would you choose for a new project? Explain why.
-#### [Code exercise](https://stackblitz.com/edit/js-llr1ac-async-task-xqvfc5)
+#### [Code exercise](https://stackblitz.com/edit/js-llr1ac-async-task-chvwqk)
 
 #### Block 3: TypeScript
     1. Is it possible to check types in runtime? If so, how?
