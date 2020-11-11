@@ -1,5 +1,5 @@
-Внутри каждой папки есть задачи и вопросы, пожалуйста выполняйте задания в порядке возростания.
+Inside each folder there are tasks and questions, please complete tasks in ascending order.
 
-Задания с `*` можно пропустить, если они покажутся слишком сложными.
+Tasks with ' * ' can be skipped if they seem too difficult.
 
-Результаты можно выложить через pull-request.
+Results can be uploaded via pull-request.
