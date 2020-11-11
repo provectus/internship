@@ -23,11 +23,11 @@
 
 ## Задания
 
-* deploy jenkins and registry helm to you minikube and configure it
+* register or login to https://circleci.com/
 
 * create pipeline for:
 
- * build you [dockerfile](../02%20-%20dockerfile/Dockerfile) with new version tag and store in into registry
+ * build you [dockerfile](../02%20-%20dockerfile/Dockerfile) with new version tag and store in into registry (dockerhub or smth else with public access)
 
  `*` update you [docker-compose](../03%20-%20docker-compose/example/docker-compose.yaml) to new tag and create new release with changelog
 
