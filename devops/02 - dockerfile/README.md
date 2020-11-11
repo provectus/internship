@@ -1,23 +1,23 @@
-## Prerequsite:
+## Prerequsite
 
 * Docker 19.03 or greater
 
-## Legend:
+## Legend
 
-Приложение на react которое выводит Hello word! Есть dockerfile и код приложения в example/app.js. 
-Необходимо оптимизировать Dockerfile исправив или добавив шаги, переписать код чтобы выводило Hello ${ENV}, где ${ENV} задается через ENV dockerfile и подставляет ip адрес запущеного контейнера.
+A node js application that outputs Hello world! There is a dockerfile and application code in example/app.js.
+You need to optimize the Dockerfile by correcting or adding steps, rewrite the dockerfile to output Hello ${ENV}, where ${ENV} is set via ENV dockerfile and substitutes the ip address of the running container.
 
-## Questiens:
+## Questions
 
-1 Что такое докер, на базе какой технологии реализуется?
+1 what is Docker, on the basis of what technology is implemented?
 
-2 Посмотри в докерфайл - что на твой взгляд лучше изменить?
+2 Look in the Docker file-what do you think is better to change?
 
-3 Как передать переменные в докерфайл при сборке и при запуске контейнера?
+3 How do I pass variables to the Docker file when building and running the container?
 
-## Задания:
+## Tasks
 
-* Dockerfile - Helo ${ENV}, где env - ip address 
+* Dockerfile - Hello ${ENV}, where env is the ip address
 
-* Multistage build - пример реализации сборки фронта
+* Multistage build-an example of the build implementation.
 

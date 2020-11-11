@@ -1,14 +1,14 @@
-## Prerequsite:
+## Prerequsite
 
 Docker 19.03 or grather
 
 Docker-compose 1.26 or grather
 
-## Legend:
+## Legend
 
-Докер композ с 3 приложениями (фронт + бек + БД).
+Docker compose with 3 applications (front + backend + DB).
 
-### Инструкция по запуску
+### Instructions for running
 
 1 Bootstrap the DB:
 
@@ -22,24 +22,24 @@ Docker-compose 1.26 or grather
 
 3 Browse to localhost:8080 to see the app in action.
 
-## Вопросы
+## Questions
 
-1 Чем отличается докер композ от докерфайла? Для чего нужен compose?
+1 What is the difference between Docker compoz and dockerfile? Why do I need compose?
 
-2 Как параметризировать композ для разных сред?
+2 how do I parameterize compos for different environments?
 
-3 Какие виды сущностей используются в docker-compose и для чего?
+3 What types of entities are used in docker-compose and for what purpose?
 
-`*` 4 Какой командой вывести логи приложения и как скопировать\залить файл в контейнер?
+`*` 4 What command to output application logs and how to copy\upload the file to the container?
 
-`*` 5 Как сохранить изменения сделанные внутри контейнера?
+`*` 5 how to save changes made inside the container?
 
 
-## Задания
+## Tasks
 
 * Docker-compose with some bug - invistigate it! what you improve?
 
 * Docker-compose with environment file. Create 2 different environment file and params docker-compose
 
-`*` Изменить докер композ на запуск через docker stack с переиспользованием кода (do not repeat you self)
+`*` Change the docker-compose.yaml to run through dockerstack with code reuse (don't repeat yourself)
 

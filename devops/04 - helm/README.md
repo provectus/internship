@@ -1,29 +1,29 @@
-## Prerequsite:
+## Prerequsite
 
 * Minikube v1.6.2 or greater with ingress plugin enabled
 
 * Helm 3.2.3 or greater
 
-## Вопросы
+## Questions
 
-1 Что такое kubernetes и для чего он нужен?
+1 What is kubernetes and what is it for?
 
-2 Какие сущности kubernetes можете перечислить и их назначение?
+2 What kubernetes entities can you list and their purpose?
 
-3 С какими инструментами для работы в кубернейтс приходилось работать и какие задачи решать?
+3 what tools did you have to work with in kubernetes and what tasks did you have to solve?
 
-4 Что такое helm chart?
+4 what is helm chart?
 
-5 Что такое umbrella chart?
+5 What is umbrella chart?
 
 
-## Задания
+## Tasks
 
-* create helm charts for applications from [docker-compose](../03%20-%20docker-compose) task (use ingress to provide access for web-ui service)
+* create helm charts for applications from [docker-compose](../03%20-%20docker-compose) task
 
 * create umbrella helm chart for you helm charts
 
-* Lint and deploy umbrella helm chart ( `*` должно работать командой `helm install .`)
+`*` Lint and deploy umbrella helm chart
 
 `*` Deploy log and monitoring tools for you users
 

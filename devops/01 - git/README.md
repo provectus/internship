@@ -1,27 +1,27 @@
-## Prerequsite:
+## Prerequsite
 
 * Git 2.28 or greater
 
-## Вопросы:
+## Questions
 
-1 Какой командой можно посмотреть историю коммитов?
+1 What command can I use to view the commit history?
 
-2 Какой командой можно отменить последний коммит?
+2 what command can I use to undo the last commit?
 
-3 Какой командой можно создать новую ветку и новый тег?
+3 what command can I use to create a new branch and a new tag?
 
-4 Как исключить из коммита файл\папку?
+4 how do I exclude a file \ folder from a commit?
 
-5 В случае конфликта, какими командами можно его решить?
+5 in case of a conflict, what commands can be used to resolve it?
 
- `*` 6 Что такое pre-commit hook и post-commit hook, для чего они нужны?
+`*` 6 what are pre-commit hook and post-commit hook, and what are they for?
 
- `*` 7 Как изменить последний коммит, без добавления нового коммита?
+`*` 7 How do I change the last commit without adding a new commit?
 
-## Задачи:
+## Tasks
 
-* форкнуть текущий репозиторий
+* fork the current repository
 
-* склонировать его,найти последние неудачные изменения и отменить их
+* clone it, find the last failed changes and cancel them
 
-* после прохождения всех вопросов сделать pull-request с результатами работы и тегом Done-текущая дата
+* after passing all the questions, make a pull-request with the results of the work and the tag Done-current date

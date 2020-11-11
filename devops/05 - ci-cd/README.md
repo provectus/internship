@@ -1,4 +1,4 @@
-## Prerequsite:
+## Prerequsite
 
 * Minikube v1.6.2 or greater
 
@@ -6,29 +6,29 @@
 
 * Git 2.28 or greater
 
-## Вопросы
+## Questions
 
-1 Что такое gitflow и его разновидности?
+1 What is git flow and its variations?
 
-2 Что такое Continuous integration ?
+2 What is Continuous integration ?
 
-3 Что такое Continuous deployment ?
+3 What is Continuous deployment?
 
-4 Какие виды deployment можете назвать и дать их описание ? (Green-blue, etc.)
+4 what types of deployment can you name and describe ? (Green-blue, etc.)
 
-5 Какие виды тестирования вы знаете? В чем их суть?
+5 What types of testing do you know? What are they?
 
-`*` 6 Опишите как код с компьютера разработчика доходит до production окружения? Какие этапы вы бы настроили?
+`*` 6 Describe how the code from the developer's computer reaches the production environment? What stages would you set up?
 
 
-## Задания
+## Tasks
 
-* register or login to https://circleci.com/
+* login with your github account to https://circleci.com/
 
-* create pipeline for:
+* in .circleci/config.yaml create pipeline for:
 
  * build you [dockerfile](../02%20-%20dockerfile/Dockerfile) with new version tag and store in into registry (dockerhub or smth else with public access)
 
  `*` update you [docker-compose](../03%20-%20docker-compose/example/docker-compose.yaml) to new tag and create new release with changelog
 
- `*` update you helm charts and umbrella helm chart, redeploy umbrella helm chart to minikube
+ `*` update you helm charts and umbrella helm chart, create release in your repository, download release and redeploy umbrella helm chart to minikube for test
