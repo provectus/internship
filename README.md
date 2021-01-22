@@ -1,8 +1,6 @@
 # Provectus Internship Program 
 
-:tada:
-
-:point_right: **Open a PR, then apply through [Provectus Internship Application Form](https://docs.google.com/forms/d/e/1FAIpQLSfpIozuzxzbFILpA2u7i4H8B4QjKJ-rSXM8Y8qoMw)!**
+:point_right:  **Open a PR with your completed test assignment, and apply through [Provectus Internship Application Form](https://docs.google.com/forms/d/e/1FAIpQLSfpIozuzxzbFILpA2u7i4H8B4QjKJ-rSXM8Y8qoMw)!**
 
 
 <p align="center">
@@ -18,14 +16,14 @@ This repository contains test assignments for Provectus Internship Program (PIP)
 
 Currently two specializations are available for internship: 
 
-- [DevOps](./devops)
-- [Frontend](./frontend)
+- **[DevOps](./devops)**
+- **[Frontend](./frontend)**
 
 Pick one and follow the directions in its README.md file.
 The test task consists of 2 parts: theory and practice. 
 Make sure to complete both and open a PR. Then, fill in this form, add a link to your PR inside it and submit: 
 
-**[Provectus Internship Application Form](https://docs.google.com/forms/d/e/1FAIpQLSfpIozuzxzbFILpA2u7i4H8B4QjKJ-rSXM8Y8qoMw)**
+- **[Provectus Internship Application Form](https://docs.google.com/forms/d/e/1FAIpQLSfpIozuzxzbFILpA2u7i4H8B4QjKJ-rSXM8Y8qoMw)**
 
 We will review your application and reply as soon as we can. 
 
@@ -69,7 +67,7 @@ For current internship and learning opportunities at Provectus and their startin
 Or send an email to us at: **kazan_internship@provectus.com**
 
 ### About Provectus
-Provectus is an Artificial Intelligence consultancy and solutions provider, helping companies in Healthcare & Life Sciences, Retail & CPG, Media & Entertainment, Manufacturing, and Internet businesses achieve their objectives through AI. Provectus is headquartered in Palo Alto, CA. For more information, visit [provectus.com](https://provectus.com/).
+Provectus is an Artificial Intelligence consultancy and solutions provider, helping companies in Healthcare & Life Sciences, Retail & CPG, Media & Entertainment, Manufacturing, and Internet businesses achieve their objectives through AI. Provectus is headquartered in Palo Alto, CA. For more information, visit **[provectus.com](https://provectus.com/)**.
 
 
-Good Luck!
+:tada: Good Luck!
