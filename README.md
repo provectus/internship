@@ -1,6 +1,6 @@
 # Provectus Internship Program 
 
-:point_right:  **Open a PR with your completed test assignment, and apply through [Provectus Internship Application Form](https://docs.google.com/forms/d/e/1FAIpQLSfpIozuzxzbFILpA2u7i4H8B4QjKJ-rSXM8Y8qoMw)!**
+:point_right:  **Open a PR with your completed test assignment, and apply through the [Internship Application Form](https://docs.google.com/forms/d/e/1FAIpQLSfpIozuzxzbFILpA2u7i4H8B4QjKJ-rSXM8Y8qoMw)!**
 
 
 <p align="center">
