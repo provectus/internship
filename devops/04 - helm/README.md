@@ -6,26 +6,26 @@
 
 ## Questions
 
-1 What is kubernetes and what is it for?
+1. What is Kubernetes and what is it for?
 
-2 What kubernetes entities can you list and their purpose?
+2. What Kubernetes entities can you list and what is their purpose?
 
-3 what tools did you have to work with in kubernetes and what tasks did you have to solve?
+3. What tools did you use to work with Kubernetes and what tasks did you solve?
 
-4 what is helm chart?
+4. What is helm chart?
 
-5 What is umbrella chart?
+5. What is an umbrella chart?
 
 
 ## Tasks
 
 * create helm charts for applications from [docker-compose](../03%20-%20docker-compose) task
 
-* create umbrella helm chart for you helm charts
+* create an umbrella helm chart for you helm charts
 
-`*` Lint and deploy umbrella helm chart
+* `*` Lint and deploy the umbrella helm chart
 
-`*` Deploy log and monitoring tools for you users
+* `*` Deploy logging and monitoring tools for your users
 
 
 
