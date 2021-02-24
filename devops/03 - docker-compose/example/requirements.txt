@@ -1,4 +1,0 @@
-Flask
-psycopg2
-SQLAlchemy
-Flask-WTF
