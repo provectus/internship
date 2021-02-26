@@ -2,6 +2,17 @@
 
 * Git 2.28 or greater
 
+## Tasks
+
+* fork the current repository
+
+* clone it, find the commit "failed changes commit, revert me" and revert them! 
+
+*Please note that after completing this task, the number of folders with tasks must change!*
+
+* after passing all the questions from all folders, make a pull-request with the results of the task and the tag Done-current date (e.g. `Done-01-01-2021`)
+
+
 ## Questions
 
 1. What command can I use to view the commit history?
@@ -17,11 +28,3 @@
 1. `*` What are pre-commit hooks and post-commit hooks, and what are they for?
 
 1. `*` How do I change the last commit without adding a new commit?
-
-## Tasks
-
-* fork the current repository
-
-* clone it, find the last failed changes and cancel them
-
-* after passing all the questions, make a pull-request with the results of the task and the tag Done-current date (e.g. `Done-01-01-2021`)
