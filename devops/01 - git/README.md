@@ -16,15 +16,49 @@
 ## Questions
 
 1. What command can I use to view the commit history?
+```
+git log
+```
 
-1. What command can I use to undo the last commit?
+2. What command can I use to undo the last commit?
+```
+git revert HEAD
 
-1. What command can I use to create a new branch and a new tag?
+Doesn't overwrite history, adds a new commit that reverts the changes
+```
 
-1. How do I exclude a file / folder from a commit?
+3. What command can I use to create a new branch and a new tag?
+```
+git branch <branch_name>
+git tag <tag_name>
+```
 
-1. In case of a merge conflict, what commands can be used to resolve it?
+4. How do I exclude a file / folder from a commit?
+```
+git reset <file/folder>  // for unstaging a file before commiting
+or
+Add them to .gitignore
+git rm -rf --cached <file/folder>
+```
 
-1. `*` What are pre-commit hooks and post-commit hooks, and what are they for?
+5. In case of a merge conflict, what commands can be used to resolve it?
+```
+git status  // to see where the conflicts are
+// resolve <<<<<<< ======= >>>>>>> conflicts in any text editor
+git commit
 
-1. `*` How do I change the last commit without adding a new commit?
+Better use IDE
+```
+
+6. `*` What are pre-commit hooks and post-commit hooks, and what are they for?
+```
+The pre-commit hook runs quick local tests (like linter, spell checking) and aborts commiting if the tests fail
+The post-commit are used for sending notifications/emails
+```
+
+7. `*` How do I change the last commit without adding a new commit?
+```
+git commit --amend
+git commit --amend -m "New msg"
+Substitutes the last commit with the new one. Changes history, not recommended if already pushed to remote.
+```
