@@ -18,4 +18,4 @@ hooks is a automatic start scripts. Its starting when see a changes in a git rep
 post-comit hook starts after commit or push in repo, pre-commit - before
 
 * How do I change the last commit without adding a new commit?
-use git commit --amend --no-edit or git commit -C HEAD --amend to save metadata from another commit
+use git commit --amend --no-edit or git commit -C HEAD --amend to save metadata from another commit.
