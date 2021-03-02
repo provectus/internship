@@ -1,3 +1,4 @@
+
 What is Docker? Which technology is it based on?
 
 Docker is a program for deploying applications in the environment necessary for him.

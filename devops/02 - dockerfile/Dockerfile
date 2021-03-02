@@ -1,3 +1,4 @@
+
 FROM node
 WORKDIR /usr/src/app
 COPY example/package*.json example/app.js ./
