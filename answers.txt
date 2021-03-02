@@ -1,0 +1,21 @@
+What command can I use to view the commit history?
+git log show you commit history
+
+What command can I use to undo the last commit?
+to undo the last commit you can use git reset --hard HEAD^
+
+What command can I use to create a new branch and a new tag?
+try git checkout -b <Branch Name> <TAG Name> or git branch <Branch Name> <TAG Name>
+
+How do I exclude a file / folder from a commit?
+make a .gitignore file with names of files and names of folders (if it is a folder, need the / in the end of name)
+
+In case of a merge conflict, what commands can be used to resolve it?
+first of all you can use command git status where you can see problem
+
+* What are pre-commit hooks and post-commit hooks, and what are they for?
+hooks is a automatic start scripts. Its starting when see a changes in a git repo.
+post-comit hook starts after commit or push in repo, pre-commit - before
+
+* How do I change the last commit without adding a new commit?
+use git commit --amend --no-edit or git commit -C HEAD --amend to save metadata from another commit
