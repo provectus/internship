@@ -1,5 +1,5 @@
 #!/bin/bash
-# Bash Menu Script Example
+# Bash Script to Encrypt and Decrypt answers
 
 PS3='Please enter your choice: '
 options=("Encrypt answers" "Decrypt answers" "Bite the tail" "Quit")
