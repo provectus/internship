@@ -26,9 +26,15 @@ Docker compose with 3 applications (frontend + backend + DB).
 
 1. What is the difference between Docker Compose and dockerfile? Why do I need Docker Compose?
 
+Docker Compose is used to decribe a network of containers. It is convenient to organize several containers that work together to provide some service.
+
 2. How do I parameterize compose for different environments?
 
+Use env_files
+
 3. What types of entities are used in docker-compose and for what purpose?
+
+
 
 4. `*` How to output application logs?
 
