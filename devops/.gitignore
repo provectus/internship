@@ -2,3 +2,5 @@ node_modules
 db
 *.answers
 Dockerfile
+docker-compose.yml
+*.conf
