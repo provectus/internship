@@ -4,3 +4,4 @@ db
 Dockerfile
 docker-compose.yml
 *.conf
+*.env
