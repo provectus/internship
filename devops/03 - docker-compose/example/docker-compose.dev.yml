@@ -1,0 +1,8 @@
+version: '3'
+services:
+  db:
+    env_file:
+      - env_file_dev
+  flaskapp:
+    env_file:
+      - env_file_dev
