@@ -83,6 +83,8 @@ docker commit <cid> <new_image_name>
 Remove py sources, they are already present in the image
   volumes:
     - .:/opt/services/flaskapp/src
+
+Nginx config has a bug. Host is defined twice that caused `return redirect(url_for('success'))` -> http://localhost,localhost:8080/success
 ```
 
 * Docker-compose with an environment file. Create 2 different environment files for docker-compose
