@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    {{- include "provectus-nginx.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "provectus-nginx.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "provectus-nginx.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: nginx
+          image: {{ .Values.deployment.image }}
+          imagePullPolicy: {{ .Values.deployment.pullPolicy }}
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nginx-config
+              mountPath: "/etc/nginx/conf.d/"
+              readOnly: true
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: nginx-config

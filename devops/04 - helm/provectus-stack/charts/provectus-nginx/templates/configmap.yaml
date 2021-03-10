@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  labels:
+    {{- include "provectus-nginx.labels" . | nindent 4 }}
+data:
+  flaskapp.conf:
+    {{- .Files.Get "conf.d/flaskapp.conf" | nindent 4 -}}

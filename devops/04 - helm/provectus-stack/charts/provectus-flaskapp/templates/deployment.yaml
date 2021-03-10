@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaskapp
+  labels:
+    {{- include "provectus-flaskapp.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "provectus-flaskapp.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "provectus-flaskapp.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: flaskapp
+          image: {{ .Values.deployment.image }}
+          imagePullPolicy: {{ .Values.deployment.pullPolicy }}
+          ports:
+            - containerPort: 5090
+          envFrom:
+            - secretRef:
+                name: flaskapp
+      initContainers:
+        - name: init-db
+          image: {{ .Values.deployment.image }}
+          imagePullPolicy: {{ .Values.deployment.pullPolicy }}
+          command: ["sh", "-c", "python -c 'import database; database.init_db()'"]
+          envFrom:
+            - secretRef:
+                name: flaskapp

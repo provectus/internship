@@ -1,0 +1,11 @@
+deployment:
+  image: postgres:9.6.5
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 5432
+
+secrets:
+  postgres_password: pass1234
+  app_secret_key: kek7878

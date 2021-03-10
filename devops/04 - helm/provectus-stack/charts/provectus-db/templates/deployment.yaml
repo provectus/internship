@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+  labels:
+    {{- include "provectus-db.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "provectus-db.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "provectus-db.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: db
+          image: {{ .Values.deployment.image }}
+          imagePullPolicy: {{ .Values.deployment.pullPolicy }}
+          ports:
+            - containerPort: 5090
+          envFrom:
+            - secretRef:
+                name: db
+          volumeMounts:
+            - mountPath: "/var/lib/postgresql/data"
+              name: db-data
+      volumes:
+        - name: db-data
+          persistentVolumeClaim:
+            claimName: db-data

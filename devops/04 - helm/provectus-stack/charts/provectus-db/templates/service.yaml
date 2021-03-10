@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+  labels:
+    {{- include "provectus-db.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 5432
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "provectus-db.selectorLabels" . | nindent 4 }}

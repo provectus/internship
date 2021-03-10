@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flaskapp
+  labels:
+    {{- include "provectus-flaskapp.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 5090
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "provectus-flaskapp.selectorLabels" . | nindent 4 }}

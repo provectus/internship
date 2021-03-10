@@ -1,0 +1,7 @@
+deployment:
+  image: nginx:1.13.5
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80

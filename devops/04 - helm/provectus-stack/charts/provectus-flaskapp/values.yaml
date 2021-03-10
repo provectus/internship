@@ -1,0 +1,11 @@
+deployment:
+  image: kochetov98/provectus-flaskapp:latest
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 80
+
+secrets:
+  postgres_password: pass1234
+  app_secret_key: kek7878
