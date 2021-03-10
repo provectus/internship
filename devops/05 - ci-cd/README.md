@@ -70,5 +70,9 @@ computer -> ci_server -> unit_tests -> build -> docker -> smoke_tests -> integra
     ```
 
     *  `*` update your [docker-compose](../03%20-%20docker-compose/example/docker-compose.yaml) with a new tag and create new release with changelog
-
+    
+    ```
+    v0.1.0
+    ```
+    
     *  `*` update you helm charts and umbrella helm chart, create release in your repository, download release and redeploy umbrella helm chart to minikube for testing
