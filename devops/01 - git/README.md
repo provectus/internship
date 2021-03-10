@@ -45,6 +45,7 @@ git commit -m => adds a comment to the commit
 1. `*` What are pre-commit hooks and post-commit hooks, and what are they for?
 
 custom scripts that run when certain events occur
+
 pre-commit - it runs first, it is used to check the data before creating a commit and lets you see if you have forgotten something
 
 post-commit - starts after the commit is created, usually, this script is used for notifications
