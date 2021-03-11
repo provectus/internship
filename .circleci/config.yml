@@ -6,7 +6,7 @@ executors:
     docker:
       - image: circleci/buildpack-deps:stretch
 jobs:
-  build:
+  build-and-push:
     executor: docker-publisher
     steps:
       - checkout
@@ -17,29 +17,16 @@ jobs:
           command: |
             SHORT_COMMIT_ID=$(git rev-parse --short "${CIRCLE_SHA1}")
             IMAGE_TAG="0.$CIRCLE_BUILD_NUM-$SHORT_COMMIT_ID"
-            docker build -t $IMAGE:$IMAGE_TAG .     
-  push:
-    executor: docker-publisher
-    steps:
-      - setup_remote_docker
-      - run:
-          name: Push Docker NodeJS image to Docker HUB
-          command: |
+            docker build -t $IMAGE:$IMAGE_TAG .
             echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER_ID --password-stdin
-            docker push $IMAGE_NAME:$IMAGE_TAG
+            docker push $IMAGE_NAME:$IMAGE_TAG    
 
 workflows:
   my-pipeline:
     jobs:
-      - build:
+      - build-and-push:
           context:
             - dockerhub-creds
-          filters:
-            branches:
-              only: main
-      - push:
-          requires:
-            - build
           filters:
             branches:
               only: main
