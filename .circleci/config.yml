@@ -1,13 +1,45 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
-# Use a package of configuration called an orb.
-orbs:
-  # Declare a dependency on the welcome-orb
-  welcome: circleci/welcome-orb@0.4.1
-# Orchestrate or schedule a set of jobs
+executors:
+  docker-publisher:
+    environment:
+      IMAGE: edvegas/flaskapp
+      SHORT_GIT_HASH: $(echo $CIRCLE_SHA1 | cut -c -7)
+    docker:
+      - image: circleci/buildpack-deps:stretch
+jobs:
+  build:
+    executor: docker-publisher
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build Docker NodeJS image
+          working_directory: "devops/02\ -\ dockerfile"
+          command: |
+            IMAGE_TAG="0.${CIRCLE_BUILD_NUM}-${SHORT_GIT_HASH}"
+            docker build -t $IMAGE:$IMAGE_TAG .     
+  push:
+    executor: docker-publisher
+    steps:
+      - setup_remote_docker
+      - run:
+          name: Push Docker NodeJS image to Docker HUB
+          command: |
+            echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER_ID --password-stdin
+            docker push $IMAGE_NAME:$IMAGE_TAG
+
 workflows:
-  # Name the workflow "welcome"
-  welcome:
-    # Run the welcome/run job in its own container
+  my-pipeline:
     jobs:
-      - welcome/run
+      - build:
+          context:
+            - dockerhub-creds
+          filters:
+            branches:
+              only: master
+      - push:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
