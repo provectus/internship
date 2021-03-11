@@ -36,10 +36,10 @@ workflows:
             - dockerhub-creds
           filters:
             branches:
-              only: master
+              only: main
       - push:
           requires:
             - build
           filters:
             branches:
-              only: master
+              only: main
