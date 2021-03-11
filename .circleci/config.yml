@@ -12,7 +12,7 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          name: Build Docker NodeJS image
+          name: Build and push docker image
           working_directory: "devops/02\ -\ dockerfile"
           command: |
             SHORT_COMMIT_ID=$(git rev-parse --short "${CIRCLE_SHA1}")
