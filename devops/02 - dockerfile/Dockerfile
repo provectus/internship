@@ -1,4 +1,4 @@
-FROM alpine as prod
+FROM alpine:3.13.2 as prod
 ENV HOST "'see readme'"
 CMD ["node", "app.js"]
 WORKDIR /usr/src/app
