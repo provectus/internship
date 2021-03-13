@@ -8,3 +8,4 @@ Dockerfile
 *.env
 *.secrets
 bootstrap.sh
+*.tpl
