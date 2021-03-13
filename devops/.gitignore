@@ -2,7 +2,8 @@ node_modules
 db
 *.answers
 Dockerfile
-docker-compose.yml
+*.yml
+*.yaml
 *.conf
 *.env
 *.secrets

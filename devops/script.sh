@@ -8,7 +8,7 @@ do
     case $opt in
         "Encrypt answers")
             for f in *\ *; do mv "$f" "${f// /_}"; done
-            for file in $(find ./ -type f -name *.answers -o -name Dockerfile -o -name docker-compose.yml -o -name *.conf -o -name *.env -o -name bootstrap.sh -o -name *.secrets); do zip -m --password $1 $file.zip $file; done
+            for file in $(find ./ -type f -name *.answers -o -name Dockerfile -o -name *.yml -o -name *.yaml -o -name *.conf -o -name *.env -o -name bootstrap.sh -o -name *.secrets); do zip -m --password $1 $file.zip $file; done
             for f in *\_*; do mv "$f" "${f//_/ }"; done
             break
             ;;
