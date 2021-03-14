@@ -15,6 +15,7 @@ do
         "Decrypt answers")
             for f in *\ *; do mv "$f" "${f// /_}"; done
             for file in $(find ./ -type f -name *.zip); do unzip -P $1 $file; done
+            find ./ -type f -name *.zip -delete
             for f in *\_*; do mv "$f" "${f//_/ }"; done
             break
             ;;
