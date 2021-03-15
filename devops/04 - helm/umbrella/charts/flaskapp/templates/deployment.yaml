@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "flaskapp.fullname" . }}
+  labels:
+    {{- include "flaskapp.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "flaskapp.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "flaskapp.selectorLabels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ include "flaskapp.serviceAccountName" . }}
+      initContainers:
+        - name: dbinit
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["sh", "-c", "sleep 15 && python -c 'import database; database.init_db()'"]
+          envFrom:
+          - secretRef:
+              name: appsecrets
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+          - secretRef:
+              name: appsecrets
+          ports:
+          - name: http
+            containerPort: 5090
+            protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

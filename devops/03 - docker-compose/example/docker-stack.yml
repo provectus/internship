@@ -6,33 +6,16 @@ services:
       - "dbdata-${ENVIRON}:/var/lib/postgresql/data/"
     env_file:
       - env_file.${ENVIRON}
-    networks:
-      - db_nw
   flaskapp:
-    build: .
+    image: "flaskapp"
     env_file:
       - env_file.${ENVIRON}
-    # volumes:
-    #   - .:/opt/services/flaskapp/src
-    networks:
-      - db_nw
-      - web_nw
-    depends_on:
-      - db
   nginx:
     image: "nginx:1.13.5"
     ports:
       - "8080:80"
     volumes:
       - ./conf.d:/etc/nginx/conf.d
-    networks:
-      - web_nw
-    depends_on: 
-      - flaskapp
-networks:
-  db_nw:
-  web_nw:
 volumes:
   dbdata-dev:
   dbdata-stg:
-

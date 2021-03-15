@@ -1,0 +1,12 @@
+apiVersion: v2
+name: umbrella
+description: A Helm chart to run sample PostgreSQLDB+FlaskAPP
+type: application
+version: 0.1.0
+appVersion: "1.0"
+icon: https://habrastorage.org/getpro/moikrug/uploads/company/013/770/785/logo/medium_b114ac55de52d5eac8d18bfb07dedb66.png
+dependencies:
+  - name: db
+    repository: file://../charts/db
+  - name: flaskapp
+    repository: file://../charts/flaskapp
