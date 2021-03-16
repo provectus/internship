@@ -1,41 +1,34 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
-# Use a package of configuration called an orb.
 orbs:
-  # Declare a dependency on the welcome-orb
-  welcome: circleci/welcome-orb@0.4.1
-# Orchestrate or schedule a set of jobs
-executors:
-  docker-publisher:
-    environment:
-      IMAGE: accuratiorem/flaskapp
-    docker:
-      - image: circleci/buildpack-deps:buster
+  docker: circleci/docker@1.5.0
+
 jobs:
   build-and-push:
-    executor: docker-publisher
+    executor: docker/docker
     steps:
-      - checkout
       - setup_remote_docker
+      - checkout
+      - docker/check
+      - docker/dockerlint:
+          path: "devops/02\ -\ dockerfile"
+          dockerfile: Dockerfile
+          treat-warnings-as-errors: true
+      - docker/build:
+          path: "devops/02\ -\ dockerfile"
+          image: accuratiorem/flaskapp
+          tag: version.$CIRCLE_SHA1
+      - docker/push:
+          digest-path: /tmp/digest.txt
+          image: accuratiorem/flaskapp
+          tag: version.$CIRCLE_SHA1
       - run:
-          name: Build and push docker image
-          working_directory: "devops/02\ -\ dockerfile"
           command: |
-            SHORT_COMMIT_ID=$(git rev-parse --short "${CIRCLE_SHA1}")
-            IMAGE_TAG="0.$CIRCLE_BUILD_NUM-$SHORT_COMMIT_ID"
-            docker build -t $IMAGE:$IMAGE_TAG .
-            echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER_ID --password-stdin
-            docker push $IMAGE:$IMAGE_TAG
+            echo "Digest is: $(</tmp/digest.txt)"
+
 workflows:
-  # Name the workflow "welcome"
-  welcome:
-    # Run the welcome/run job in its own container
-  my-pipeline:
+  commit:
     jobs:
-      - welcome/run
       - build-and-push:
-          context:
-            - dockerhub-creds
           filters:
             branches:
               only: main
