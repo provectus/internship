@@ -9,10 +9,6 @@ jobs:
       - setup_remote_docker
       - checkout
       - docker/check
-      - docker/dockerlint:
-          path: "devops/02\ -\ dockerfile"
-          dockerfile: Dockerfile
-          treat-warnings-as-errors: true
       - docker/build:
           path: "devops/02\ -\ dockerfile"
           image: accuratiorem/flaskapp
