@@ -12,11 +12,9 @@ jobs:
       - docker/build:
           path: "devops/02\ -\ dockerfile"
           image: accuratiorem/flaskapp
-          tag: version.$CIRCLE_SHA1
       - docker/push:
           digest-path: /tmp/digest.txt
           image: accuratiorem/flaskapp
-          tag: version.$CIRCLE_SHA1
       - run:
           command: |
             echo "Digest is: $(</tmp/digest.txt)"
