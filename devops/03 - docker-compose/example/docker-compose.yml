@@ -1,0 +1,70 @@
+version: "3.9"
+services:
+
+  db:
+    image: postgres:9.6.21
+    volumes:
+      - "db_data_${env_file}:/var/lib/postgresql/data"
+    networks:
+      - backend
+    env_file:
+      - "${env_file}"
+    secrets:
+      - "${env_file}.db.password"
+
+  flaskapp_db_migration:
+    build: .
+    image: flaskapp
+    command: "/usr/local/bin/python -c 'import database; database.init_db()'"
+    networks:
+      - frontend
+      - backend
+    env_file:
+      - "${env_file}"
+    secrets:
+      - "${env_file}.db.password"
+      - "${env_file}.api.key"
+    depends_on:
+      - db
+
+  flaskapp:
+    image: flaskapp
+    networks:
+      - frontend
+      - backend
+    env_file:
+      - "${env_file}"
+    secrets:
+      - "${env_file}.db.password"
+      - "${env_file}.api.key"
+    depends_on:
+      - flaskapp_db_migration
+
+  nginx:
+    image: "nginx:1.19.7"
+    ports:
+      - "8080:80"
+    volumes:
+      - ./conf.d/flaskapp.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - frontend
+    depends_on:
+      - flaskapp
+
+networks:
+  frontend:
+  backend:
+
+secrets:
+  dev.env.db.password:
+    file: dev.env.db.password.secrets
+  dev.env.api.key:
+    file: dev.env.api.key.secrets
+  stg.env.db.password:
+    file: stg.env.db.password.secrets
+  stg.env.api.key:
+    file: stg.env.api.key.secrets
+
+volumes:
+  db_data_dev.env:
+  db_data_stg.env:

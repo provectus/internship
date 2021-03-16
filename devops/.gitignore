@@ -1,11 +1,2 @@
 node_modules
 db
-*.answers
-Dockerfile
-*.yml
-*.yaml
-*.conf
-*.env
-*.secrets
-bootstrap.sh
-*.tpl

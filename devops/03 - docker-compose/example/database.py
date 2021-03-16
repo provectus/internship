@@ -6,9 +6,9 @@ from sqlalchemy.ext.declarative import declarative_base
 user = os.environ['POSTGRES_USER']
 pwd = os.environ['POSTGRES_PASSWORD']
 db = os.environ['POSTGRES_DB']
-host = 'db'
+host = 'provectus-postgresql'
 port = '5432'
-engine = create_engine('postgres://%s:%s@%s:%s/%s' % (user, pwd, host, port, db)) 
+engine = create_engine('postgres://%s:%s@%s:%s/%s' % (user, pwd, host, port, db))
 
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,

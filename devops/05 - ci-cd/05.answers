@@ -1,0 +1,13 @@
+1. GitFlow is a branching model for Git, created by Vincent Driessen. It has attracted a lot of attention because it is very well suited to collaboration and scaling the development team.
+https://habr.com/ru/company/flant/blog/491320/
+2. Continuous Integration (CI) is a software development practice where developers regularly merge their code changes into a central code repository, after which automated builds and tests are run. CI helps find and address bugs quicker, improve software quality, and reduce the time it takes to validate and release new software updates.
+3. Continuous Deployment (CD) is a software release process that uses automated testing to validate if changes to a codebase are correct and stable for immediate autonomous deployment to a production environment.
+4. Types of deployment:
+All-at-once deployments: all traffic is shifted from the original environment to the replacement environment all at once.
+Recreate: Version A is terminated then version B is rolled out.
+Ramped (also known as rolling-update or incremental): Version B is slowly rolled out and replacing version A.
+Blue/Green: Version B is released alongside version A, then the traffic is switched to version B.
+Canary: Version B is released to a subset of users, then proceed to a full rollout.
+A/B testing: Version B is released to a subset of users under specific condition.
+Shadow: Version B receives real-world traffic alongside version A and doesn’t impact the response.
+5.
