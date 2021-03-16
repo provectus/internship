@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "db.fullname" . }}
+  labels:
+    {{- include "db.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "db.selectorLabels" . | nindent 6 }}
+  serviceName: {{ include "db.fullname" . }}
+  template:
+    metadata:
+      labels:
+        {{- include "db.selectorLabels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ include "db.serviceAccountName" . }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+          - secretRef:
+              name: dbsecrets
+          volumeMounts:
+            - mountPath: "/var/lib/postgresql/data"
+              name: dbdata
+          ports:
+            - name: http
+              containerPort: 5432
+              protocol: TCP
+  volumeClaimTemplates:
+  - metadata:
+      name: dbdata
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      volumeMode: Filesystem
+      resources:
+        requests:
+          storage: 512Mi

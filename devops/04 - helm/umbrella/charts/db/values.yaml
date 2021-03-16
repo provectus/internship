@@ -1,0 +1,18 @@
+replicaCount: 1
+
+image:
+  repository: postgres
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+secrets:
+  dbpassword: ZGV2cGFzc3dvcmQ=
+
+serviceAccount:
+  create: true
+  name: edvegas-db
+
+service:
+  type: ClusterIP
+  port: 5432
