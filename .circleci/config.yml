@@ -25,6 +25,8 @@ workflows:
   commit:
     jobs:
       - build-and-push:
+          context:
+            - dockerhub-creds
           filters:
             branches:
               only: main
