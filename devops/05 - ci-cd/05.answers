@@ -10,4 +10,5 @@ Blue/Green: Version B is released alongside version A, then the traffic is switc
 Canary: Version B is released to a subset of users, then proceed to a full rollout.
 A/B testing: Version B is released to a subset of users under specific condition.
 Shadow: Version B receives real-world traffic alongside version A and doesn’t impact the response.
-5.
+5. https://www.softwaretestinghelp.com/types-of-software-testing/
+6. https://habr.com/ru/post/346066/

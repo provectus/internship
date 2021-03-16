@@ -5,9 +5,37 @@ orbs:
   # Declare a dependency on the welcome-orb
   welcome: circleci/welcome-orb@0.4.1
 # Orchestrate or schedule a set of jobs
+executors:
+  docker-publisher:
+    environment:
+      IMAGE: accuratiorem/flaskapp
+    docker:
+      - image: circleci/buildpack-deps:buster
+jobs:
+  build-and-push:
+    executor: docker-publisher
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build and push docker image
+          working_directory: "devops/02\ -\ dockerfile"
+          command: |
+            SHORT_COMMIT_ID=$(git rev-parse --short "${CIRCLE_SHA1}")
+            IMAGE_TAG="0.$CIRCLE_BUILD_NUM-$SHORT_COMMIT_ID"
+            docker build -t $IMAGE:$IMAGE_TAG .
+            echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER_ID --password-stdin
+            docker push $IMAGE:$IMAGE_TAG
 workflows:
   # Name the workflow "welcome"
   welcome:
     # Run the welcome/run job in its own container
+  my-pipeline:
     jobs:
       - welcome/run
+      - build-and-push:
+          context:
+            - dockerhub-creds
+          filters:
+            branches:
+              only: main
