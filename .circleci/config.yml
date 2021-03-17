@@ -2,6 +2,11 @@ version: 2.1
 orbs:
   docker: circleci/docker@1.5.0
 
+executors:
+  docker:
+    environment:
+      IMAGE: accuratiorem/flaskapp
+
 jobs:
   build-and-push:
     executor: docker/docker
@@ -15,9 +20,9 @@ jobs:
           command: |
             SHORT_COMMIT_ID=$(git rev-parse --short "${CIRCLE_SHA1}")
             IMAGE_TAG="0.$CIRCLE_BUILD_NUM-$SHORT_COMMIT_ID"
-            docker build -t v$IMAGE_TAG .
+            docker build -t $IMAGE:$IMAGE_TAG .
       - docker/push:
-          image: accuratiorem/flaskapp
+          image: $IMAGE:$IMAGE_TAG
 
 workflows:
   commit:
