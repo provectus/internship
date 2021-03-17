@@ -12,14 +12,13 @@ jobs:
       - checkout
       - docker/check
       - run:
-          name: docker build with custom tag
+          name: build and push docker image with custom tag
           working_directory: "devops/02\ -\ dockerfile"
           command: |
             SHORT_COMMIT_ID=$(git rev-parse --short "${CIRCLE_SHA1}")
             IMAGE_TAG="0.$CIRCLE_BUILD_NUM-$SHORT_COMMIT_ID"
             docker build -t $IMAGE:$IMAGE_TAG .
-      - docker/push:
-          image: $IMAGE:$IMAGE_TAG
+            docker push $IMAGE:$IMAGE_TAG
 
 workflows:
   commit:
