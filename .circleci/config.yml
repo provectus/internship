@@ -2,13 +2,10 @@ version: 2.1
 orbs:
   docker: circleci/docker@1.5.0
 
-executors:
-  docker/docker:
-    environment:
-      IMAGE: accuratiorem/flaskapp
-
 jobs:
   build-and-push:
+    environment:
+      IMAGE: accuratiorem/flaskapp
     executor: docker/docker
     steps:
       - setup_remote_docker
