@@ -3,7 +3,7 @@ orbs:
   docker: circleci/docker@1.5.0
 
 executors:
-  docker:
+  docker/docker:
     environment:
       IMAGE: accuratiorem/flaskapp
 
