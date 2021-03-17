@@ -7,6 +7,7 @@
 ## Questions
 
 1. What is Kubernetes and what is it for?
+
     https://www.youtube.com/watch?v=LeVULLqWwcg
     Kubernetes is a platform for managing containerized workloads and services, that facilitates both declarative configuration and automation.
 
@@ -37,6 +38,7 @@
     You can deploy and update secrets and application configuration without rebuilding your container images, and without exposing secrets in your stack configuration.
 
 2. What Kubernetes entities can you list and what is their purpose?
+
     Kubernetes entities:
     - namespace - to divide cluster resources
     - pod - group of one or more containers, with shared storage and network resources, and a specification for how to run the containers
@@ -50,15 +52,18 @@
     - ingress - provide load balancing, SSL termination and name-based virtual hosting
 
 3. What tools did you use to work with Kubernetes and what tasks did you solve?
+
     kubectl - to work with k8s cluster inside AWS EKS
     spinnaker - to deploy k8s manifests into AWS EKS by pushing the manifest into git repo
     helm - to test new software in a quick manner and to do this task
     prometheus, grafana, loki - as a monitoring stack for k8s and applications
 
 4. What is helm chart?
+
     Helm chart is a collection of files that describe a related set of Kubernetes resources
 
 5. What is an umbrella chart?
+
     Umbrella chart is a top level chart that exposes the global configurations and has other charts in the charts/ subdirectory to embed each of the components
 
 ## Tasks

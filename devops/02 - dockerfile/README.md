@@ -11,10 +11,12 @@ You need to optimize the Dockerfile by correcting or adding steps, rewrite the d
 ## Questions
 
 1. What is Docker? Which technology is it based on?
+
     Docker is an open platform for developing, shipping, and running applications.
     The Docker technology uses the Linux kernel and features of the kernel, like Cgroups and namespaces, to segregate processes so they can run independently.
 
 2. Look at the Docker file – what would you change in it?
+
     In the docker file I would change the following things:
     1) I'd define the node version and put the same version what was used when the app was written and tested by developer. In long project I would use LTS Node.
     2) I'd also use smaller/lightweight image
@@ -24,6 +26,7 @@ You need to optimize the Dockerfile by correcting or adding steps, rewrite the d
     6) I'd add Maintainer field to know who is the developer of the app
 
 3. How do I pass variables to the Docker file when building and running the container?
+
     ARG VAR
 
     and then build the docker file with the --build-arg "VAR=value"
