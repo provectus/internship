@@ -15,7 +15,7 @@ jobs:
           command: |
             SHORT_COMMIT_ID=$(git rev-parse --short "${CIRCLE_SHA1}")
             IMAGE_TAG="0.$CIRCLE_BUILD_NUM-$SHORT_COMMIT_ID"
-            docker build -t $IMAGE:$IMAGE_TAG .
+            docker build -t v$IMAGE_TAG .
       - docker/push:
           image: accuratiorem/flaskapp
 
