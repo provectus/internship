@@ -1,4 +1,4 @@
-env_file=$1 docker-compose up -d db
+env_file=$1 docker-compose up -d provectus-postgresql
 echo "Mister Snorlax is tired and going to sleep while database is starting" && sleep 5
 #env_file=$1 docker-compose run --rm flaskapp /bin/bash -c "cd /opt/services/flaskapp/src && python -c 'import database; database.init_db()'"
 # env_file=$1 docker-compose up -d flaskapp_db_migration
