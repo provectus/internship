@@ -19,11 +19,11 @@ jobs:
       - docker/build:
           path: "devops/02\ -\ dockerfile"
           image: accuratiorem/flaskapp
-          tag: $IMAGE_TAG
+          tag: "$IMAGE_TAG"
       - docker/push:
           digest-path: /tmp/digest.txt
           image: accuratiorem/flaskapp
-          tag: $IMAGE_TAG
+          tag: "$IMAGE_TAG"
       - run:
           command: |
             echo "Digest is: $(</tmp/digest.txt)"
