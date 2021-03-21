@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: NetworkPolicy
+metadata:
+  creationTimestamp: null
+  name: db_nw
+spec:
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          io.kompose.network/db_nw: "true"
+  podSelector:
+    matchLabels:
+      io.kompose.network/db_nw: "true"

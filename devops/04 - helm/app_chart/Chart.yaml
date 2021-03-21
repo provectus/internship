@@ -1,0 +1,8 @@
+name: app_chart
+description: A generated Helm Chart for app_chart from Skippbox Kompose
+version: 0.0.1
+apiVersion: v1
+keywords:
+  - app_chart
+sources:
+home:

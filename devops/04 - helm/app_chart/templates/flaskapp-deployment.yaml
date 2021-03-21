@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -c -o app_chart
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: flaskapp
+  name: flaskapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: flaskapp
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -c -o app_chart
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/db_nw: "true"
+        io.kompose.network/web_nw: "true"
+        io.kompose.service: flaskapp
+    spec:
+      containers:
+      - env:
+        - name: APP_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: APP_PORT
+              name: env
+        - name: APP_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: flask-secret
+              key: APP_SECRET_KEY
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRES_DB
+              name: env
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgers-secret
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgers-secret
+              key: POSTGRES_USER
+        image: bulbawarrior/test_task-flask
+        imagePullPolicy: ""
+        name: flaskapp
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}
