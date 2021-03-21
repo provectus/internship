@@ -11,4 +11,4 @@ FROM stage1 as test
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 EXPOSE 3000
-CMD ["/usr/bin/supervisord"]
+CMD ["/usr/bin/supervisord"]cd ..

@@ -63,6 +63,8 @@ use volumes or docker commit
 
 * Docker-compose has a bug - investigate it! What would you improve?
 
+The bug that I found is not directly in Docker Compose - after user submits name and email the website redirects him to http://localhost%2Clocalhost:8080/success, while it should simply be http://localhost:8080/success. This is fixed in flaskapp.conf.
+
 * Docker-compose with an environment file. Create 2 different environment files for docker-compose
 
 * `*` Change the `docker-compose.yml` to run through dockerstack with code reuse (don't repeat yourself)
