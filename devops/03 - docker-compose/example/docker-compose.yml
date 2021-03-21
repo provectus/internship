@@ -4,16 +4,10 @@ services:
     image: "postgres:9.6.5"
     volumes:
       - "dbdata:/var/lib/postgresql/data"
-    env_file:
-      - env_file
     networks:
       - db_nw
   flaskapp:
     build: .
-    env_file:
-      - env_file
-    volumes:
-      - .:/opt/services/flaskapp/src
     networks:
       - db_nw
       - web_nw
