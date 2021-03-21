@@ -1,0 +1,12 @@
+apiVersion: v1
+data:
+  APP_SECRET_KEY: USE_YOUR_SECRET_KEY
+  POSTGRES_DB: flaskapp_db
+  POSTGRES_PASSWORD: USE_YOUR_PASSWORD
+  POSTGRES_USER: postgres
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: db-env_dev
+  name: env_dev
