@@ -1,4 +1,5 @@
 Flask
-psycopg2
+psycopg2-binary
+# psycopg2
 SQLAlchemy
 Flask-WTF

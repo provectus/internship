@@ -12,7 +12,7 @@
 
 * after passing all the questions from all folders, make a pull-request with the results of the task and the tag Done-current date (e.g. `Done-01-01-2021`)
 
-
+***
 ## Questions
 
 1. What command can I use to view the commit history?
@@ -29,10 +29,11 @@ git checkout -b <branch name>
 git tag -a v1.5.3 -m "Tag message"
 ```
 1. How do I exclude a file / folder from a commit?
-```bash
-if file/folder already indexed: Not staging
-else: add file/folder to .gitignore
-```
+
+    if file/folder already indexed: Not staging
+
+    else: add file/folder to .gitignore
+
 1. In case of a merge conflict, what commands can be used to resolve it?
 ```
 git add <filepath> - After manually editing files with conflicts.
@@ -40,10 +41,10 @@ git merge -s <strategy> - Use another strategy.
 git merge --abort - Abort merge
 ```
 1. `*` What are pre-commit hooks and post-commit hooks, and what are they for?
-```
-All Git hooks are ordinary scripts that Git executes when certain events occur in the repository.
+
+    All Git hooks are ordinary scripts that Git executes when certain events occur in the repository.
 pre-commit and post-commit hooks performed before and after commit respectively 
-```
+
 1. `*` How do I change the last commit without adding a new commit?
 ```bash
 git commit --amend

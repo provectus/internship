@@ -1,17 +1,30 @@
-version: '3'
+version: "3.3"
 services:
   db:
     image: "postgres:9.6.5"
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    env_file:
+      - .env/postgres.env
     volumes:
       - "dbdata:/var/lib/postgresql/data"
-    env_file:
-      - env_file
     networks:
       - db_nw
+
   flaskapp:
     build: .
+    image: shurgentum/flaskapp
+    deploy:
+      mode: replicated
+      replicas: 2
+      restart_policy:
+        condition: on-failure
     env_file:
-      - env_file
+      - .env/app.env
+      - .env/postgres.env
     volumes:
       - .:/opt/services/flaskapp/src
     networks:
@@ -19,20 +32,26 @@ services:
       - web_nw
     depends_on:
       - db
+
   nginx:
     image: "nginx:1.13.5"
+    deploy:
+      mode: replicated
+      replicas: 2
+      restart_policy:
+        condition: on-failure
     ports:
       - "8080:80"
     volumes:
-      - ./conf.d:/etc/nginx/conf.d
+      - ./conf.d:/etc/nginx/conf.d/
     networks:
       - web_nw
-    depends_on: 
+    depends_on:
       - flaskapp
+
 networks:
   db_nw:
-    driver: bridge
   web_nw:
-    driver: bridge
+
 volumes:
   dbdata:
