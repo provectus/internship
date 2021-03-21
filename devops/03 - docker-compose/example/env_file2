@@ -1,0 +1,4 @@
+POSTGRES_USER=aboba
+POSTGRES_PASSWORD=qwerty
+POSTGRES_DB=flaskapp_db
+APP_SECRET_KEY=my_secret_key

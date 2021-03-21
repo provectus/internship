@@ -22,7 +22,8 @@ def signup():
 
 @app.route("/success")
 def success():
-    return "Thank you for signing up!"
+    return f"Thank you for signing up! Postgres user is {os.environ['POSTGRES_USER']}"
 
 if __name__ == '__main__':
+    print('postgres user:', os.environ['POSTGRES_USER'])
     app.run(host='0.0.0.0', port=5090, debug=True)

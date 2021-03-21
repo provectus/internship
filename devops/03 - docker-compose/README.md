@@ -30,11 +30,13 @@ Docker Compose is a tool for defining and running multi-container Docker applica
 
 2. How do I parameterize compose for different environments?
 
-Use environment variables inside compose file
+Use environment variables inside compose file, they can be pulled from .env by default or some other specified file
 
 3. What types of entities are used in docker-compose and for what purpose?
 
-services, volumes, networks
+services describe the containers to be deployed and actions to be performed on them
+volumes are used for presistent data
+networks are used for communication between containers
 
 4. `*` How to output application logs?
 `docker logs <container-name>` or `docker-compose logs` or `docker-compose logs <service name>`
@@ -51,7 +53,7 @@ define a volume for the container
 * Docker-compose has a bug - investigate it! What would you improve?
 configuration file for nginx had a bug - it set the Host header twice which caused flask to redirect to a wrong redirect.
 
-Also just as I was doing the task a new version of sqlalchemy got released (on March 19). This version has some bug with `create_engine('postgres://')` so I had to explicitly state sqlalchemy's version in `requirements.txt`
+Also using `postgres://` in `create_engine()` is long depricated and is no longer supported in the newest version of sqlalchemy (released on March 19) So I had to change it to `'postgresql://'` for the application to be able to run
 
 * Docker-compose with an environment file. Create 2 different environment files for docker-compose
 Done if I understood the task correctly
