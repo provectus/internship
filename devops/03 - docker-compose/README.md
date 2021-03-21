@@ -26,15 +26,37 @@ Docker compose with 3 applications (frontend + backend + DB).
 
 1. What is the difference between Docker Compose and dockerfile? Why do I need Docker Compose?
 
+Dockerfile is focused on dealing with images - the commands needed to assemble an images is written in a single file in order not to execute them one by one each time.
+
+Docker Compose is more focused on the entire application - it defines the services and their dependencies, so that they could be run together.
+
+Dockerfile and Docker Compose are related in the following way:
+First, it is necessary to create a Dockerfile for every image
+Second, use Compose to assemble the images to be able to run the app by simply executing docker-compose up
+
 2. How do I parameterize compose for different environments?
+
+In addition to standart docker-compose.yml file create one or several override files. Then provide the necessary ones via docker-compose-up -f overridefile1.yml overridefile2.yml .... overridefileN.yml
 
 3. What types of entities are used in docker-compose and for what purpose?
 
+networks - specifies the networks to be created
+services - contains configuration that is applied to each container started for that service
+volumes - creates named volumes that can be reused across multiple services
+
 4. `*` How to output application logs?
+
+docker-compose logs <parameter>
+
+parameter could be service name, container id
 
 4. `*` How to copy\upload a file from host machine to the container?
 
+docker cp path/on/the/host/machine.txt container:/path/in/the/container.txt
+
 5. `*` How to save file changes made inside the container?
+
+use volumes or docker commit
 
 
 ## Tasks
