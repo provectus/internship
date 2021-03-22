@@ -5,11 +5,11 @@ from flask import Flask, render_template, redirect, url_for
 from forms import SignupForm
 
 from models import Signups
-from database import db_session
+from database import db_session, init_db
 
 app = Flask(__name__)
 app.secret_key = os.environ['APP_SECRET_KEY']
-
+init_db()
 @app.route("/", methods=('GET', 'POST'))
 def signup():
     form = SignupForm()
