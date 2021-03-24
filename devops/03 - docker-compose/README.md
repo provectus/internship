@@ -53,8 +53,8 @@ use docker commit to create new image
 ## Tasks
 
 * Docker-compose has a bug - investigate it! What would you improve?
-
+done
 * Docker-compose with an environment file. Create 2 different environment files for docker-compose
-
+done
 * `*` Change the `docker-compose.yml` to run through dockerstack with code reuse (don't repeat yourself)
 
