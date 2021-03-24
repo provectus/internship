@@ -1,18 +1,22 @@
-
-What is Docker? Which technology is it based on?
+1. What is Docker? Which technology is it based on?
 
 Docker is a program for deploying applications in the environment necessary for him.
-Docker works like vitraualization but with the condition of using the system core.
-Docker uses a technology called namespaces to provide the isolated workspace called the container.
+Docker uses a technology called namespaces, cgroups & capabilities to provide the isolated workspace called the container.
 
-Look at the Docker file – what would you change in it?
+2. Look at the Docker file – what would you change in it?
 
-1. Use version in FROM (and try to set not "latest")
-2. set the ENV
+  2.1. Use version in FROM (and try to set not "latest")
+  2.2. Set the ENV
+  2.3. Dont install openssh-server, apache2, supervisor
+  2.4. EXPOSE isnt required parameter
+  2.5. Use USER parameter for security
+  2.6. Use alpine image for lightweight containers
 
-How do I pass variables to the Docker file when building and running the container?
+3. How do I pass variables to the Docker file when building and running the container?
 
-for example from task:
-add ARG var_name and ENV HOST=$var_name in Dockerfile then build:
-docker build --build-arg var_name=$(hostname -I | cut -f1 -d' ') (...)
-to watch result, don't forget to add ports in docker run.
+For example from task:
+* add ARG var_name and ENV HOST=$var_name in Dockerfile then build:
+  docker build --build-arg var_name=$(hostname -I | cut -f1 -d' ') (...)
+  To watch result, don't forget to add ports in docker run.
+
+* If you need to run container with specific env variables you can use -e parameter
