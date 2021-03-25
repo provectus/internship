@@ -13,6 +13,9 @@ RUN npm install
 
 FROM node:${NODE_VERSION} AS prod
 
+# author
+LABEL maintainer="avgust_in@mail.ru"
+
 # default variable, you must set it when build. To see IP adress build with --build-arg var_name=$(hostname -I | cut -f1 -d' ')
 ARG var_name=localhost
 
