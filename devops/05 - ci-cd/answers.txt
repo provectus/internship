@@ -1,0 +1,55 @@
+1. What is git flow and its variations?
+
+  * Gitflow Workflow involves building a strict branching model based on the release of the project.
+
+  * The second variation is github flow
+
+2. What is Continuous integration ?
+
+  Continuous integration (CI) is the practice of automating the integration of code changes from multiple contributors into a single software project.
+
+3. What is Continuous deployment?
+
+  Continuous Deployment (CD) is a software release process that uses automated testing to validate if changes to a codebase are correct and stable for immediate autonomous deployment to a production environment.
+
+4. What types of deployment can you name and describe ? (Green-blue, etc.)
+  Canary Deployment- is a deployment strategy that releases an application or service incrementally to a subset of users.
+  Blue-green deployment is a deployment strategy that utilizes two identical environments, a “blue” (aka staging) and a “green” (aka production) environment with different versions of an application or service.
+  A rolling deployment is a deployment strategy that updates running instances of an application with the new release.
+
+5. What types of testing do you know? What are they?
+  Functional Testing types include:
+    Unit Testing
+    Integration Testing
+    System Testing
+    Sanity Testing
+    Smoke Testing
+    Interface Testing
+    Regression Testing
+    Beta/Acceptance Testing
+  Non-functional Testing types include:
+    Performance Testing
+    Load Testing
+    Stress Testing
+    Volume Testing
+    Security Testing
+    Compatibility Testing
+    Install Testing
+    Recovery Testing
+    Reliability Testing
+    Usability Testing
+    Compliance Testing
+    Localization Testing
+
+6. `*` Describe how the code from the developer's computer reaches the production environment? What stages would you set up?
+
+  * code - build - test - release - deploy - operate - monitor - plan.
+
+  Need to set up: Typical ci pipeline with gitlab ci
+
+  A typical pipeline might consist of four stages, executed in the following order:
+
+  * A build stage, with a job called compile.
+  * A test stage, with two jobs called test1 and test2.
+  * A staging stage, with a job called deploy-to-stage.
+  * A production stage, with a job called deploy-to-prod.
