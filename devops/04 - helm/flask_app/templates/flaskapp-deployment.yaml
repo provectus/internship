@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -c
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: flaskapp
+  name: flaskapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: flaskapp
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -c
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/db_nw: "true"
+        io.kompose.network/web_nw: "true"
+        io.kompose.service: flaskapp
+    spec:
+      containers:
+        - env:
+            - name: APP_SECRET_KEY
+              valueFrom:
+                configMapKeyRef:
+                  key: APP_SECRET_KEY
+                  name: env_file
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  key: POSTGRES_DB
+                  name: env_file
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: POSTGRES_PASSWORD
+                  name: env_file
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  key: POSTGRES_USER
+                  name: env_file
+          image: flaskapp
+          name: flaskapp
+          resources: {}
+          volumeMounts:
+            - mountPath: /opt/services/flaskapp/src
+              name: flaskapp-claim0
+      restartPolicy: Always
+      volumes:
+        - name: flaskapp-claim0
+          persistentVolumeClaim:
+            claimName: flaskapp-claim0
+status: {}

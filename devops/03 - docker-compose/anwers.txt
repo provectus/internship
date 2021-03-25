@@ -1,0 +1,30 @@
+1. What is the difference between Docker Compose and dockerfile? Why do I need Docker Compose?
+
+Dockerfile can only configure one container. But applications need multiple processes, they cannot run in one container.
+With docker compose, you can run many containers which need for your application.
+
+2. How do I parameterize compose for different environments?
+
+First of all you can set your environments in docker-compose file to set it in containers
+or may create Dockerfiles where set needed environments and write ways to Dockerfiles
+
+
+3. What types of entities are used in docker-compose and for what purpose?
+
+* version - set version of docker compose specification
+* services - set services and they configurations, you need in your environments for correct work your application
+* networks - Each container for a service joins the default network and is both reachable by other containers on that network, and discoverable by them at a hostname identical to the container name.
+* volumes - Set directory on server to mount in container
+
+* How to output application logs?
+docker-compose logs <name-of-service>
+docker logs $cont_id
+docker-compose up > log.txt
+Or start without -d and see log on your screen
+
+* How to copy\upload a file from host machine to the container?
+    Use Docker cp SRC_PATH|- CONTAINER:DEST_PATH
+    Or mount directory with file use volumes
+
+* How to save file changes made inside the container?
+    If volume mount, changes in directory which mount in container save automatically.

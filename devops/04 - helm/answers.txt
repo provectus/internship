@@ -1,0 +1,27 @@
+1. What is Kubernetes and what is it for?
+
+  Kubernetes is an open source software for the orchestration of containerized applications-automating their deployment, scaling, and coordination in a cluster environment.
+
+
+2. What Kubernetes entities can you list and what is their purpose?
+
+  namespace - to divide cluster resources
+  pod - group of one or more containers, with shared storage and network resources, and a specification for how to run the containers
+  deployment - provides declarative updates for pods and replicasets
+  service - an abstract way to expose an application running on a set of Pods as a network service
+  daemonset - ensures that all (or some) Nodes run a copy of a Pod
+  replicaset - to maintain a stable set of replica Pods running at any given time
+  statefulset - manages the deployment and scaling of a set of Pods, and provides guarantees about the ordering and uniqueness of these Pods
+  configmap - an API object used to store non-confidential data in key-value pairs, and can be consumed as environment variables, command-line arguments, or as configuration files in a volume
+  secret - let you store and manage sensitive information, such as passwords, OAuth tokens, and ssh keys
+  ingress - provide load balancing, SSL termination and name-based virtual hosting
+
+3. What tools did you use to work with Kubernetes and what tasks did you solve?
+  Helm management tool for applications
+  Kubectl main tool for administration and configuration kubernetes cluster
+
+4. What is helm chart?
+  Helm Charts help you define, install, and upgrade even the most complex Kubernetes application.
+
+5. What is an umbrella chart?
+  umbrella chart - chart for charts.
