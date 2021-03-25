@@ -8,13 +8,14 @@ pwd = os.environ['POSTGRES_PASSWORD']
 db = os.environ['POSTGRES_DB']
 host = 'db'
 port = '5432'
-engine = create_engine('postgres://%s:%s@%s:%s/%s' % (user, pwd, host, port, db)) 
+engine = create_engine('postgresql://%s:%s@%s:%s/%s' % (user, pwd, host, port, db))
 
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
                                          bind=engine))
 Base = declarative_base()
 Base.query = db_session.query_property()
+
 
 def init_db():
     # import all modules here that might define models so that
