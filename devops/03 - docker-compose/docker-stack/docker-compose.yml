@@ -1,0 +1,46 @@
+version: '3'
+services:
+  db:
+    image: "postgres:9.6.5"
+    restart: always
+    environment:
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+    volumes:
+      - "dbdata:/var/lib/postgresql/data"
+    networks:
+      - db_nw
+
+  flaskapp:
+#    build: .
+    image: "bulbawarrior/test_task-flask"
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - APP_SECRET_KEY=$APP_SECRET_KEY
+    networks:
+      - db_nw
+      - web_nw
+    depends_on:
+      - db
+
+  nginx:
+    build: nginx_build
+    image: "bulbawarrior/test_task-nginx"
+    ports:
+      - "${APP_PORT}:80"
+    networks:
+      - web_nw
+    depends_on:
+      - flaskapp
+
+networks:
+  db_nw:
+    driver: overlay
+  web_nw:
+    driver: overlay
+volumes:
+  dbdata:
