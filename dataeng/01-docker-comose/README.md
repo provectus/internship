@@ -6,7 +6,7 @@ Docker-compose 1.26 or greater
 
 ## Legend
 
-Docker compose with 3 applications (frontend + backend + DB).
+Docker compose with 3 applications (MINIO + postgres + pgadmin).
 
 ### Instructions for running
 
