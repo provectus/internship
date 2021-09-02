@@ -18,6 +18,7 @@ Currently one specialization is available for internship. The Frontend recruitme
 
 - **[DevOps](./devops)**
 - **[Frontend](./frontend)**
+- **[DataEng](./dataeng)**
 
 Pick one and follow the directions in its README.md file.
 The test task consists of 2 parts: theory and practice. 
