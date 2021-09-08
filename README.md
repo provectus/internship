@@ -1,6 +1,6 @@
 # Provectus Internship Program 
 
-:point_right:  **Open a PR with your completed test assignment, and apply through the [Internship Application Form](https://forms.gle/9d18UhCfwXK7edFJ8)!**
+:point_right:  **Open a PR with your completed test assignment, and apply through the [Internship Application Form](https://www.surveymonkey.com/r/InternshipProvectus)!**
 
 
 <p align="center">
@@ -23,7 +23,7 @@ Pick one and follow the directions in its README.md file.
 The test task consists of 2 parts: theory and practice. 
 Make sure to complete both and open a PR. Then, fill in this form, add a link to your PR inside it and submit: 
 
-- **[Provectus Internship Application Form](https://forms.gle/9d18UhCfwXK7edFJ8)**
+- **[Provectus Internship Application Form](https://www.surveymonkey.com/r/InternshipProvectus)**
 
 We will review your application and reply as soon as we can. 
 
@@ -34,7 +34,7 @@ We will review your application and reply as soon as we can.
 - Internship is unpaid
 - Location: Kazan or online
 - For Kazan, it's recommended to come to office at least once a week for better teamwork
-- To apply, complete both parts of the test assignment (theory and practice) and apply using the [application form](https://forms.gle/9d18UhCfwXK7edFJ8) 
+- To apply, complete both parts of the test assignment (theory and practice) and apply using the [application form](https://www.surveymonkey.com/r/InternshipProvectus) 
 
 ## What Interns Get
 
@@ -54,7 +54,7 @@ We will review your application and reply as soon as we can.
 3. Fork & clone this repository 
 4. Complete the assignment in a separate branch
 5. Push the branch and open a PR to this repository
-6. Fill in the [application form](https://forms.gle/9d18UhCfwXK7edFJ8), add a link to your PR, submit. 
+6. Fill in the [application form](https://www.surveymonkey.com/r/InternshipProvectus), add a link to your PR, submit. 
 
 ## Provectus Opportunities
 
@@ -64,7 +64,7 @@ For current internship and learning opportunities at Provectus and their startin
 - [Provectus Internship (Kazan)](https://careers.provectus.com/internship/)
 - [Provectus NOC School](https://careers.provectus.com/noc-school2-provectus/)
 
-Or send an email to us at: **kazan_internship@provectus.com**
+Or send an email to us at: **internship@provectus.com**
 
 ### About Provectus
 Provectus is an Artificial Intelligence consultancy and solutions provider, helping companies in Healthcare & Life Sciences, Retail & CPG, Media & Entertainment, Manufacturing, and Internet businesses achieve their objectives through AI. Provectus is headquartered in Palo Alto, CA. For more information, visit **[provectus.com](https://provectus.com/)**.
