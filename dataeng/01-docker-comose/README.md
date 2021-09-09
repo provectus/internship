@@ -10,7 +10,11 @@ Docker compose with 3 applications (MINIO + postgres + pgadmin).
 
 ### Instructions for running
 
-`docker-compose up -d db`
+`docker-compose up -d`
+
+### Instructions for stopping
+
+`docker-compose down`
 
 ### Credentials
 

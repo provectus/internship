@@ -15,6 +15,7 @@ services:
     image: postgres:13.3
     restart: always
     environment:
+      POSTGRES_DB: internship
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
