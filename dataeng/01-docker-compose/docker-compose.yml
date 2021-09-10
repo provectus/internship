@@ -10,6 +10,7 @@ services:
       - ./minio:/data
     ports:
       - 9000:9000
+      - 9001:9001
 
   minio-create-bucket:
     image: minio/mc
