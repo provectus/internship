@@ -11,6 +11,18 @@ services:
     ports:
       - 9000:9000
 
+  minio-create-bucket:
+    image: minio/mc
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc config host add myminio http://minio:9000 minio-access-key minio-secret-key;
+      /usr/bin/mc mb myminio/datalake;
+      /usr/bin/mc policy download myminio/datalake;
+      exit 0;
+      "
+
   db:
     image: postgres:13.3
     restart: always
@@ -30,5 +42,5 @@ services:
       - ./pgadmin:/data
     ports:
       - 5050:5050
-    depends_on: 
+    depends_on:
       - db
