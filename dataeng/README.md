@@ -1,4 +1,4 @@
-### Prerequisite
+### Prerequisites
 
 * Python3.7 or greater
 * Docker 19.03 or greater
@@ -33,12 +33,12 @@ Ivan, Ivanov, 946674000000
 2. Try to find image for the same user.
 3. Combine data from CSV and image path
 4. Update processed_data/output.csv CSV file and add new data. Important we can update data for previously processed
-   user. In output CSV and DB we should not to duplicate records. Output CSV file format: user_id, first_name,
+   user. In output CSV and DB we should not duplicate records. Output CSV file format: user_id, first_name,
    last_name, birthts, img_path
 
 ## Task
 
-Implement script to process files in src_data folder.
+Implement a script to process files from the `src_data` folder.
 
 ## Results delivery format
 
@@ -46,7 +46,7 @@ Results should be implemented as a python script with demo data. Also should be
 provided the README.md file with the description of your solution.
 
 ## Level 2
-The same as **Level 1** but with next differences.
+The same as **Level 1** with the following extras.
 
 ## Results delivery format
 
