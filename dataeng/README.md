@@ -30,7 +30,7 @@ Ivan, Ivanov, 946674000000
 ### Data processing description
 
 1. Read csv file
-2. Try to find image for the same user.
+2. Match images for each user
 3. Combine data from CSV and image path
 4. Update processed_data/output.csv CSV file and add new data. Important we can update data for previously processed
    user. In output CSV and DB we should not duplicate records. Output CSV file format: user_id, first_name,
@@ -66,7 +66,7 @@ Source data and processed data should store in Minio. Minio service already defi
 ### Data processing description
 
 1. Read csv file
-2. Try to find image for the same user.
+2. Match images for each user
 3. Combine data from CSV and image path
 4. Update processed_data/output.csv CSV file and add new data. Important we can update data for previously processed
    user. In output CSV and DB we should not to duplicate records. Output CSV file format: user_id, first_name,
