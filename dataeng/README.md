@@ -11,7 +11,7 @@
 
 - src_data - Path with source data needed to be processed.
 - processed_data - Path with output processed data.
-- user_id.jpg - User image file, for example, 0001.jpg. Could be several for different users in source data path.
+- user_id.png - User image file, for example, 0001.png. Could be several for different users in source data path.
 - user_id.csv - User info file, for example, 0001.csv. Could be several for different users in source data path.
 
 User csv file contains next columns:
@@ -19,6 +19,8 @@ User csv file contains next columns:
 1. first_name - User first name
 2. last_name - User last name
 3. birthts - User birthdate timestamp in milliseconds UTC
+
+Test csv and img files can be found in the [02-src-data](./02-src-data) folder
 
 **For example:**
 
