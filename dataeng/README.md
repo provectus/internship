@@ -20,7 +20,7 @@ User csv file contains next columns:
 2. last_name - User last name
 3. birthts - User birthdate timestamp in milliseconds UTC
 
-Test csv and img files can be found in the [02-src-data](./02-src-data) folder
+Test csv and img files could be found in the [02-src-data](./02-src-data) folder
 
 **For example:**
 
