@@ -1,0 +1,47 @@
+version: '3'
+services:
+  minio:
+    image: bitnami/minio:latest
+    restart: always
+    environment:
+      - MINIO_ACCESS_KEY=minio-access-key
+      - MINIO_SECRET_KEY=minio-secret-key
+    volumes:
+      - ./minio:/data
+    ports:
+      - 9000:9000
+      - 9001:9001
+
+  minio-create-bucket:
+    image: minio/mc
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc config host add myminio http://minio:9000 minio-access-key minio-secret-key;
+      /usr/bin/mc mb myminio/datalake;
+      /usr/bin/mc policy download myminio/datalake;
+      exit 0;
+      "
+
+  db:
+    image: postgres:13.3
+    restart: always
+    environment:
+      POSTGRES_DB: internship
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./postgres-data:/var/lib/postgresql
+    ports:
+      - 5432:5432
+
+  pgadmin:
+    image: chorss/docker-pgadmin4
+    restart: always
+    volumes:
+      - ./pgadmin:/data
+    ports:
+      - 5050:5050
+    depends_on:
+      - db
