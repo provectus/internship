@@ -35,7 +35,7 @@ WHERE id NOT IN (
 ```
 ```sql
 +---------+--------+
-| id | usernane    |
+| id | username    |
 +----+--------+----+
 | 1  | Alex       |
 | 2  | Maria      |
