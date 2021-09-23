@@ -1,9 +1,8 @@
-FROM node
+FROM golang:1.15
 WORKDIR /usr/src/app
-COPY example/package*.json example/app.js ./
-RUN npm install
-RUN apt-get update && apt-get install -y openssh-server apache2 supervisor
-RUN mkdir -p /var/run/sshd /var/log/supervisor
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-EXPOSE 3000
-CMD ["/usr/bin/supervisord"]
+COPY main.go .
+COPY go.mod .
+COPY .env .
+RUN go get -d github.com/joho/godotenv 
+RUN CGO_ENABLED=0 GOOS=linux go build -o simple-webpage .
+CMD ["./simple-webpage"]
