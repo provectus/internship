@@ -4,9 +4,9 @@
 
 ## Legend
 
-A node.js application that outputs "Hello world!". 
-There is a dockerfile and application code in example/app.js.
-You need to optimize the Dockerfile by correcting or adding steps, rewrite the dockerfile to output `Hello ${ENV}`, where `${ENV}` is set via ENV in dockerfile and it is set to the ip address of the running container.
+A go web application that outputs container_id(hostname) and access count.
+There is a dockerfile and application code in current folder.
+You need to optimize the Dockerfile by correcting or adding steps.
 
 ## Questions
 
@@ -16,9 +16,14 @@ You need to optimize the Dockerfile by correcting or adding steps, rewrite the d
 
 3. How do I pass variables to the Docker file when building and running the container?
 
+4. Why do we need multistage build ?
+
 ## Tasks
 
-* Dockerfile - Hello ${ENV}, where env is the ip address
+* Dockerfile - generate .env file inside Dockerfile, provide value of port at build step.
 
-* Multi-stage build – change the Dockerfile to make it multi-stage.
+* Multi-stage build – change the Dockerfile to make it multi-stage. Try to get the lowest container size.
 
+* Compare size of docker images with and without multistage build.
+
+* Write down all commands which you have used.
