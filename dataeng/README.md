@@ -1,5 +1,4 @@
 ### Prerequisites
-
 * Python 3.7 or greater
 * Docker 19.03 or greater
 * Git 2.28 or greater
@@ -19,6 +18,8 @@ User csv file contains next columns:
 1. first_name - User first name
 2. last_name - User last name
 3. birthts - User birthdate timestamp in milliseconds UTC
+
+Test csv and img files could be found in the [02-src-data](./02-src-data) folder
 
 **For example:**
 
@@ -80,6 +81,7 @@ Results should be implemented as a service. The service should periodically read
 Also, the service should implement web server with next endpoints:
 - **GET**  /data - get all records from DB in JSON format. Need to implement filtering by: is_image_exists = True/False, user min_age and max_age in years.
 - **POST** /data - manually run data processing in src_data
+
 The solution should work in docker-compose. As base template can be taken [docker-compose](./01-docker-comose/docker-compose.yml) file.
 
 ## Coding Tasks for Data Engineers
