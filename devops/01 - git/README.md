@@ -6,11 +6,9 @@
 
 * fork the current repository
 
-* clone it, find the commit "failed changes commit, revert me" and revert them! 
+* after passing other test tasks (02 - dockerfile, 03 - docker-compose, 04 - bash, 05 - cloud-ops) need to squash all your commits to one
 
-*Please note that after completing this task, the number of folders with tasks must change!*
-
-* after passing all the questions from all folders, make a pull-request with the results of the task and the tag Done-current date (e.g. `Done-01-01-2021`)
+* make a pull-request with the results of the tasks and tag Done-current date (e.g. `Done-01-01-2021`)
 
 
 ## Questions
