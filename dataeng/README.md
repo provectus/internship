@@ -62,7 +62,7 @@ Should be provided the README.md file with the description of your solution.
 The same as **Level 2** but with next differences.
 
 ### Files definitions:
-Source data and processed data should store in Minio. Minio service already defined in [docker-compose](./01-docker-comose/docker-compose.yml) file.
+Source data and processed data should store in Minio. Minio service already defined in [docker-compose](./01-docker-compose/docker-compose.yml) file.
 
 ### Data processing description
 
@@ -73,7 +73,7 @@ Source data and processed data should store in Minio. Minio service already defi
    user. In output CSV and DB we should not to duplicate records. Output CSV file format: user_id, first_name,
    last_name, birthts, img_path
 5. Write this combined data to DB. Record should contain next columns: id, user_id, first_name, last_name, birthdate, img_path. id - autoincrement unique record id.
-Postgres DB service already defined in [docker-compose](./01-docker-comose/docker-compose.yml)
+Postgres DB service already defined in [docker-compose](./01-docker-compose/docker-compose.yml)
 
 ## Results delivery format
 
@@ -82,7 +82,7 @@ Also, the service should implement web server with next endpoints:
 - **GET**  /data - get all records from DB in JSON format. Need to implement filtering by: is_image_exists = True/False, user min_age and max_age in years.
 - **POST** /data - manually run data processing in src_data
 
-The solution should work in docker-compose. As base template can be taken [docker-compose](./01-docker-comose/docker-compose.yml) file.
+The solution should work in docker-compose. As base template can be taken [docker-compose](./01-docker-compose/docker-compose.yml) file.
 
 ## Coding Tasks for Data Engineers
 The following tasks cover different sections to check candidate's basic knowledge in SQL, Algorithms and Linux shell. 
