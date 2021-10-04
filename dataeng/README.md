@@ -84,6 +84,7 @@ Also, the service should implement web server with next endpoints:
 
 The solution should work in docker-compose. As base template can be taken [docker-compose](./01-docker-compose/docker-compose.yml) file.
 
+**As a solution, you should implement one of the levels. You don't need to implement all of them, just choose the one you can solve.** 
 ## Coding Tasks for Data Engineers
 The following tasks cover different sections to check candidate's basic knowledge in SQL, Algorithms and Linux shell. 
 
