@@ -1,0 +1,35 @@
+Resources:
+  Ec2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId: ami-090717c950a5c34d3
+      SecurityGroups: !Ref SSHSecurityGroup
+      KeyName: !Ref 'KeyName'
+      Tags:
+        - Key: Name
+          Value: Cloudformation-task
+        - Key: Type
+          Value: Server Instance
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          yum update -y # update existing packages
+          yum install -y httpd # install apache web server
+          systemctl start httpd
+          systemctl enable httpd
+          echo "Hello World" > /var/www/html/index.html
+  SSHSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow ssh
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+Parameters:
+  KeyName:
+    Description: Name of an existing EC2 KeyPair to connect via ssh.
+    Type: AWS::EC2::KeyPair::KeyName
+    ConstraintDescription: must be the name of an existing EC2 KeyPair.
