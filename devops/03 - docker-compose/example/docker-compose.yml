@@ -1,7 +1,7 @@
 version: '3'
 services:
   db:
-    image: "postgres:9.6.5"
+    image: "postgres:${DB_TAG}"
     volumes:
       - "dbdata:/var/lib/postgresql/data"
     env_file:
@@ -20,14 +20,14 @@ services:
     depends_on:
       - db
   nginx:
-    image: "nginx:1.13.5"
+    image: "nginx:${NGINX_TAG}"
     ports:
-      - "8080:80"
+      - "${PUB_PORT}:${NGINX_PORT}"
     volumes:
       - ./conf.d:/etc/nginx/conf.d
     networks:
       - web_nw
-    depends_on: 
+    depends_on:
       - flaskapp
 networks:
   db_nw:
