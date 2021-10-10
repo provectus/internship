@@ -1,0 +1,108 @@
+===================== PYTHON ======================
+
+1. Optimise execution time of this Python code snippet:
+
+def count_connections(list1: list, list2: list) -> int:
+	return len(list(set(list1) & set(list2)))
+
+2. Given a string S, find the length of the longest substring without repeating characters. Analyze your solution and please provide Space and Time complexities.
+
+def longestSubstring(s: str) -> int:
+	stored = ""
+	searched = ""
+	for letter in s:
+		if letter not in searched:
+			searched += letter
+		else:
+			if len(stored) < len(searched):
+				stored = searched
+			searched += letter
+			searched = searched[searched.index(letter)+1:]
+	return(max(len(stored), len(searched)))
+
+3. Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
+
+def foo(t, arr):
+	if t not in arr:
+		prevNum = min(arr, key=lambda x:abs(x-t))
+		if prevNum > t:
+			return arr.index(prevNum)
+		return arr.index(prevNum) + 1
+  return arr.index(t)
+
+===================== SQL =======================
+
+1. Rewrite this SQL without subquery:
+
+SELECT id
+FROM users
+WHERE id NOT IN (
+	SELECT user_id
+	FROM departments
+	WHERE department_id = 1
+);
+
+SELECT id
+FROM users
+JOIN departments ON id=user_id AND department_id!=1
+
+2. Write a SQL query to find all duplicate lastnames in a table named user
+
++----+-----------+-----------
+| id | firstname | lastname |
++----+-----------+-----------
+| 1  | Ivan      | Sidorov  |
+| 2  | Alexandr  | Ivanov   |
+| 3  | Petr      | Petrov   |
+| 4  | Stepan    | Ivanov   |
++----+-----------+----------+
+
+SELECT lastname
+FROM user
+GROUP BY lastname
+HAVING COUNT(lastname)>1;
+
+3. Write a SQL query to get a username from the user table with the second highest salary from salary tables. Show the username and it's salary in the result.
+
++---------+--------+
+| user_id | salary |
++----+--------+----+
+| 1       | 1000   |
+| 2       | 1100   |
+| 3       | 900    |
+| 4       | 1200   |
++---------+--------+
+
++---------+--------+
+| id | username    |
++----+--------+----+
+| 1  | Alex       |
+| 2  | Maria      |
+| 3  | Bob        |
+| 4  | Sean       |
++---------+-------+
+
+SELECT username, salary
+FROM user, salary
+WHERE user_id=id
+ORDER BY salary DESC
+LIMIT 1 OFFSET 1;
+
+===================== LINUX ======================
+
+1. List processes listening on ports 80 and 443
+
+ss -tunlp | grep :80
+ss -tunlp | grep :443
+
+2. List process environment variables by given PID
+
+cat /proc/<pid>/environ
+
+3. Launch a python program my_program.py through CLI in the background. How would you close it after some period of time?
+
+- get pid:
+	ps aux | grep my_program.py
+	
+- kill the process:
+	kill -9 <pid_of_the_process>
