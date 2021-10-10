@@ -1,0 +1,5 @@
+If we want to simply list variables, 
+then we can use command 'ls /proc/N'
+
+It is also possible to write a shell script, 
+which takes PID as an input and runs needed command itself.

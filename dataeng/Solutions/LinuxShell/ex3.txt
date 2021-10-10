@@ -1,0 +1,4 @@
+1) python3 my_program.py &
+
+2) One can stop a background process by using "kill PID", 
+where PID is usually given after running the first command.
