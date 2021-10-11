@@ -5,11 +5,12 @@ import time
 
 class processing:
 
-    def __init__(self, source_data_path: str):
+    def __init__(self, source_data_path: str, processed_data_path: str):
         """
         Source_data_path is the path where source data are located
         """
         self.source_data_path = source_data_path
+        self.processed_data_path = processed_data_path
 
     def get_age(self, birth_date: float):
         birth_date = float(birth_date)
@@ -30,11 +31,13 @@ class processing:
         min_age = float(min_age)
         max_age = float(max_age)
         records = []
-        with open('output.csv', 'r') as file:
-                file = open("output.csv")
+
+        out_file_name = 'output.csv'
+        out_file = f'{self.processed_data_path}/{out_file_name}'
+
+        with open(out_file, 'r') as file:
                 csvreader = csv.reader(file)
                 next(csvreader, None)
-                #h = next(csvreader)
                 for record in csvreader:
                     if len(record) != 0:
                         records.append(record)
@@ -120,10 +123,14 @@ class processing:
 
         records = []
         headers = ['user_id', 'first_name', ' last_name', ' birthts', 'image_path']
+
+        out_file_name = 'output.csv'
+        out_file = f'{self.processed_data_path}/{out_file_name}'
+
         
-        if os.path.isfile('output.csv'):
-            with open('output.csv', 'r') as file:
-                file = open("output.csv")
+        if os.path.isfile(out_file):
+            with open(out_file, 'r') as file:
+                file = open(out_file)
                 csvreader = csv.reader(file)
                 next(csvreader, None)
                 #h = next(csvreader)
@@ -131,10 +138,10 @@ class processing:
                     if len(record) != 0:
                         records.append(record)
             file.close()
-            os.remove('output.csv')
+            os.remove(out_file)
 
         
-        with open('output.csv', 'w', newline='') as writefile:
+        with open(out_file, 'w', newline='') as writefile:
             csv_writer = csv.writer(writefile)
 
             csv_writer.writerow(headers)
@@ -165,6 +172,8 @@ class processing:
 
         csv_files , images = [] , []
 
+        print('trying to open files')
+
         # Take all files (csv and images) from source directory and get their id's 
         for root,dirs,files in os.walk(directory):
             for file in files:
@@ -175,7 +184,7 @@ class processing:
         
         # Attach each image to it's user and add them to output file using new_record function
         for csv_file, id in csv_files:
-            with open(f'{self.source_data_path}/{csv_file}', 'r') as file:
+            with open(csv_file, 'r') as file:
                 csvreader = csv.reader(file)
                 record = next(csvreader)
                 for data in csvreader:
@@ -197,5 +206,3 @@ class processing:
 if __name__ == "__main__":
     d = processing('../02-src-data')
     d.combine()
-    p = d.filter_data(1,20,25)
-    print(p)
