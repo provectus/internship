@@ -17,7 +17,7 @@ def auto_process():
 
 Auto_processor = BackgroundScheduler()
 
-Auto_processor.add_job(auto_process, 'interval', seconds=60)
+Auto_processor.add_job(auto_process, 'interval', seconds=300)
 Auto_processor.start()
 atexit.register(lambda: Auto_processor.shutdown())
 
