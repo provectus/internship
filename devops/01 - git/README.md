@@ -15,6 +15,8 @@
 
 1. What command can I use to view the commit history?
 
+Answer: **git log**
+
 1. What command can I use to undo the last commit?
 
 1. What command can I use to create a new branch and a new tag?
