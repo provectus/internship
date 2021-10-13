@@ -73,12 +73,19 @@ root@b7c9cbc77177:/#
 ```
 ***Note: we can also coply the file while building image using docker file or docker compose***
 
-
-
 6. `*` How to save file changes made inside the container?
+
+Answer 6: ***Whatever changes that we make can be persist by commiting it. Below is the command***
+
+```
+sudo docker commit [CONTAINER_ID] [new_image_name]
+```
+***Note: we can also assign a folder in our host machine to make the container persistent in some cases we need***
 
 
 ## Tasks
+
+Answer : *** I have less time for this task otherwise i would do that***
 
 * Docker-compose has a bug - investigate it! What would you improve?
 
