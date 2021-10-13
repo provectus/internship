@@ -12,8 +12,25 @@ https://aws.amazon.com/free/?all-free-tier.sort-by=item.additionalFields.SortRan
 ## Tasks
 
 * Create an AWS account and protect the root user with MFA https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html#id_root-user_manage_mfa
+Answer: *** As below picture shows the MFA is enabled for my free account***
 
-* Create an EC2 instance, connect to it through SSH and install apache or nginx manually, terminate it then. 
+![](https://i.imgur.com/8PhBoNJ.png)
+
+
+* Create an EC2 instance, connect to it through SSH and install apache or nginx manually, terminate it then.
+
+Answer: ***I had already AWS account and added a new EC2 instance. I also generated the key pair of SSH type ed25519 in AWS and download the key. I used Putty-keygen tool to convert the key into putty key (.ppk). I added the username and SSH key into putty and below shows that I am connected to Putty***
+
+![](https://i.imgur.com/3dcepNW.png)
+
+***Below I am installing nginx***
+
+```
+sudo yum update
+sudo yum install nginx
+```
+
+
 
 * Create an EC2 instance, provision software (apache/nginx) using Cloudformation, validate the installation, finally delete the stack. 
   Provide the resulting template as outcome of this task.
