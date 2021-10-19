@@ -1,29 +1,27 @@
-import os
 import pathlib
-import csv
+from util import *
 
 
-def append_to_csv(output_file, user_id: int, path_to_csv: str) -> bool:
+def append_to_csv(output_file, user_id: int, path_to_csv: str, user_png: bool) -> bool:
     """
     Given the path to the .csv file and the user id, create the data needed and then
     append it to output_file/output.csv.
     :param output_file: path to where the output file should be.
     :param user_id: user id to be added to the output file.
     :param path_to_csv: path to the .csv file.
+    :param user_png: is there a photo for this .csv file.
     :return: true if the output.csv was changed, false if not.
     """
-    if not os.path.isfile(output_file + "/output.csv"):
-        f = open(output_file + "/output.csv", "w+")
-        f.close()
-    r = csv.reader(open(output_file + "/output.csv", "r+"))
-    lines = list(r)
+    lines = get_csv(output_file + "/output.csv")
     if not len(lines):
-        lines.append(["user_id", " first_name", " last_name", " birthts", " img_path"])
-    jpg_path = path_to_csv[:-4]
-    jpg_path += ".png"
-    jpg_path = " " + jpg_path
-    line_to_write = [str(user_id), *list(csv.reader(open(path_to_csv, "r+")))[1], jpg_path]
-    line_to_write[1] = " " + line_to_write[1]
+        lines.append(["user_id", "first_name", "last_name", "birthts", "img_path"])
+    if user_png:
+        jpg_path = path_to_csv[:-4]
+        jpg_path += ".png"
+    else:
+        jpg_path = "None"
+    temp = get_csv(path_to_csv)
+    line_to_write = [str(user_id), *temp[1], jpg_path]
     for i in range(len(lines)):
         if lines[i][0] == line_to_write[0]:
             if lines[i] == line_to_write:
@@ -40,7 +38,7 @@ def append_to_csv(output_file, user_id: int, path_to_csv: str) -> bool:
     return True
 
 
-def find_png(input_path: str) -> int:
+def find_png_and_id(input_path: str) -> (bool, int):
     """
     Takes a path to a .csv file and checks if there's a .png file with the same name in the same directory.
     if the file exists then returns the name of the file (since this is also the user id), if it doesn't exist
@@ -48,12 +46,15 @@ def find_png(input_path: str) -> int:
     :param input_path: path to the .csv file.
     :return: user id if the file exists or -1 otherwise.
     """
-    user_id = int(pathlib.Path(input_path).stem)
+    try:
+        user_id = int(pathlib.Path(input_path).stem)
+    except ValueError:
+        return False, -1
     input_path = input_path[:-4]
     input_path += ".png"
     if os.path.isfile(input_path):
-        return user_id
-    return -1
+        return True, user_id
+    return False, user_id
 
 
 def process(input_path: str, output_path: str) -> (int, list):
@@ -69,12 +70,12 @@ def process(input_path: str, output_path: str) -> (int, list):
         raise ValueError("This directory doesn't exist")
     count = 0
     filenames = []
-    for filename in os.listdir(input_path):
+    for filename in sorted(os.listdir(input_path)):
         if filename.endswith('.csv'):
-            user_id = find_png(input_path + "/" + filename)
-            if user_id == -1:
+            user_id = find_png_and_id(input_path + "/" + filename)
+            if user_id[1] == -1:
                 continue
-            if append_to_csv(output_path, user_id, input_path + "/" + filename):
+            if append_to_csv(output_path, user_id[1], input_path + "/" + filename, user_id[0]):
                 count += 1
                 filenames.append(pathlib.Path(filename).stem)
     filenames.sort()
@@ -82,7 +83,6 @@ def process(input_path: str, output_path: str) -> (int, list):
 
 
 if __name__ == "__main__":
-    print(process("/home/ehsan2754/git_workspace/provectus task/provectus-internship-task/Level1/demo-data", "/home/ehsan2754/git_workspace/provectus task/provectus-internship-task/Level1/demo-output"))
     istr = input("Enter the input absolute path: ")
     ostr = input("Enter the output absolute path: ")
     print(process(istr, ostr))
