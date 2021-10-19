@@ -1,10 +1,6 @@
-import os
 import csv
-
-input_path_real_data = "/home/ehsan2754/git_workspace/provectus task/provectus-internship-task/Level1/src-data"
-output_path_real_data = "/home/ehsan2754/git_workspace/provectus task/provectus-internship-task/Level1/processed_data"
-input_path_test_data = "/home/ehsan2754/git_workspace/provectus task/provectus-internship-task/Level1/unittests/demo-data"
-output_path_test_data = "/home/ehsan2754/git_workspace/provectus task/provectus-internship-task/Level1/unittests/demo-output"
+from minio import Minio
+from minio.select import SelectRequest, CSVInputSerialization, CSVOutputSerialization
 
 
 def millisecond_to_years(x):
@@ -62,15 +58,42 @@ def check_max_age(row, max_age_filter):
     return False
 
 
-def get_csv(path):
+def get_csv(minio_client: Minio, bucket: str, obj: str, num_col: int):
     """
     Given an absolute path to a .csv, returns the contents of the csv file.
     :param path: path to the .csv
     :return: contents of the csv file.
     """
-    if not os.path.isfile(path):
-        f = open(path, "w+")
-        f.close()
-    reader = csv.reader(open(path, "r+"), delimiter=',', quoting=csv.QUOTE_NONE)
-    temp = [[x.strip() for x in row] for row in reader]
-    return temp
+    with minio_client.select_object_content(
+            bucket,
+            obj,
+            SelectRequest(
+                "select * from S3Object",
+                CSVInputSerialization(),
+                CSVOutputSerialization(),
+                request_progress=True,
+            ),
+    ) as result:
+        for data in result.stream():
+            x = data.decode().replace("\n", ",").split(",")
+            for i in range(len(x)):
+                x[i] = x[i].strip('"').strip(" ")
+    y = [i for i in x if i != ""]
+    ans = []
+    k = 0
+    temp = []
+    for i in y:
+        if not k:
+            ans.append(temp.copy())
+            temp.clear()
+        temp.append(i)
+        k += 1
+        k %= num_col
+    ans.append(temp.copy())
+    ans = ans[1:]
+    return ans
+
+
+def put_csv(path: str, lines: list):
+    w = csv.writer(open(path, "w+"))
+    w.writerows(lines)
