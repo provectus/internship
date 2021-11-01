@@ -1,7 +1,7 @@
 # Provectus Internship Program test assignment
 ## Test Assignment
 
-Thу repo contains the server part of a simple spend-tracking application written using ME*N stack.
+The repo contains the server part of a simple spend-tracking application written using ME*N stack.
 
 ME*N stack technologies
 - MongoDB - document database
