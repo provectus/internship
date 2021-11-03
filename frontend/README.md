@@ -1,7 +1,7 @@
 # Provectus Internship Program test assignment
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
 ### Test Assignment
-The repository contains the backend part for a simple expense-tracking application written using ME\*N stack.
+The repository contains the backend part for a simple expense-tracking application written using ME*N stack.
 ME*N stack technologies:
 - **MongoDB** - document database
 - **Express(.js)** - Node.js web framework
