@@ -6,7 +6,7 @@ const expenseSchema = new Schema(
     description: { type: String, required: true },
     amount: { type: Number, required: true },
     date: { type: Date, required: true },
-    category: { type: Schema.Types.ObjectId, ref: 'Category' }
+    category: { type: Schema.Types.ObjectId, ref: 'Category', required: true }
   },
   { timestamps: true },
 )
