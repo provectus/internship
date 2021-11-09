@@ -11,9 +11,8 @@ ME*N stack technologies:
 You need to write the client side of expense-tracking application using any JS framework / UI kit / libs you like.
 Application will need to display, add new, update, remove expenses and track statistics by month and spending category.
 ### Getting Started
-##### Clone the repo
+##### Fork & clone the repo
 ```
-git clone git@github.com:provectus/internship.git
 cd /internship/frontend/exercise
 ```
 ##### Seed the database with the generated data
@@ -41,3 +40,11 @@ ___
 #### Difficulty level : **High**
 - Created Docker image for the front-end application
 - The docker-compose file is updated and can be used to run the whole app with one command
+-
+## How to Apply
+
+1. Have a Github account & basic Git skills
+2. Fork & clone this repository
+3. Complete the assignment in a separate branch
+4. Push the branch and open a PR to this repository
+5. Fill in the [application form](https://www.surveymonkey.com/r/InternshipProvectus), add a link to your PR, submit.
