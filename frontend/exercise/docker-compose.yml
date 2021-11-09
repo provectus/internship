@@ -1,0 +1,32 @@
+version: '3'
+services:
+  api:
+    build: ./server
+    env_file:
+      - ./server/dev.env
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+    volumes:
+      - ./server/:/usr/src/app
+      - /usr/src/app/node_modules
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo/db:/data/db
+
+  mongo-seed:
+    build: ./mongo-seed
+    restart: on-failure:5
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+    volumes:
+      - ./mongo-seed/dump:/dump
