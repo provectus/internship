@@ -65,10 +65,14 @@ const Expense = require('../models/expense');
 *            description:
 *              type: string
 *              example: Ikea
+*            category:
+*              type: string
+*              example: 617be036888f752511901458
 *          required:
 *            - amount
 *            - date
 *            - description
+*            - category
 *     responses:
 *       201:
 *         description: Returns the newly created expense.

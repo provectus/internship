@@ -13,7 +13,7 @@ Application will need to display, add new, update, remove expenses and track sta
 ### Getting Started
 ##### Fork & clone the repo
 ```
-cd /internship/frontend/exercise
+cd ./internship/frontend/exercise
 ```
 ##### Seed the database with the generated data
 ```
