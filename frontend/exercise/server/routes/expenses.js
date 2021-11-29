@@ -12,6 +12,7 @@ const Expense = require('../models/expense');
 *       - description
 *       - amount
 *       - date
+*       - category
 *     properties:
 *       _id:
 *         type: string
@@ -22,6 +23,9 @@ const Expense = require('../models/expense');
 *       amount:
 *         type: number
 *         example: 999999
+*       category:
+*         type: string
+*         example: 317bf036888s752511901466
 *       date:
 *         type: string
 *         example: 2021-10-29T11:51:18.805Z
