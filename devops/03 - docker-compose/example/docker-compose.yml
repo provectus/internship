@@ -4,14 +4,20 @@ services:
     image: "postgres:9.6.5"
     volumes:
       - "dbdata:/var/lib/postgresql/data"
-    env_file:
-      - env_file
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - APP_SECRET_KEY
     networks:
       - db_nw
   flaskapp:
     build: .
-    env_file:
-      - env_file
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - APP_SECRET_KEY
     volumes:
       - .:/opt/services/flaskapp/src
     networks:
@@ -36,3 +42,4 @@ networks:
     driver: bridge
 volumes:
   dbdata:
+  flaskapp:

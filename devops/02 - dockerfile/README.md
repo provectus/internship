@@ -12,11 +12,19 @@ You need to optimize the Dockerfile by correcting or adding steps.
 
 1. What is Docker? Which technology is it based on?
 
+> Docker is an open source containerization platform based on cgroups and namespaces
+
 2. Look at the Docker file – what would you change in it?
+
+> Did some changes in docker file and tested it
 
 3. How do I pass variables to the Docker file when building and running the container?
 
-4. Why do we need multistage build ?
+> like `docker build --build-arg PORT=5000 -t test .`
+
+4. Why do we need multistage build?
+
+> All things about building images is keeping the image size down and layer control of your dockerfile
 
 ## Tasks
 
@@ -26,4 +34,14 @@ You need to optimize the Dockerfile by correcting or adding steps.
 
 * Compare size of docker images with and without multistage build.
 
+>12283750
+> vs
+>858480705
+
 * Write down all commands which you have used.
+
+> docker build --build-arg PORT=5000 -t test .
+> 
+> docker run -it --entrypoint=/bin/sh test
+> 
+> docker inspect 742fef8ed9de e08865d7a924
