@@ -3,4 +3,267 @@
 @import "reset";
 @import "global";
 
+.header {
+  &__inner {
+    background-color: #d4d4f7;
+    padding: 15px 0;
+  }
+  &__content {
+    display: flex;
+    align-items: center;
+  }
+  &__title {
+    font-size: 30px;
+    line-height: 36px;
+    font-weight: 600;
+    margin-right: 50px;
+  }
+  &__content-link {
+    margin: 0 20px;
+    color: inherit;
+    transition: all 0.2s;
+
+    &:hover {
+      color: #8b82c8;
+    }
+  }
+
+  &__content-link.header__content-link--active {
+    display: flex;
+    background-color: $bgBtn;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+  }
+}
+
+.expenses {
+  margin-top: 100px;
+
+  &__form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 60px;
+  }
+
+  &__form-add {
+    height: 50px;
+    padding: 0 20px;
+    @extend %btn;
+    background-color: #86dc0c;
+    color: #18641a;
+    outline: none;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: #c0f07d;
+    }
+  }
+
+  &__form-box {
+    display: flex;
+    align-items: center;
+  }
+
+  &__form-search {
+    display: flex;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  &__form-find {
+    height: 40px;
+    width: 40px;
+    border: none;
+    background-color: $bgBtn;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__form-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  &__form-input {
+    height: 40px;
+    border: none;
+    background-color: #d4d4f7;
+    padding: 10px;
+    outline: none;
+    width: 180px;
+    color: inherit;
+  }
+
+  &__form-filters {
+    width: 460px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 20px;
+  }
+
+  &__form-select {
+    position: relative;
+  }
+
+  &__form-select select {
+    display: none;
+  }
+
+  .select-selected {
+    background-color: $bgBtn;
+    @extend %btn;
+    color: $text;
+    outline: none;
+    height: 50px;
+    width: 220px;
+    justify-content: start;
+
+    &:after {
+      position: absolute;
+      content: "";
+      top: 50%;
+      transform: translateY(-50%);
+      right: 10px;
+      width: 0;
+      height: 0;
+      border: 6px solid transparent;
+      border-color: $text transparent transparent transparent;
+    }
+
+    &.select-arrow-active {
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      box-shadow: none;
+    }
+
+    &.select-arrow-active:after {
+      border-color: transparent transparent $text transparent;
+      top: 50%;
+      transform: translateY(-100%);
+    }
+  }
+
+  .select-items div,
+  .select-selected {
+    color: $text;
+    padding: 8px 12px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+  }
+
+  .select-items {
+    position: absolute;
+    background-color: $bgBtn;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    font-size: 16px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+
+  .select-hide {
+    display: none;
+  }
+
+  .select-items div:hover,
+  .same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  &__top {
+    display: flex;
+    margin-bottom: 15px;
+    font-weight: 600;
+
+    &-descr {
+      margin-left: 40px;
+      max-width: 275px;
+      width: 100%;
+    }
+
+    &-amount {
+      max-width: 275px;
+      width: 100%;
+    }
+
+    &-date {
+      max-width: 260px;
+      width: 100%;
+    }
+
+    &-category {
+      max-width: 260px;
+      width: 100%;
+    }
+
+    &-action {
+      display: flex;
+    }
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    background-color: pink;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+
+    &-descr {
+      margin-left: 20px;
+      max-width: 275px;
+      width: 100%;
+    }
+
+    &-amount {
+      max-width: 300px;
+      width: 100%;
+    }
+
+    &-date {
+      max-width: 260px;
+      width: 100%;
+    }
+
+    &-category {
+      max-width: 260px;
+      width: 100%;
+    }
+
+    &-action {
+      display: flex;
+    }
+
+    &-edit {
+      @extend %btn;
+      height: 30px;
+      padding: 5px 10px;
+      color: $text;
+      margin-right: 10px;
+    }
+
+    &-delete {
+      @extend %btn;
+      background-color: red;
+      height: 30px;
+      width: 30px;
+
+      &:hover {
+        background-color: #cb0303;
+      }
+    }
+  }
+}
+
 @import "media";

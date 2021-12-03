@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/style.min.css">
+</head>
+
+<body>
+  <header class="header">
+    <div class="header__inner">
+      <div class="container">
+        <div class="header__content">
+          <div class="header__title">Expenses Manager</div>
+          <a class="header__content-link" href="index.html">Home</a>
+          <a class="header__content-link header__content-link--active" href="expenses.html">Expenses</a>
+          <a class="header__content-link" href="categories.html">Categories</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="expenses">
+    <div class="container">
+      <form class="expenses__form">
+        <button class="expenses__form-add">add new</button>
+
+        <div class="expenses__form-box">
+          <div class="expenses__form-search">
+            <button class="expenses__form-find">
+              <img class="expenses__form-icon" src="images/icon/search.png" alt="">
+            </button>
+            <input class="expenses__form-input" placeholder="your description" type="search">
+          </div>
+
+          <div class="expenses__form-filters">
+            <div class="expenses__form-select">
+              <select>
+                <option value="0">FILTER</option>
+                <option value="1">From last date</option>
+                <option value="2">From first date</option>
+                <option value="3">By amount up</option>
+                <option value="4">By amount down</option>
+                <option value="5">Default</option>
+              </select>
+            </div>
+
+            <div class="expenses__form-select">
+              <select>
+                <option value="0">CATEGORY</option>
+                <option value="1">Housing</option>
+                <option value="2">Transportation</option>
+                <option value="3">Food</option>
+                <option value="4">Utilities</option>
+                <option value="5">Insurance</option>
+                <option value="6">Medical & Healthcare</option>
+                <option value="7">Gym</option>
+                <option value="8">Gifts</option>
+                <option value="9">Entertainment</option>
+                <option value="10">Hobbies</option>
+                <option value="11">Default</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="expenses__content">
+        <div class="expenses__top">
+          <div class="expenses__top-descr">Descr</div>
+          <div class="expenses__top-amount">Amount</div>
+          <div class="expenses__top-date">Date</div>
+          <div class="expenses__top-category">Category</div>
+          <div class="expenses__top-action">Action</div>
+        </div>
+
+        <div class="expenses__list">
+          <div class="expenses__item">
+            <div class="expenses__item-number">1</div>
+            <div class="expenses__item-descr">sweets</div>
+            <div class="expenses__item-amount">50.3$</div>
+            <div class="expenses__item-date">07-01-2020</div>
+            <div class="expenses__item-category">Medical & Healthcare</div>
+            <div class="expenses__item-action">
+              <button class="expenses__item-edit">EDIT</button>
+              <button class="expenses__item-delete">
+                <img class="expenses__item-icon" src="images/icon/cross.png" alt="">
+              </button>
+            </div>
+          </div>
+
+          <div class="expenses__item">
+            <div class="expenses__item-number">1</div>
+            <div class="expenses__item-descr">sweets</div>
+            <div class="expenses__item-amount">50.3$</div>
+            <div class="expenses__item-date">07-01-2020</div>
+            <div class="expenses__item-category">Medical & Healthcare</div>
+            <div class="expenses__item-action">
+              <button class="expenses__item-edit">EDIT</button>
+              <button class="expenses__item-delete">
+                <img class="expenses__item-icon" src="images/icon/cross.png" alt="">
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <script src="js/main.min.js"></script>
+</body>
+
+</html>
