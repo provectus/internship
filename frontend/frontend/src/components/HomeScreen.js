@@ -4,7 +4,8 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 import axios from 'axios'
 import Message from './Message'
 import Loader from './Loader'
-import { actions } from '../actions'
+import requests from '../requests'
+import Request from './Request'
 
 function HomeScreen() {
     const [name, setName] = useState('')
@@ -64,15 +65,21 @@ function HomeScreen() {
     return (
         <Container>
             <Row className='justify-content-md-center my-5'>
-                <Col xs={12} md={6} lg={6}>
-                    <h1>Please select an action</h1>
+                <Col xs={12} md={7} lg={7}>
+                    <h1 class='text-center'>Please select an action</h1>
 
                     {loading && <Loader />}
                     {response && <Message variant='info'>{response}</Message>}
                     {error && <Message variant='danger'>{error}</Message>}
 
                     <div>
-                        <Row></Row>
+                        <Row>
+                            {requests.map((request) => (
+                                <Col key={request._id} sm={12} md={6} lg={4} xl={3}>
+                                    <Request request={request} />
+                                </Col>
+                            ))}
+                        </Row>
                     </div>
                 </Col>
             </Row>
