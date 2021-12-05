@@ -1,12 +1,4 @@
-function getDataByAPI() {
-  fetch('http://localhost:5000/categories', { method: 'GET' })
-    .then(resp => resp.json())
-    .then(async data => {
-      console.log(data);
-    });
-}
-
-getDataByAPI();
+"use strict";
 
 customSelect();
 
@@ -27,7 +19,7 @@ function customSelect() {
     for (j = 1; j < ll; j++) {
       c = document.createElement("DIV");
       c.innerHTML = selElmnt.options[j].innerHTML;
-      c.addEventListener("click", function (e) {
+      c.addEventListener("click", () => {
         var y, i, k, s, h, sl, yl;
         s = this.parentNode.parentNode.getElementsByTagName("select")[0];
         sl = s.length;

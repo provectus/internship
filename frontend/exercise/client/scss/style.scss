@@ -5,7 +5,7 @@
 
 .header {
   &__inner {
-    background-color: #d4d4f7;
+    background-color: $bgLight;
     padding: 15px 0;
   }
   &__content {
@@ -94,7 +94,7 @@
   &__form-input {
     height: 40px;
     border: none;
-    background-color: #d4d4f7;
+    background-color: $bgLight;
     padding: 10px;
     outline: none;
     width: 180px;
@@ -215,7 +215,7 @@
   &__item {
     display: flex;
     align-items: center;
-    background-color: pink;
+    background-color: $bgLight;
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 10px;
@@ -262,6 +262,84 @@
       &:hover {
         background-color: #cb0303;
       }
+    }
+  }
+}
+
+.paginationjs {
+  display: flex;
+  margin-bottom: 100px;
+  justify-content: center;
+  align-items: center;
+
+  ul {
+    display: flex;
+    list-style-type: none;
+
+    li {
+      margin: 0 5px;
+      @extend %btn;
+    }
+
+    li a {
+      text-decoration: none;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: inherit;
+    }
+  }
+
+  &-go-input input {
+    height: 30px;
+    max-width: 50px;
+    border: none;
+    background-color: $bgLight;
+    padding: 10px;
+    outline: none;
+    width: 180px;
+    color: inherit;
+    margin-left: 20px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+  }
+
+  &-go-button {
+    margin-top: -2px;
+    input {
+      width: 30px;
+      height: 30px;
+      font-size: 0;
+      line-height: 0;
+      border: none;
+      background-image: url(../images/icon/search.png);
+      background-size: 60%;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-color: $bgBtn;
+      border-bottom-right-radius: 10px;
+      border-top-right-radius: 10px;
+      cursor: pointer;
+    }
+  }
+
+  .disabled {
+    background-color: #ccc;
+    cursor: default;
+
+    &:hover {
+      background-color: #ccc;
+    }
+  }
+
+  .active {
+    background-color: $text;
+    color: $bgLight;
+
+    &:hover {
+      background-color: #6649f0;
     }
   }
 }
