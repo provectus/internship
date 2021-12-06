@@ -25,48 +25,47 @@
 
   <section class="expenses">
     <div class="container">
-      <form class="expenses__form">
+      <div class="expenses__form">
         <button class="expenses__form-add">add new</button>
 
         <div class="expenses__form-box">
-          <div class="expenses__form-search">
-            <button class="expenses__form-find">
+          <form class="expenses__form-search" method="post">
+            <button class="expenses__form-find" type="submit">
               <img class="expenses__form-icon" src="images/icon/search.png" alt="">
             </button>
-            <input class="expenses__form-input" placeholder="your description" type="search">
+            <input class="expenses__form-input" placeholder="your description" type="text" required>
+          </form>
+
+          <div class="expenses__form-select expenses__form-select--user">
+            <select>
+              <option value="default">FILTER</option>
+              <option value="From last date">From last date</option>
+              <option value="From first date">From first date</option>
+              <option value="By amount ASC">By amount ASC</option>
+              <option value="By amount DESC">By amount DESC</option>
+              <option value="default">Default</option>
+            </select>
           </div>
 
-          <div class="expenses__form-filters">
-            <div class="expenses__form-select">
-              <select>
-                <option value="0">FILTER</option>
-                <option value="1">From last date</option>
-                <option value="2">From first date</option>
-                <option value="3">By amount up</option>
-                <option value="4">By amount down</option>
-                <option value="5">Default</option>
-              </select>
-            </div>
-
-            <div class="expenses__form-select">
-              <select>
-                <option value="0">CATEGORY</option>
-                <option value="1">Housing</option>
-                <option value="2">Transportation</option>
-                <option value="3">Food</option>
-                <option value="4">Utilities</option>
-                <option value="5">Insurance</option>
-                <option value="6">Medical & Healthcare</option>
-                <option value="7">Gym</option>
-                <option value="8">Gifts</option>
-                <option value="9">Entertainment</option>
-                <option value="10">Hobbies</option>
-                <option value="11">Default</option>
-              </select>
-            </div>
+          <div class="expenses__form-select expenses__form-select--category">
+            <select>
+              <option value="default">CATEGORY</option>
+              <option value="Housing">Housing</option>
+              <option value="Transportation">Transportation</option>
+              <option value="Food">Food</option>
+              <option value="Utilities">Utilities</option>
+              <option value="Insurance">Insurance</option>
+              <option value="Medical & Healthcare">Medical & Healthcare</option>
+              <option value="Gym">Gym</option>
+              <option value="Gifts">Gifts</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Hobbies">Hobbies</option>
+              <option value="default">Default</option>
+            </select>
           </div>
+
         </div>
-      </form>
+      </div>
 
       <div class="expenses__content">
         <div class="expenses__top">
@@ -84,8 +83,11 @@
     </div>
   </section>
 
-  <script src="js/expenses.js"></script>
+
+
+
   <script src="js/main.min.js"></script>
+  <script src="js/expenses.js"></script>
 </body>
 
 </html>
