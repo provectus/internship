@@ -1,0 +1,23 @@
+header {
+  padding: 30px;
+  font-size: 24px;
+}
+
+header h1 {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+main {
+  padding: 60px;
+  text-align: left;
+  font-size: 16px;
+}
+
+main h1 {
+  font-size: 24px;
+}
+
+main ul {
+  list-style: none;
+}
