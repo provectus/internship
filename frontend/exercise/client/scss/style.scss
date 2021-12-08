@@ -341,17 +341,17 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  align-items: center;
-  justify-content: center;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: none;
 
   &__content {
     width: 500px;
     height: 500px;
+    margin: 0 auto;
     background-color: #fff;
     padding: 20px;
     font-family: sans-serif;
@@ -397,6 +397,11 @@
       color: $text;
     }
 
+    select[disabled] {
+      border: 1px solid #ccc;
+      color: #8c8c8c;
+    }
+
     &-btn {
       @extend %btn;
       padding: 10px 20px;
@@ -408,6 +413,128 @@
     &-error {
       display: none;
     }
+  }
+}
+
+.pop-up-delete {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+
+  &__content {
+    margin: 0 auto;
+    width: 300px;
+    height: 300px;
+    background-color: #fff;
+    padding: 20px;
+    font-family: sans-serif;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__close {
+    width: 20px;
+    height: 20px;
+    margin-left: auto;
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  &__text {
+    font-size: 30px;
+    line-height: 32px;
+    text-align: center;
+  }
+
+  &__btns {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__cancel {
+    @extend %btn;
+    color: #fff;
+    background-color: red;
+
+    &:hover {
+      background-color: #cb0303;
+    }
+  }
+
+  &__yes {
+    @extend %btn;
+    background-color: #86dc0c;
+    color: #18641a;
+
+    &:hover {
+      background-color: #c0f07d;
+    }
+  }
+}
+
+.error {
+  margin-top: 50px;
+
+  &__title {
+    margin: 0 auto;
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    font-size: 40px;
+    line-height: 44px;
+    font-family: sans-serif;
+  }
+}
+
+.categories {
+  margin-top: 100px;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  &__item-title {
+    // text-align: center;
+    font-weight: 700;
+    width: 700px;
+    padding: 10px 15px;
+    background-color: $bgBtn;
+    border-radius: 5px;
+  }
+
+  &__item-bar {
+    border: 1px solid #000;
+    height: 20px;
+    border-radius: 10px;
+    width: 400px;
+  }
+
+  &__item-fill {
+    height: 20px;
+    background-color: $bgBtn;
+    width: 50%;
+    border-radius: 10px;
+  }
+
+  &__item-percent {
+    margin-left: 250px;
+  }
+
+  &__item-amount {
+    margin-left: 250px;
   }
 }
 

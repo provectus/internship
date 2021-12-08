@@ -10,13 +10,12 @@ window.addEventListener('DOMContentLoaded', () => {
           categories[item._id] = item.title;
         }
 
-        customSelect('expenses__form-select--category', 'category__item');
-        customSelect('expenses__form-select--user', 'user__item');
+        createCustomSelect('expenses__form-select--category', 'category__item');
+        createCustomSelect('expenses__form-select--user', 'user__item');
         getExpenses('default', 'default', '');
-        expensesFilter();
-        addNewExpense();
+        runExpensesFilter();
       })
-      .catch(e => console.log(e));
+      .catch(() => document.location = 'error.html');
   }
 
   function getExpenses(currentCategory, currentUserFilter, searchInput) {
@@ -67,7 +66,7 @@ window.addEventListener('DOMContentLoaded', () => {
           }
 
           if (dataClone.length != 0) {
-            renderExpensesItem(dataClone);
+            renderExpenses(dataClone);
             return;
           }
 
@@ -75,14 +74,14 @@ window.addEventListener('DOMContentLoaded', () => {
           inputSearch.placeholder = 'not found!';
         }
 
-        renderExpensesItem(data);
+        renderExpenses(data);
       })
-      .catch(e => {
-        console.log(e);
+      .catch(() => {
+        document.location = 'error.html'
       });
   }
 
-  function expensesFilter() {
+  function runExpensesFilter() {
     const filterCategory = document.querySelectorAll('.category__item');
     const filterUser = document.querySelectorAll('.user__item');
     const inputSearch = document.querySelector('.expenses__form-input');
@@ -113,21 +112,29 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function renderExpensesItem(data) {
-    // console.log(data);
-
+  function renderExpenses(data) {
     $('#pagination').pagination({
       dataSource: data,
       pageSize: 20,
       showGoInput: true,
       showGoButton: true,
       callback: function (data, pagination) {
-        expensesBuilding(pagination.pageNumber, this.pageSize);
+        createExpenses(pagination.pageNumber, this.pageSize);
+        openAddOrEditPopUp();
+        openDeletePopUp();
       }
     })
 
-    function expensesBuilding(currentPage, pageSize) {
+    function createExpenses(currentPage, pageSize) {
       const list = document.querySelector('.expenses__list');
+      const expenseForm = document.querySelector('.expenses__form');
+
+      document.querySelector('.expenses__form-add').remove();
+      const btn = document.createElement('botton');
+      btn.innerHTML = 'add new';
+      btn.classList.add('expenses__form-add');
+      expenseForm.prepend(btn);
+
       let loopStart = pageSize * --currentPage;
       list.innerHTML = '';
 
@@ -138,11 +145,11 @@ window.addEventListener('DOMContentLoaded', () => {
   <div class="expenses__item-number">${i + 1}</div>
     <div class="expenses__item-descr">${data[i].description}</div>
     <div class="expenses__item-amount">${data[i].amount}$</div>
-    <div class="expenses__item-date">${dateBuilding(data[i].date)}</div>
+    <div class="expenses__item-date">${buildDate(data[i].date)}</div>
     <div class="expenses__item-category">${categories[data[i].category]}</div>
     <div class="expenses__item-action">
-      <button class="expenses__item-edit">EDIT</button>
-      <button class="expenses__item-delete">
+      <button class="expenses__item-edit" data-category="${data[i].category}" data-id="${data[i]._id}">EDIT</button>
+      <button class="expenses__item-delete" data-id="${data[i]._id}">
         <img class="expenses__item-icon" src="images/icon/cross.png" alt="" />
       </button>
     </div>
@@ -151,7 +158,7 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    function dateBuilding(date) {
+    function buildDate(date) {
       const userdate = new Date(date);
       let year = userdate.getFullYear(),
         month = userdate.getMonth(),
@@ -165,7 +172,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function customSelect(elemetClass, elementItem) {
+  function createCustomSelect(elemetClass, elementItem) {
     let selectParent, selElement, selSelected, selItems, selItem;
     selectParent = document.getElementsByClassName(elemetClass);
 
@@ -237,52 +244,91 @@ window.addEventListener('DOMContentLoaded', () => {
     document.addEventListener("click", closeAllSelect);
   }
 
-  function addNewExpense() {
-    const addBtn = document.querySelector('.expenses__form-add');
+  function openAddOrEditPopUp() {
     const popUp = document.querySelector('.pop-up-expense');
+    const popUpContent = document.querySelector('.pop-up-expense__content');
     const closeBtn = document.querySelector('.pop-up-expense__close-btn');
-    const popUpBg = document.querySelector('.pop-up-expense');
     const form = document.querySelector('.pop-up-expense__form');
-
     const categorySelect = document.querySelector('.pop-up-expense__category--select select');
+    const categoryOptions = categorySelect.querySelectorAll('option');
     const dateInput = document.querySelector('.pop-up-expense__date--input');
     const descrInput = document.querySelector('.pop-up-expense__descr--input');
     const amountInput = document.querySelector('.pop-up-expense__amount--input');
     const userMessage = document.querySelector('.pop-up-expense__form-message');
+    const addBtn = document.querySelector('.expenses__form-add');
+    const editBtns = document.querySelectorAll('.expenses__item-edit');
 
-    addBtn.addEventListener('click', () => {
-      popUp.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    });
+    let scrollTop = Math.max(
+      document.body.scrollHeight, document.documentElement.scrollHeight,
+      document.body.offsetHeight, document.documentElement.offsetHeight,
+      document.body.clientHeight, document.documentElement.clientHeight
+    );
 
-    popUpBg.addEventListener('click', (e) => {
-      if (e.target == popUpBg) {
-        popUp.style.display = 'none';
-        document.body.style.overflow = 'unset';
-      }
-    });
+    let id;
+    let categoryId;
+    let methodAPI;
 
-    closeBtn.addEventListener('click', () => {
-      popUp.style.display = 'none';
-      document.body.style.overflow = 'unset';
-    });
-
-    form.addEventListener('submit', (e) => {
+    function formSubmit(e) {
       e.preventDefault();
       if (checkFields(categorySelect, descrInput, amountInput)) {
-        postNewExpense(categorySelect, dateInput, descrInput, amountInput);
-        userMessage.innerHTML = 'success sending!';
-        userMessage.style.color = 'green';
-        userMessage.style.display = 'block';
-        setTimeout(() => {
-          userMessage.style.display = 'none';
-        }, 1500);
-        form.reset();
+        postNewExpense(categorySelect, dateInput, descrInput, amountInput, methodAPI, id);
       } else {
         userMessage.innerHTML = 'Incorrect data!';
         userMessage.style.color = 'red';
         userMessage.style.display = 'block';
       }
+    }
+
+    function overlayClose(e) {
+      if (e.target == popUp) {
+        form.reset();
+        popUp.style.display = 'none';
+        document.body.style.overflow = 'unset';
+      }
+    }
+
+    function btnClose() {
+      form.reset();
+      popUp.style.display = 'none';
+      document.body.style.overflow = 'unset';
+    }
+
+    addBtn.addEventListener('click', () => {
+      popUp.style.display = 'block';
+      popUp.style.height = `${scrollTop}px`;
+      popUpContent.style.marginTop = `calc(${window.pageYOffset}px + ${document.documentElement.clientHeight / 2 - 250}px)`;
+      document.body.style.overflow = 'hidden';
+      methodAPI = 'POST';
+
+      form.addEventListener('submit', formSubmit);
+      popUp.addEventListener('click', overlayClose);
+      closeBtn.addEventListener('click', btnClose);
+    });
+
+    editBtns.forEach(btn => {
+      btn.addEventListener('click', function () {
+        id = this.getAttribute('data-id');
+        categoryId = this.getAttribute('data-category');
+        methodAPI = 'PUT';
+        categoryOptions.forEach(item => {
+          if (item.value == 'Choose category') {
+            item.removeAttribute('selected');
+          }
+
+          if (item.value == categories[categoryId]) {
+            item.setAttribute('selected', 'selected')
+          }
+        });
+        categorySelect.setAttribute('disabled', 'disabled');
+        popUp.style.display = 'block';
+        popUp.style.height = `${scrollTop}px`;
+        popUpContent.style.marginTop = `calc(${window.pageYOffset}px + ${document.documentElement.clientHeight / 2 - 250}px)`;
+        document.body.style.overflow = 'hidden';
+
+        form.addEventListener('submit', formSubmit);
+        popUp.addEventListener('click', overlayClose);
+        closeBtn.addEventListener('click', btnClose);
+      });
     });
   }
 
@@ -295,7 +341,7 @@ window.addEventListener('DOMContentLoaded', () => {
     return true;
   }
 
-  function postNewExpense(categorySelect, dateInput, descrInput, amountInput) {
+  function postNewExpense(categorySelect, dateInput, descrInput, amountInput, methodAPI, id) {
     let userCategory;
     for (const property in categories) {
       if (categorySelect.value == categories[property]) {
@@ -310,14 +356,86 @@ window.addEventListener('DOMContentLoaded', () => {
       category: userCategory
     };
 
-    fetch('http://localhost:5000/expenses', {
-      method: 'POST',
+    if (methodAPI == 'POST') {
+      id = '';
+    } else {
+      delete categories.category;
+    }
+
+    fetch(`http://localhost:5000/expenses/${id}`, {
+      method: methodAPI,
       body: JSON.stringify(expense),
       headers: { "Content-type": "application/json; charset=UTF-8" }
     })
       .then(response => response.json())
-      .then(data => { console.log(data) })
-      .catch(e => { console.log(e); });
+      .then(data => {
+        console.log(data);
+        location.reload();
+      })
+      .catch(e => { document.location = 'error.html' });
+  }
+
+  function openDeletePopUp() {
+    const deleteBtns = document.querySelectorAll('.expenses__item-delete');
+    const cancelBtn = document.querySelector('.pop-up-delete__cancel');
+    const yesBtn = document.querySelector('.pop-up-delete__yes');
+    const popUp = document.querySelector('.pop-up-delete');
+    const popUpContent = document.querySelector('.pop-up-delete__content');
+    const closeBtn = document.querySelector('.pop-up-delete__close');
+
+    let scrollTop = Math.max(
+      document.body.scrollHeight, document.documentElement.scrollHeight,
+      document.body.offsetHeight, document.documentElement.offsetHeight,
+      document.body.clientHeight, document.documentElement.clientHeight
+    );
+
+    let id;
+
+    deleteBtns.forEach(btn => {
+      btn.addEventListener('click', function () {
+        popUp.style.display = 'block';
+        popUp.style.height = `${scrollTop}px`;
+        popUpContent.style.marginTop = `calc(${window.pageYOffset}px + ${document.documentElement.clientHeight / 2 - 150}px)`;
+        document.body.style.overflow = 'hidden';
+        id = this.getAttribute('data-id');
+
+        yesBtn.addEventListener('click', () => {
+          deleteExpenseByID(id);
+        });
+
+        popUp.addEventListener('click', (e) => {
+          if (e.target == popUp) {
+            popUp.style.display = 'none';
+            document.body.style.overflow = 'unset';
+          }
+        });
+
+        cancelBtn.addEventListener('click', () => {
+          popUp.style.display = 'none';
+          document.body.style.overflow = 'unset';
+        });
+
+        closeBtn.addEventListener('click', () => {
+          popUp.style.display = 'none';
+          document.body.style.overflow = 'unset';
+        });
+      });
+    });
+  }
+
+  function deleteExpenseByID(id) {
+    fetch(`http://localhost:5000/expenses/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        location.reload();
+      })
+      .catch(() => document.location = 'error.html')
   }
 
 });
