@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import FormComponent from "../Form";
-import Button from 'react-bootstrap/Button'
+import Button from "react-bootstrap/Button";
 
-interface typeCategories {
+export interface typeCategories {
   _id: string;
   title: string;
   __v: number;
 }
 
-interface typeExpenses {
+export interface typeExpenses {
   _id: string;
   description: string;
   amount: number;
@@ -36,11 +36,10 @@ const getFetch = async (set: any, url: string): Promise<void> => {
 };
 
 const Table: React.FC = () => {
-  const [categories, setCategories] = useState<any>([]);
+  const [categories, setCategories] = useState<typeCategories[]>([]);
   const [expenses, setExpenses] = useState<any[]>([]);
   const [currentCategory, setCurrentCategory] = useState<string>("");
   const [showInput, setShowInput] = useState<boolean>(false);
-
   useEffect(() => {
     getFetch(setCategories, URL.CATEGORIES);
     getFetch(setExpenses, URL.EXPENSES);
@@ -60,12 +59,12 @@ const Table: React.FC = () => {
         </button>
       ))}
       <div>
-      {showInput ? (
-              <FormComponent />
-            ) : (
-              <Button onClick={() => setShowInput(true)}>Add</Button>
-            )}
-        </div>
+        {showInput ? (
+          <FormComponent categories={categories} />
+        ) : (
+          <Button onClick={() => setShowInput(true)}>Add</Button>
+        )}
+      </div>
       <table style={styleTable}>
         <thead>
           <tr style={styleTable}>
