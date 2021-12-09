@@ -1,46 +1,129 @@
 import React from "react";
-import { Row, Col, FloatingLabel } from "react-bootstrap";
+import * as formik from "formik";
+import { Row, Col, FloatingLabel, Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
+import * as yup from "yup";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { typeCategories } from "../Table";
+import { typeCategories, typePostValues } from "../Table";
 
-interface typeFormComponentProps {
-  categories: typeCategories[];
+const styleForm = {
+  border: "1px solid grey",
+  borderRadius: "5px"
 }
 
-const FormComponent: React.FC<typeFormComponentProps> = (categories) => {
-  console.log(categories);
+interface Props {
+  categories: typeCategories[],
+  postAndUpdate: (values: typePostValues) => void,  
+} 
+
+const { Formik } = formik;
+
+const schema = yup.object().shape({
+  price: yup.number().required(),
+  date: yup.date().required(),
+  shop: yup.string().required(),
+  category: yup.string().required(),
+});
+
+const FormComponent: React.FC<Props> = (props) => {
+  // const handleSubmit = (event: any) => {
+  //   const form = event.currentTarget;
+
+  //   event.preventDefault();
+  //   event.stopPropagation();
+  // };
+
   return (
-    <Row className="g-2">
-      <Col sm>
-        <FloatingLabel controlId="floatingInputGrid" label="amount of costs">
-          <Form.Control type="price" placeholder="5000" />
-        </FloatingLabel>
-      </Col>
-      <Col sm>
-        <FloatingLabel controlId="floatingInputGrid" label="Date">
-          <Form.Control type="date" placeholder="example: 20.03.2012" />
-        </FloatingLabel>
-      </Col>
-      <Col sm>
-        <FloatingLabel controlId="floatingInputGrid" label="Shop">
-          <Form.Control type="shop" placeholder="shop name" />
-        </FloatingLabel>
-      </Col>
-      <Col sm>
-        <FloatingLabel
-          controlId="floatingSelectGrid"
-          label="Works with selects"
-        >
-          <Form.Select size="sm" aria-label="Floating label select example">
-            <option>Open this select menu</option>
-            {/* {categories.map((category: typeCategories) => (
-              <option value={category._id}>{category.title}</option>
-            ))} */}
-          </Form.Select>
-        </FloatingLabel>
-      </Col>
-    </Row>
+    <Formik
+      validationSchema={schema}
+      onSubmit={values => {
+        console.log(values);
+        return props.postAndUpdate(values)
+      }
+      }
+      initialValues={{
+        price: undefined,
+        date: "",
+        shop: "",
+        category: "617be036888f752511901458",
+        floatingSelectGrid: "",
+      }}
+    >
+      {({ handleSubmit, handleChange, values, touched, errors }) => (
+        <Form noValidate style={styleForm} onSubmit={handleSubmit}>
+          <Row className="g-1">
+            <Col sm={3}>
+              <Form.Group controlId="validationFormik01">
+                <FloatingLabel
+                  controlId="floatingInputGrid"
+                  label="amount of costs(example: 500)"
+                >
+                  <Form.Control
+                    size="sm"
+                    type="text"
+                    name="price"
+                    value={values.price}
+                    onChange={handleChange}
+                    isValid={touched.price && !errors.price}
+                  />
+                </FloatingLabel>
+              </Form.Group>
+            </Col>
+            <Col xs="auto">
+              <Form.Group controlId="validationFormik02">
+                <FloatingLabel controlId="floatingInputGrid" label="Date">
+                  <Form.Control
+                    size="sm"
+                    type="date"
+                    name="date"
+                    value={values.date}
+                    onChange={handleChange}
+                    isValid={touched.date && !errors.date}
+                  />
+                </FloatingLabel>
+              </Form.Group>
+            </Col>
+            <Col xs="auto">
+              <Form.Group controlId="validationFormik02">
+                <FloatingLabel controlId="floatingInputGrid" label="Shop">
+                  <Form.Control
+                    size="sm"
+                    type="text"
+                    name="shop"
+                    value={values.shop}
+                    onChange={handleChange}
+                    isValid={touched.shop && !errors.shop}
+                  />
+                </FloatingLabel>
+              </Form.Group>
+            </Col>
+            <Col xs="auto">
+              <FloatingLabel
+                controlId="floatingSelectGrid"
+                label="Choose categories"
+              >
+                <Form.Select
+                  size="sm"
+                  aria-label="Floating label select example"
+                  // value={values.category}
+                  onChange={handleChange}
+                  isValid={touched.category && !errors.category}
+                >
+                  {props.categories.map((category: typeCategories) => (
+                    <option value={category._id}>{category.title}</option>
+                  ))}
+                </Form.Select>
+              </FloatingLabel>
+            </Col>
+            <Col xs="auto">
+              <Button size="lg" variant="primary" type="submit">
+                Submit
+              </Button>
+            </Col>
+          </Row>
+        </Form>
+      )}
+    </Formik>
   );
 };
 

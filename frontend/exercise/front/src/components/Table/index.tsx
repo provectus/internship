@@ -19,6 +19,14 @@ export interface typeExpenses {
   __v: number;
 }
 
+export interface typePostValues {
+  price: string | undefined;
+  date: string;
+  shop: string;
+  category?: string;
+  floatingSelectGrid?: string;
+}
+
 enum URL {
   CATEGORIES = "categories",
   EXPENSES = "expenses",
@@ -34,24 +42,56 @@ const getFetch = async (set: any, url: string): Promise<void> => {
   const data = await response.json();
   set(data);
 };
+const postFetch = async ({
+  price,
+  date,
+  shop,
+  floatingSelectGrid,
+}: typePostValues) => {
+  const newDate = new Date(date).toISOString();
+  const body = {
+    amount: Number(price),
+    date: newDate,
+    description: shop,
+    category: floatingSelectGrid,
+  };
+  const response = await fetch(`http://localhost:5000/${URL.EXPENSES}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+    body: JSON.stringify(body),
+  });
+  await console.log(response);
+  // getFetch(setExpenses, URL.EXPENSES);
+};
 
 const Table: React.FC = () => {
   const [categories, setCategories] = useState<typeCategories[]>([]);
   const [expenses, setExpenses] = useState<any[]>([]);
-  const [currentCategory, setCurrentCategory] = useState<string>("");
+  const [currentCategory, setCurrentCategory] = useState<string>(
+    "617be036888f752511901458"
+  ); //default category is Housing
   const [showInput, setShowInput] = useState<boolean>(false);
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const postAndUpdate = (values: typePostValues) => {
+    setIsLoading(true);
+    postFetch(values);
+    setIsLoading(false);
+  };
   useEffect(() => {
     getFetch(setCategories, URL.CATEGORIES);
     getFetch(setExpenses, URL.EXPENSES);
-  }, []);
-  console.log(currentCategory);
+  }, [isLoading]);
+  console.log(expenses.length);
   return (
     <div>
       {categories.map((category: typeCategories) => (
         <button
           style={styleTable}
           onClick={() => {
-            // console.log(category._id);
             setCurrentCategory(category._id);
           }}
         >
@@ -60,7 +100,10 @@ const Table: React.FC = () => {
       ))}
       <div>
         {showInput ? (
-          <FormComponent categories={categories} />
+          <FormComponent
+            categories={categories}
+            postAndUpdate={postAndUpdate}
+          />
         ) : (
           <Button onClick={() => setShowInput(true)}>Add</Button>
         )}
@@ -84,14 +127,15 @@ const Table: React.FC = () => {
                   (expenseCategory: typeExpenses) =>
                     expenseCategory.category === currentCategory
                 )
+
                 .map((expense: typeExpenses) => (
                   <tr style={styleTable} key={expense.date}>
-                    {Object.entries(expense).map(([name, discription]) => (
+                    {Object.entries(expense).map(([name, description]) => (
                       <td
                         key={expense.date + expense.amount + name}
                         style={styleTable}
                       >
-                        {discription === expense._id ? null : discription}
+                        {description === expense._id ? null : description}
                       </td>
                     ))}
                   </tr>
