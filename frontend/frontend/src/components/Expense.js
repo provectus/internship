@@ -2,7 +2,7 @@ import React from 'react'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-const Request = ({ request }) => {
+const Expense = ({ request }) => {
     return (
         <Card className='my-3 p-3 rounded'>
             <Link to={`/request/${request._id}`}>
@@ -26,4 +26,4 @@ const Request = ({ request }) => {
     )
 }
 
-export default Request
+export default Expense
