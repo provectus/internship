@@ -2,15 +2,19 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
+
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
 
 const ExpenseEditScreen = ({ match, history }) => {
     // const expenseId = match.params.id
+    const navigate = useNavigate()
+
     const [description, setDescription] = useState('')
     const [amount, setAmount] = useState('')
-    const [date, setDate] = useState('')
+    const [date, setDate] = useState(null)
     const [category, setCategory] = useState('')
 
     const [error, setError] = useState('')
@@ -19,11 +23,72 @@ const ExpenseEditScreen = ({ match, history }) => {
     const [errorUpdate, setErrorUpdate] = useState('')
     const [loadingUpdate, setLoadingUpdate] = useState(false)
 
-    useEffect(() => {}, [])
+    const [expense, setExpense] = useState(null)
+    const [updatedExpense, setUpdatedExpense] = useState(false)
+
+    const getExpense = async () => {
+        try {
+            setLoading(true)
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+            // const { data } = await axios.get(`/api/`, notif, config)
+            const { data } = await axios.get(`/expenses.json`, config)
+
+            setExpense(data['expenses'][0])
+        } catch (errors) {
+            setError(
+                errors.response && errors.response.data.detail
+                    ? errors.response.data.detail
+                    : errors.message
+            )
+        } finally {
+            setLoading(false)
+        }
+    }
 
     const submitHandler = (e) => {
         e.preventDefault()
+        try {
+            setLoadingUpdate(true)
+            const config = {
+                headers: {
+                    'Content-type': 'application/json',
+                },
+            }
+            // const { data } = await axios.put(
+            //     `/api/products/update/${product._id}/`,
+            //     product,
+            //     config
+            // )
+            setUpdatedExpense(true)
+        } catch (errors) {
+            setErrorUpdate(
+                errors.response && errors.response.data.detail
+                    ? errors.response.data.detail
+                    : errors.message
+            )
+        } finally {
+            setLoadingUpdate(false)
+        }
     }
+
+    useEffect(() => {
+        if (updatedExpense) {
+            navigate('/expenses')
+        } else {
+            if (!expense) {
+                getExpense()
+            } else {
+                setDescription(expense.description)
+                setAmount(expense.amount)
+                setDate(expense.date.substring(0, 10))
+                setCategory(expense.category)
+            }
+        }
+    }, [expense, updatedExpense])
 
     return (
         <div>
