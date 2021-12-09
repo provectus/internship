@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
 
-const ExpenseEditScreen = ({ match, history }) => {
-    // const expenseId = match.params.id
+const ExpenseEditScreen = () => {
     const navigate = useNavigate()
+    const { id } = useParams()
 
     const [description, setDescription] = useState('')
     const [amount, setAmount] = useState('')
@@ -26,7 +26,7 @@ const ExpenseEditScreen = ({ match, history }) => {
     const [expense, setExpense] = useState(null)
     const [updatedExpense, setUpdatedExpense] = useState(false)
 
-    const getExpense = async () => {
+    const getExpense = async (id) => {
         try {
             setLoading(true)
             const config = {
@@ -34,10 +34,11 @@ const ExpenseEditScreen = ({ match, history }) => {
                     'Content-Type': 'application/json',
                 },
             }
-            // const { data } = await axios.get(`/api/`, notif, config)
-            const { data } = await axios.get(`/expenses.json`, config)
+            const { data } = await axios.get(`/expenses/${id}`, config)
+            // const { data } = await axios.get(`/expenses.json`, config)
 
-            setExpense(data['expenses'][0])
+            // setExpense(data['expenses'][0])
+            setExpense(data)
         } catch (errors) {
             setError(
                 errors.response && errors.response.data.detail
@@ -49,7 +50,7 @@ const ExpenseEditScreen = ({ match, history }) => {
         }
     }
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault()
         try {
             setLoadingUpdate(true)
@@ -58,11 +59,16 @@ const ExpenseEditScreen = ({ match, history }) => {
                     'Content-type': 'application/json',
                 },
             }
-            // const { data } = await axios.put(
-            //     `/api/products/update/${product._id}/`,
-            //     product,
-            //     config
-            // )
+            const { data } = await axios.put(
+                `/expenses/${id}`,
+                {
+                    _id: expense._id,
+                    amount,
+                    date,
+                    description,
+                },
+                config
+            )
             setUpdatedExpense(true)
         } catch (errors) {
             setErrorUpdate(
@@ -80,7 +86,8 @@ const ExpenseEditScreen = ({ match, history }) => {
             navigate('/expenses')
         } else {
             if (!expense) {
-                getExpense()
+                // if (!expense || expense._id !== Number(id)) {
+                getExpense(id)
             } else {
                 setDescription(expense.description)
                 setAmount(expense.amount)

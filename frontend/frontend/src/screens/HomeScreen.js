@@ -13,16 +13,38 @@ function HomeScreen({ history }) {
     return (
         <Container>
             <Row className='justify-content-md-center my-5'>
-                <Col xs={12} md={5} lg={5}>
-                    <h1 class='text-center'>Please select an action</h1>
+                <h1 class='text-center'>Please select an action</h1>
 
+                <Col xs={12} md={4} lg={4}>
                     <Card className='my-3 p-3 rounded'>
                         <Link to={`/expenses/`}>
-                            <Card.Img src={'/images/get.png'} />
+                            <Card.Img src={'/images/crud.png'} />
                         </Link>
 
                         <Card.Body>
                             <Link to={`/expenses/`}>
+                                <Card.Title as='div'>
+                                    <strong>CRUD</strong>
+                                </Card.Title>
+                            </Link>
+
+                            <Card.Text as='div'>
+                                <div className='my-3'>
+                                    <strong>display / create / update / delete expenses</strong>
+                                </div>
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+                </Col>
+
+                <Col xs={12} md={4} lg={4}>
+                    <Card className='my-3 p-3 rounded'>
+                        <Link to={`/chart/`}>
+                            <Card.Img src={'/images/chart.jpg'} />
+                        </Link>
+
+                        <Card.Body>
+                            <Link to={`/chart/`}>
                                 <Card.Title as='div'>
                                     <strong>list</strong>
                                 </Card.Title>
@@ -30,7 +52,10 @@ function HomeScreen({ history }) {
 
                             <Card.Text as='div'>
                                 <div className='my-3'>
-                                    <strong>list all the expenses</strong>
+                                    <strong>
+                                        displays a chart that shows spending stats/statistics by
+                                        month and spending category
+                                    </strong>
                                 </div>
                             </Card.Text>
                         </Card.Body>

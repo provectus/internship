@@ -3,12 +3,14 @@ import React, { useState, useEffect } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Table, Button, Row, Col } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 
-const ListExpensesScreen = ({ match }) => {
+const ListExpensesScreen = () => {
     const navigate = useNavigate()
+    var today = new Date()
 
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
@@ -21,6 +23,7 @@ const ListExpensesScreen = ({ match }) => {
 
     const [expenses, setExpenses] = useState([])
     const [createdExpense, setCreatedExpense] = useState(null)
+    const [deletedExpense, setDeletedExpense] = useState(null)
 
     const getExpenses = async () => {
         try {
@@ -30,10 +33,11 @@ const ListExpensesScreen = ({ match }) => {
                     'Content-Type': 'application/json',
                 },
             }
-            // const { data } = await axios.get(`/api/`, notif, config)
-            const { data } = await axios.get(`/expenses.json`, config)
+            const { data } = await axios.get(`/expenses`, config)
+            // const { data } = await axios.get(`/expenses.json`, config)
 
-            setExpenses(data['expenses'])
+            setExpenses(data)
+            // setExpenses(data['expenses'])
         } catch (errors) {
             setError(
                 errors.response && errors.response.data.detail
@@ -45,7 +49,7 @@ const ListExpensesScreen = ({ match }) => {
         }
     }
 
-    const createExpenseHandler = (expense) => {
+    const createExpenseHandler = async () => {
         try {
             setLoadingCreate(true)
             const config = {
@@ -54,18 +58,21 @@ const ListExpensesScreen = ({ match }) => {
                 },
             }
 
-            // const { data } = await axios.post(`/api/expenses/create/`, {}, config)
-            const dataCreated = {
+            const { data } = await axios.post(
+                `/expenses`,
+                {
+                    amount: 0,
+                    date: today,
+                    description: 'choose a description',
+                    category: '617be036888f752511901458',
+                },
+                config
+            )
+
+            const dataCreated0 = {
                 _id: '1',
-                description: 'Magnit',
-                amount: 496865,
-                date: '2021-07-05T08:22:09.068Z',
-                category: '617be036888f752511901458',
-                createdAt: '2021-10-29T11:51:18.805Z',
-                updatedAt: '2021-10-29T11:51:18.805Z',
-                __v: 0,
             }
-            setCreatedExpense(dataCreated)
+            setCreatedExpense(data)
         } catch (errors) {
             setErrorCreate(
                 errors.response && errors.response.data.detail
@@ -77,7 +84,7 @@ const ListExpensesScreen = ({ match }) => {
         }
     }
 
-    const deleteExpenseHandler = (id) => {
+    const deleteExpenseHandler = async (id) => {
         if (window.confirm('Are you sure you want to delete this expense?')) {
             try {
                 setLoadingDelete(true)
@@ -86,7 +93,8 @@ const ListExpensesScreen = ({ match }) => {
                         'Content-type': 'application/json',
                     },
                 }
-                // const { data } = await axios.delete(`/api/expenses/delete/${id}/`, config)
+                const { data } = await axios.delete(`/expenses/${id}`, config)
+                setDeletedExpense(data)
             } catch (errors) {
                 setErrorDelete(
                     errors.response && errors.response.data.detail
@@ -102,14 +110,17 @@ const ListExpensesScreen = ({ match }) => {
     useEffect(() => {
         if (createdExpense) {
             navigate(`/expense/${createdExpense._id}/edit`)
-            // history.push(`/expense/${createdExpense._id}/edit`)
-        } else {
-            getExpenses()
+            setCreatedExpense(null)
+        } else if (deletedExpense) {
+            setDeletedExpense(null)
         }
-    }, [navigate, createdExpense])
+        getExpenses()
+    }, [navigate, createdExpense, deletedExpense])
 
     return (
         <div>
+            <Link to='/'>Go Back</Link>
+
             <Row className='align-items-center'>
                 <Col>
                     <h1>Expenses</h1>
