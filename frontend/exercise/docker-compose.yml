@@ -1,28 +1,41 @@
 version: '3'
 services:
+  client:
+    build: ./client
+    ports:
+      - '3000:3000'
+    depends_on:
+      - api
+    links:
+      - api # todo check how this works
+    volumes:
+      - ./client:/usr/src/app
+
   api:
     build: ./server
     env_file:
       - ./server/dev.env
     ports:
-      - "5000:5000"
+      - '5000:5000'
     depends_on:
       - mongodb
     links:
       - mongodb
     volumes:
       - ./server/:/usr/src/app
-      - /usr/src/app/node_modules
+      - /usr/src/app/node_modules # what is this for?
 
   mongodb:
     image: mongo
     ports:
-      - "27017:27017"
+      - '27017:27017'
     volumes:
       - ./mongo/db:/data/db
 
   mongo-seed:
     build: ./mongo-seed
+    profiles:
+      - seed
     restart: on-failure:5
     depends_on:
       - mongodb
