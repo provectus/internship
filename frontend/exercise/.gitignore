@@ -1,1 +1,5 @@
 mongo/
+
+# virtual environments
+/venv
+/env
