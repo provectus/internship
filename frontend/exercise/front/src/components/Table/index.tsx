@@ -1,95 +1,54 @@
 import React, { useEffect, useState } from "react";
-import FormComponent from "../Form";
+import FormComponent from "../AddForm";
 import Button from "react-bootstrap/Button";
-
-export interface typeCategories {
-  _id: string;
-  title: string;
-  __v: number;
-}
-
-export interface typeExpenses {
-  _id: string;
-  description: string;
-  amount: number;
-  date: string;
-  category: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-}
-
-export interface typePostValues {
-  price: string | undefined;
-  date: string;
-  shop: string;
-  category?: string;
-  floatingSelectGrid?: string;
-}
-
-enum URL {
-  CATEGORIES = "categories",
-  EXPENSES = "expenses",
-}
+import SearchFormComponent from "../SearchForm";
+import { Categories, Expense, PostValues, URL } from "./../types";
+import { getFetch, getFetchById, postFetch } from "../../api";
 
 const styleTable = {
   border: "1px solid black",
   margin: "2px",
 };
 
-const getFetch = async (set: any, url: string): Promise<void> => {
-  const response = await fetch(`http://localhost:5000/${url}`);
-  const data = await response.json();
-  set(data);
-};
-const postFetch = async ({
-  price,
-  date,
-  shop,
-  floatingSelectGrid,
-}: typePostValues) => {
-  const newDate = new Date(date).toISOString();
-  const body = {
-    amount: Number(price),
-    date: newDate,
-    description: shop,
-    category: floatingSelectGrid,
-  };
-  const response = await fetch(`http://localhost:5000/${URL.EXPENSES}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-    },
-    body: JSON.stringify(body),
-  });
-  await console.log(response);
-  // getFetch(setExpenses, URL.EXPENSES);
-};
-
 const Table: React.FC = () => {
-  const [categories, setCategories] = useState<typeCategories[]>([]);
+  const [categories, setCategories] = useState<Categories[]>([]);
   const [expenses, setExpenses] = useState<any[]>([]);
   const [currentCategory, setCurrentCategory] = useState<string>(
     "617be036888f752511901458"
   ); //default category is Housing
+  const [expenseById, setExpenseById] = useState<Expense | null>(null);
   const [showInput, setShowInput] = useState<boolean>(false);
-
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const postAndUpdate = (values: typePostValues) => {
+  const getCategoriesAndExpenses = async (
+    set: any,
+    url: string
+  ): Promise<void> => {
+    const data = await getFetch(url);
+    set(data);
+  };
+  const postAndUpdate = (values: PostValues) => {
     setIsLoading(true);
     postFetch(values);
     setIsLoading(false);
   };
+  const getExpenseById = async ({ id }: { id: string }) => {
+    const data = await getFetchById(id);
+    setExpenseById(data);
+  };
   useEffect(() => {
-    getFetch(setCategories, URL.CATEGORIES);
-    getFetch(setExpenses, URL.EXPENSES);
+    getCategoriesAndExpenses(setCategories, URL.CATEGORIES);
+    getCategoriesAndExpenses(setExpenses, URL.EXPENSES);
   }, [isLoading]);
-  console.log(expenses.length);
+  console.log(expenses)
+  console.log(categories)
+  console.log(currentCategory)
+  console.log(expenseById)
   return (
     <div>
-      {categories.map((category: typeCategories) => (
+      {categories.map((category: Categories) => (
         <button
+          key={category._id + category.title}
           style={styleTable}
           onClick={() => {
             setCurrentCategory(category._id);
@@ -98,6 +57,7 @@ const Table: React.FC = () => {
           {category.title}
         </button>
       ))}
+      <SearchFormComponent getExpenseById={getExpenseById} />
       <div>
         {showInput ? (
           <FormComponent
@@ -108,41 +68,68 @@ const Table: React.FC = () => {
           <Button onClick={() => setShowInput(true)}>Add</Button>
         )}
       </div>
-      <table style={styleTable}>
-        <thead>
-          <tr style={styleTable}>
-            {expenses[0]
-              ? Object.entries(expenses[0]).map(([name]) => (
-                  <td key={name} style={styleTable}>
-                    {name}
-                  </td>
-                ))
-              : "нет данных"}
-          </tr>
-        </thead>
-        <tbody style={styleTable}>
-          {expenses
-            ? expenses
-                .filter(
-                  (expenseCategory: typeExpenses) =>
-                    expenseCategory.category === currentCategory
-                )
+      {expenseById ? (
+        <table style={styleTable}>
+          <thead>
+            <tr style={styleTable}>
+              {Object.keys(expenseById).map((key) => (
+                <td style={styleTable} key={key + Math.random().toString}>
+                  {key}
+                </td>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={styleTable}>
+              {Object.values(expenseById).map((values) => (
+                <td style={styleTable} key={values + Math.random().toString}>
+                  {values}
+                </td>
+              ))}
+            </tr>
+          </tbody>
+        </table>
+      ) : (
+        <table style={styleTable}>
+          <thead>
+            <tr style={styleTable}>
+              {expenses[0]
+                ? Object.keys(expenses[0]).map((key) => (
+                    <td key={key + Math.random().toString} style={styleTable}>
+                      {key}
+                    </td>
+                  ))
+                : "нет данных"}
+            </tr>
+          </thead>
+          <tbody style={styleTable}>
+            {expenses
+              ? expenses
+                  .filter(
+                    (expenseCategory: Expense) =>
+                      expenseCategory.category === currentCategory
+                  )
+                  .slice(-10)
 
-                .map((expense: typeExpenses) => (
-                  <tr style={styleTable} key={expense.date}>
-                    {Object.entries(expense).map(([name, description]) => (
-                      <td
-                        key={expense.date + expense.amount + name}
-                        style={styleTable}
-                      >
-                        {description === expense._id ? null : description}
-                      </td>
-                    ))}
-                  </tr>
-                ))
-            : "нет данных"}
-        </tbody>
-      </table>
+                  .map((expense: Expense) => (
+                    <tr
+                      style={styleTable}
+                      key={expense.date + Math.random().toString}
+                    >
+                      {Object.entries(expense).map(([name, description]) => (
+                        <td
+                          key={name + Math.random().toString}
+                          style={styleTable}
+                        >
+                          {description}
+                        </td>
+                      ))}
+                    </tr>
+                  ))
+              : "нет данных"}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };

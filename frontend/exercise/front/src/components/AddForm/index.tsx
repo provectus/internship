@@ -4,17 +4,17 @@ import { Row, Col, FloatingLabel, Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import * as yup from "yup";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { typeCategories, typePostValues } from "../Table";
+import { Categories, PostValues } from "../types";
 
 const styleForm = {
   border: "1px solid grey",
-  borderRadius: "5px"
-}
+  borderRadius: "5px",
+};
 
 interface Props {
-  categories: typeCategories[],
-  postAndUpdate: (values: typePostValues) => void,  
-} 
+  categories: Categories[];
+  postAndUpdate: (values: PostValues) => void;
+}
 
 const { Formik } = formik;
 
@@ -25,7 +25,7 @@ const schema = yup.object().shape({
   category: yup.string().required(),
 });
 
-const FormComponent: React.FC<Props> = (props) => {
+const AddFormComponent: React.FC<Props> = (props) => {
   // const handleSubmit = (event: any) => {
   //   const form = event.currentTarget;
 
@@ -36,11 +36,10 @@ const FormComponent: React.FC<Props> = (props) => {
   return (
     <Formik
       validationSchema={schema}
-      onSubmit={values => {
-        console.log(values);
-        return props.postAndUpdate(values)
-      }
-      }
+      onSubmit={(values) => {
+        // console.log(values);
+        return props.postAndUpdate(values);
+      }}
       initialValues={{
         price: undefined,
         date: "",
@@ -74,7 +73,7 @@ const FormComponent: React.FC<Props> = (props) => {
                 <FloatingLabel controlId="floatingInputGrid" label="Date">
                   <Form.Control
                     size="sm"
-                    type="date"
+                    type="datetime-local"
                     name="date"
                     value={values.date}
                     onChange={handleChange}
@@ -109,7 +108,7 @@ const FormComponent: React.FC<Props> = (props) => {
                   onChange={handleChange}
                   isValid={touched.category && !errors.category}
                 >
-                  {props.categories.map((category: typeCategories) => (
+                  {props.categories.map((category: Categories) => (
                     <option value={category._id}>{category.title}</option>
                   ))}
                 </Form.Select>
@@ -127,4 +126,4 @@ const FormComponent: React.FC<Props> = (props) => {
   );
 };
 
-export default FormComponent;
+export default AddFormComponent;
