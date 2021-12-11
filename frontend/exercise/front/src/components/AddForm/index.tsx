@@ -4,7 +4,7 @@ import { Row, Col, FloatingLabel, Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import * as yup from "yup";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Categories, PostValues } from "../types";
+import { Category, PostValues } from "../types";
 
 const styleForm = {
   border: "1px solid grey",
@@ -12,7 +12,7 @@ const styleForm = {
 };
 
 interface Props {
-  categories: Categories[];
+  categories: Category[];
   postAndUpdate: (values: PostValues) => void;
 }
 
@@ -108,7 +108,7 @@ const AddFormComponent: React.FC<Props> = (props) => {
                   onChange={handleChange}
                   isValid={touched.category && !errors.category}
                 >
-                  {props.categories.map((category: Categories) => (
+                  {props.categories.map((category: Category) => (
                     <option value={category._id}>{category.title}</option>
                   ))}
                 </Form.Select>

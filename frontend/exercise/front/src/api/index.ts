@@ -1,9 +1,22 @@
-import { PostValues, URL } from "../components/types";
+import { Expense, Category, PostValues, URL } from "../components/types";
+const SERVER_API = 'http://localhost:5000/'
 
-export const getFetch = async (url: string): Promise<void> => {
-  const response = await fetch(`http://localhost:5000/${url}`);
+const getFetch = async <Type>(url: string): Promise<Type> => {
+  const response = await fetch(`${SERVER_API}${url}`);
   return await response.json();
 };
+export const getCategories = async () => {
+  return getFetch<Category[]>(URL.CATEGORIES);
+};
+
+export const getExpenses = async () => {
+  return getFetch<Expense[]>(URL.EXPENSES);
+};
+
+export const getExpenseById = async (id: string): Promise<Expense> => {
+  return getFetch<Expense>(`${URL.EXPENSES}/${id}`);
+};
+
 export const postFetch = async ({
   price,
   date,
@@ -21,17 +34,11 @@ export const postFetch = async ({
     description: shop,
     category: floatingSelectGrid,
   };
-  await fetch(`http://localhost:5000/${URL.EXPENSES}`, {
+  await fetch(`${SERVER_API}${URL.EXPENSES}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
     },
     body: JSON.stringify(body),
   });
-};
-
-export const getFetchById = async (id: string) => {
-  const response = await fetch(`http://localhost:5000/${URL.EXPENSES}/${id}`);
-  const data = await response.json();
-  return data;
 };

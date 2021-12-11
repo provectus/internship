@@ -2,51 +2,55 @@ import React, { useEffect, useState } from "react";
 import FormComponent from "../AddForm";
 import Button from "react-bootstrap/Button";
 import SearchFormComponent from "../SearchForm";
-import { Categories, Expense, PostValues, URL } from "./../types";
-import { getFetch, getFetchById, postFetch } from "../../api";
+import { Category, Expense, PostValues } from "./../types";
+import {
+  getCategories,
+  getExpenses,
+  getExpenseById,
+  postFetch,
+} from "../../api";
 
 const styleTable = {
   border: "1px solid black",
   margin: "2px",
 };
 
-const Table: React.FC = () => {
-  const [categories, setCategories] = useState<Categories[]>([]);
-  const [expenses, setExpenses] = useState<any[]>([]);
+const Table = () => {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [expenses, setExpenses] = useState<Expense[]>([]);
   const [currentCategory, setCurrentCategory] = useState<string>(
     "617be036888f752511901458"
   ); //default category is Housing
   const [expenseById, setExpenseById] = useState<Expense | null>(null);
   const [showInput, setShowInput] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isToched, setIsTouched] = useState<boolean>(false);
 
-  const getCategoriesAndExpenses = async (
-    set: any,
-    url: string
-  ): Promise<void> => {
-    const data = await getFetch(url);
-    set(data);
+  const getSetCategories = async (): Promise<void> => {
+    const data = await getCategories();
+    setCategories(data);
+  };
+  const getSetExpenses = async (): Promise<void> => {
+    const data = await getExpenses();
+    setExpenses(data);
   };
   const postAndUpdate = (values: PostValues) => {
     setIsLoading(true);
     postFetch(values);
     setIsLoading(false);
   };
-  const getExpenseById = async ({ id }: { id: string }) => {
-    const data = await getFetchById(id);
+  const getSetExpenseById = async ({ id }: { id: string }) => {
+    const data = await getExpenseById(id);
     setExpenseById(data);
   };
   useEffect(() => {
-    getCategoriesAndExpenses(setCategories, URL.CATEGORIES);
-    getCategoriesAndExpenses(setExpenses, URL.EXPENSES);
+    getSetCategories();
+    getSetExpenses();
   }, [isLoading]);
-  console.log(expenses)
-  console.log(categories)
-  console.log(currentCategory)
-  console.log(expenseById)
+
   return (
     <div>
-      {categories.map((category: Categories) => (
+      {categories.map((category: Category) => (
         <button
           key={category._id + category.title}
           style={styleTable}
@@ -57,7 +61,7 @@ const Table: React.FC = () => {
           {category.title}
         </button>
       ))}
-      <SearchFormComponent getExpenseById={getExpenseById} />
+      <SearchFormComponent getSetExpenseById={getSetExpenseById} />
       <div>
         {showInput ? (
           <FormComponent
@@ -118,10 +122,26 @@ const Table: React.FC = () => {
                     >
                       {Object.entries(expense).map(([name, description]) => (
                         <td
+                          onDoubleClick={() => {
+                            setIsTouched(true);
+                            // expense._id
+                          }}
                           key={name + Math.random().toString}
                           style={styleTable}
                         >
-                          {description}
+                          {!isToched ? (
+                            description
+                          ) : isToched && description === expense.amount ? (
+                            <input type="text" />
+                          ) : isToched && description === expense.date ? (
+                            <input type="text" />
+                          ) : isToched &&
+                            description === expense.description ? (
+                            <input type="text" />
+                          ) : (
+                            description
+                          )}
+                          {/* {description} */}
                         </td>
                       ))}
                     </tr>

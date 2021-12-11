@@ -12,7 +12,7 @@ const styleForm = {
   borderRadius: "5px",
 };
 interface Props {
-  getExpenseById: (values:typeSearch)=>void
+  getSetExpenseById: (values:typeSearch)=>void
 }
 
 const { Formik } = formik;
@@ -25,14 +25,14 @@ const schema = yup.object().shape({
     // }),
 });
 
-const SearchFormComponent: React.FC<Props> = ({getExpenseById}) => {
+const SearchFormComponent: React.FC<Props> = ({getSetExpenseById}) => {
   return (
     <div>
       <Formik
         validationSchema={schema}
         onSubmit={(values: typeSearch) => {
           // console.log(values);
-          getExpenseById(values)
+          getSetExpenseById(values)
 
         }}
         initialValues={{
