@@ -7,7 +7,7 @@ import axios from 'axios'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 
-function HomeScreen({ history }) {
+function HomeScreen() {
     useEffect(() => {}, [])
 
     return (
@@ -46,7 +46,7 @@ function HomeScreen({ history }) {
                         <Card.Body>
                             <Link to={`/chart/`}>
                                 <Card.Title as='div'>
-                                    <strong>list</strong>
+                                    <strong>Chart</strong>
                                 </Card.Title>
                             </Link>
 

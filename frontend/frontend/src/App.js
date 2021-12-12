@@ -9,6 +9,7 @@ import HomeScreen from './screens/HomeScreen'
 import ExpenseScreen from './screens/ExpenseScreen'
 import ExpenseEditScreen from './screens/ExpenseEditScreen'
 import ListExpensesScreen from './screens/ListExpensesScreen'
+import ChartScreen from './screens/ChartScreen'
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                         <Route path='/expense/:id' element={<ExpenseScreen />} />
                         <Route path='/expense/:id/edit' element={<ExpenseEditScreen />} />
                         <Route path='/expenses/' element={<ListExpensesScreen />} />
+                        <Route path='/chart/' element={<ChartScreen />} />
                     </Routes>
                 </Container>
             </main>

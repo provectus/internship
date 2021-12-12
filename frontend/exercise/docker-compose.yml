@@ -1,32 +1,45 @@
 version: '3'
 services:
-  api:
-    build: ./server
-    env_file:
-      - ./server/dev.env
-    ports:
-      - "5000:5000"
-    depends_on:
-      - mongodb
-    links:
-      - mongodb
-    volumes:
-      - ./server/:/usr/src/app
-      - /usr/src/app/node_modules
+    api:
+        build: ./server
+        env_file:
+            - ./server/dev.env
+        ports:
+            - '5000:5000'
+        depends_on:
+            - mongodb
+        links:
+            - mongodb
+        volumes:
+            - ./server/:/usr/src/app
+            - /usr/src/app/node_modules
 
-  mongodb:
-    image: mongo
-    ports:
-      - "27017:27017"
-    volumes:
-      - ./mongo/db:/data/db
+    mongodb:
+        image: mongo
+        ports:
+            - '27017:27017'
+        volumes:
+            - ./mongo/db:/data/db
 
-  mongo-seed:
-    build: ./mongo-seed
-    restart: on-failure:5
-    depends_on:
-      - mongodb
-    links:
-      - mongodb
-    volumes:
-      - ./mongo-seed/dump:/dump
+    mongo-seed:
+        build: ./mongo-seed
+        restart: on-failure:5
+        depends_on:
+            - mongodb
+        links:
+            - mongodb
+        volumes:
+            - ./mongo-seed/dump:/dump
+
+    # frontend:
+    #     container_name: frontend
+    #     build: ../frontend
+    #     # volumes:
+    #     #     - './:/app'
+    #     # - '/app/node_modules'
+    #     ports:
+    #         - 3000:3000
+    #     stdin_open: true
+    #     environment:
+    #         - CHOKIDAR_USEPOLLING=true
+    #     command: npm start

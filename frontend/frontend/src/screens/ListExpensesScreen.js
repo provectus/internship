@@ -33,7 +33,7 @@ const ListExpensesScreen = () => {
                     'Content-Type': 'application/json',
                 },
             }
-            const { data } = await axios.get(`/expenses`, config)
+            const { data } = await axios.get(`http://localhost:5000/expenses`, config)
             // const { data } = await axios.get(`/expenses.json`, config)
 
             setExpenses(data)
@@ -59,7 +59,7 @@ const ListExpensesScreen = () => {
             }
 
             const { data } = await axios.post(
-                `/expenses`,
+                `http://localhost:5000/expenses`,
                 {
                     amount: 0,
                     date: today,
@@ -93,7 +93,7 @@ const ListExpensesScreen = () => {
                         'Content-type': 'application/json',
                     },
                 }
-                const { data } = await axios.delete(`/expenses/${id}`, config)
+                const { data } = await axios.delete(`http://localhost:5000/expenses/${id}`, config)
                 setDeletedExpense(data)
             } catch (errors) {
                 setErrorDelete(

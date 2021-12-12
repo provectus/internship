@@ -34,7 +34,7 @@ const ExpenseEditScreen = () => {
                     'Content-Type': 'application/json',
                 },
             }
-            const { data } = await axios.get(`/expenses/${id}`, config)
+            const { data } = await axios.get(`http://localhost:5000/expenses/${id}`, config)
             // const { data } = await axios.get(`/expenses.json`, config)
 
             // setExpense(data['expenses'][0])
@@ -60,7 +60,7 @@ const ExpenseEditScreen = () => {
                 },
             }
             const { data } = await axios.put(
-                `/expenses/${id}`,
+                `http://localhost:5000/expenses/${id}`,
                 {
                     _id: expense._id,
                     amount,
