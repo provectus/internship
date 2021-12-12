@@ -14,7 +14,7 @@ The application display, add new, update, remove expenses and track statistics b
 ##### clone the repo
 
 ```
-git clone https://github.com/samysellami/internship.git
+git clone git@github.com:samysellami/internship.git
 ```
 
 ##### cd into the directory
