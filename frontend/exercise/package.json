@@ -10,6 +10,7 @@
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.27.7",
+    "chart.js": "^3.6.2",
     "del": "^6.0.0",
     "eslint": "^8.3.0",
     "eslint-plugin-babel": "^5.3.1",

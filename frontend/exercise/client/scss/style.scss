@@ -209,6 +209,7 @@
     display: flex;
     align-items: center;
     background-color: $bgLight;
+
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 10px;
@@ -244,17 +245,16 @@
       padding: 5px 10px;
       color: $text;
       margin-right: 10px;
+      background-color: $bgLight;
     }
 
     &-delete {
       @extend %btn;
-      background-color: red;
+      background-color: $bgLight;
+      background-color: transparent;
       height: 30px;
       width: 30px;
-
-      &:hover {
-        background-color: #cb0303;
-      }
+      border: none;
     }
   }
 }
@@ -463,12 +463,8 @@
 
   &__cancel {
     @extend %btn;
-    color: #fff;
-    background-color: red;
-
-    &:hover {
-      background-color: #cb0303;
-    }
+    color: $text;
+    background-color: transparent;
   }
 
   &__yes {
@@ -506,35 +502,127 @@
     margin-bottom: 20px;
   }
 
+  &__item-img {
+    width: 40px;
+    overflow: hidden;
+    margin-left: 20px;
+    margin-right: 40px;
+  }
+
   &__item-title {
-    // text-align: center;
     font-weight: 700;
     width: 700px;
-    padding: 10px 15px;
-    background-color: $bgBtn;
-    border-radius: 5px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+    line-height: 32px;
+    border-radius: 10px;
+    color: #fff;
   }
 
   &__item-bar {
-    border: 1px solid #000;
+    border: 1px solid #ccc;
     height: 20px;
     border-radius: 10px;
     width: 400px;
+    overflow: hidden;
   }
 
   &__item-fill {
     height: 20px;
-    background-color: $bgBtn;
-    width: 50%;
+  }
+
+  &__item-nums {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.info {
+  margin-top: 50px;
+  padding-bottom: 100px;
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.info-expenses {
+  width: 700px;
+
+  &__title {
+    padding: 10px 0;
+    text-align: center;
+    font-weight: 600;
+    font-size: 22px;
+  }
+
+  &__top {
+    display: grid;
+    grid-template-columns: 1.35fr 0.9fr 0.9fr 1.2fr;
+    grid-template-rows: 1fr;
+    padding-top: 10px;
+  }
+
+  &__top-descr {
+    padding-left: 35px;
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: 0.1fr 1fr 0.8fr 0.8fr 1fr;
+    grid-template-rows: 1fr;
+    margin: 15px 0px;
+    padding: 5px 10px;
+    background: linear-gradient(90deg, #8f95c7 0%, rgba(212, 212, 247, 1) 100%);
+    border-radius: 5px;
+  }
+}
+
+.info-categories {
+  &__title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  &__item {
+    padding: 0 20px;
+    margin-top: 20px;
+  }
+
+  &__item-content {
+    display: flex;
+    align-items: center;
+  }
+
+  &__item-name {
+    margin-bottom: 10px;
+  }
+
+  &__item-img {
+    width: 50px;
+    margin-right: 30px;
+  }
+
+  &__item-bar {
+    width: 300px;
+    height: 20px;
+    border: 1px solid #ccc;
     border-radius: 10px;
+    overflow: hidden;
   }
 
-  &__item-percent {
-    margin-left: 250px;
+  &__item-fill {
+    height: 20px;
+    background-color: blue;
+    width: 10%;
   }
 
-  &__item-amount {
-    margin-left: 250px;
+  &__item-nums {
+    display: flex;
+    justify-content: space-between;
   }
 }
 

@@ -32,6 +32,7 @@ function styles() {
 
 function scripts() {
   return src([
+    'node_modules/chart.js/dist/chart.min.js',
     'node_modules/jquery/dist/jquery.min.js',
     'client/js/pagination.min.js',
     'client/js/main.js'

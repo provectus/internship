@@ -1,4 +1,17 @@
 window.addEventListener('DOMContentLoaded', () => {
+  const colors = {
+    Housing: '#e1cfe5',
+    Transportation: '#bab0d7',
+    Food: '#8f95c7',
+    Utilities: '#b1c7e6',
+    Insurance: '#bde5e7',
+    'Medical & Healthcare': '#c2e0d2',
+    Gym: '#e1edd7',
+    Gifts: '#fefacb',
+    Entertainment: '#fee4cd',
+    Hobbies: '#fcddc9'
+  };
+
   const categories = {};
   getCategories();
 
@@ -141,6 +154,7 @@ window.addEventListener('DOMContentLoaded', () => {
       for (let i = loopStart; i < loopStart + pageSize && i < data.length; i++) {
         const item = document.createElement('div');
         item.classList.add('expenses__item');
+        item.style.background = `linear-gradient(90deg, ${colors[categories[data[i].category]]} 0%, rgba(212,212,247,1) 100%)`;
         item.innerHTML = `
   <div class="expenses__item-number">${i + 1}</div>
     <div class="expenses__item-descr">${data[i].description}</div>
