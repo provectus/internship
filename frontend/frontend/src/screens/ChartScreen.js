@@ -4,13 +4,14 @@ import { useState, useEffect } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Table, Button, Row, ListGroup, Form, Col } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import BarChart from '../components/BarChart'
 
-const ChartScreen = () => {
+const ChartScreen = ({ history }) => {
+    const navigate = useNavigate()
+
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const [expenses, setExpenses] = useState([])
@@ -18,9 +19,8 @@ const ChartScreen = () => {
     const [errorCategories, setErrorCategories] = useState('')
     const [loadingCategories, setLoadingCategories] = useState(false)
     const [categories, setCategories] = useState([])
-    const [chartData, setchartData] = useState({})
 
-    const [month, setMonth] = useState('')
+    const [month, setMonth] = useState('august')
     const months = [
         'january',
         'february',
@@ -46,6 +46,7 @@ const ChartScreen = () => {
             const { data } = await axios.get(`http://localhost:5000/expenses`, config)
 
             setExpenses(data)
+            console.log('expenses', expenses.length)
         } catch (errors) {
             setError(
                 errors.response && errors.response.data.detail
@@ -78,7 +79,14 @@ const ChartScreen = () => {
             setLoadingCategories(false)
         }
     }
-
+    function random_rgba() {
+        var o = Math.round,
+            r = Math.random,
+            s = 255
+        return (
+            'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')'
+        )
+    }
     const generate_chart_data = () => {
         var categors = []
         var spendings = []
@@ -99,34 +107,25 @@ const ChartScreen = () => {
             )
         })
 
-        var chartData = {
+        console.log('spend', spendings)
+
+        var dataChart = {
             labels: categors,
             datasets: [
                 {
                     label: 'spending statistics',
                     data: spendings,
-                    backgroundColor: [
-                        '#ffbb11',
-                        '#ecf0f1',
-                        '#50AF95',
-                        '#f3ba2f',
-                        '#2a71d0',
-                        '#ffbb11',
-                        '#ecf0f1',
-                        '#50AF95',
-                        '#f3ba2f',
-                        '#2a71d0',
-                    ],
+                    backgroundColor: [...Array(spendings.length).keys()].map((e) => random_rgba()),
                 },
             ],
         }
-        return chartData
+
+        return dataChart
     }
 
     useEffect(() => {
         getExpenses()
         getCategories()
-        setchartData(generate_chart_data())
     }, [month])
 
     return (
@@ -139,7 +138,7 @@ const ChartScreen = () => {
                 <ListGroup variant='flush'>
                     <ListGroup.Item>
                         <Row className='justify-content-md-center my-5'>
-                            <h1 class='text-center'>Please select a month</h1>
+                            <h1 class='text-center'>Please select a month (August-November)</h1>
                         </Row>
 
                         <Row className='justify-content-md-center my-5'>
@@ -160,6 +159,9 @@ const ChartScreen = () => {
                     </ListGroup.Item>
 
                     <ListGroup.Item>
+                        <Row>
+                            <h1>SPENDING BY CATEGORIES</h1>
+                        </Row>
                         <Row>
                             <Table striped bordered hover responsive className='table-sm'>
                                 <thead>
@@ -197,7 +199,7 @@ const ChartScreen = () => {
                     </ListGroup.Item>
 
                     <ListGroup.Item>
-                        <BarChart>{chartData}</BarChart>
+                        <BarChart>{generate_chart_data()}</BarChart>
                     </ListGroup.Item>
                 </ListGroup>
             )}

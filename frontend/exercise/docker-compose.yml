@@ -31,15 +31,12 @@ services:
         volumes:
             - ./mongo-seed/dump:/dump
 
-    # frontend:
-    #     container_name: frontend
-    #     build: ../frontend
-    #     # volumes:
-    #     #     - './:/app'
-    #     # - '/app/node_modules'
-    #     ports:
-    #         - 3000:3000
-    #     stdin_open: true
-    #     environment:
-    #         - CHOKIDAR_USEPOLLING=true
-    #     command: npm start
+    frontend:
+        container_name: frontend
+        build: ../frontend
+        ports:
+            - 3000:3000
+        stdin_open: true
+        environment:
+            - CHOKIDAR_USEPOLLING=true
+        command: npm start
