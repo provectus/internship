@@ -2,14 +2,13 @@ import React from "react";
 import * as formik from "formik";
 import * as yup from "yup";
 import { Button, Col, FloatingLabel, Form, Row } from "react-bootstrap";
+import { typeSearch } from "../types";
 
-interface typeSearch {
-  id: string
-}
 
 const styleForm = {
   border: "1px solid grey",
   borderRadius: "5px",
+  paddingRight  : "5px"
 };
 interface Props {
   getSetExpenseById: (values:typeSearch)=>void
@@ -40,8 +39,8 @@ const SearchFormComponent: React.FC<Props> = ({getSetExpenseById}) => {
         }}
       >
         {({ handleSubmit, handleChange, values, touched, errors }) => (
-          <Form noValidate style={styleForm} onSubmit={handleSubmit}>
-            <Row>
+          <Form noValidate style={styleForm}  onSubmit={handleSubmit}>
+            <Row style={{  alignItems: "center"}}>
               <Col>
                 <Form.Group controlId="validationFormik01">
                   <FloatingLabel

@@ -28,3 +28,14 @@ export enum URL {
   CATEGORIES = "categories",
   EXPENSES = "expenses",
 }
+
+export interface typeSearch {
+  id: string
+}
+
+export enum InputEnum {
+  search = 'search',
+  add = 'add',
+  edit = 'edit',
+  delete = 'delete'
+}
