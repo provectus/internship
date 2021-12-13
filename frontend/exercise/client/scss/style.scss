@@ -3,6 +3,47 @@
 @import "reset";
 @import "global";
 
+.preloader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  z-index: 999;
+  transition: 1s all;
+  opacity: 1;
+  visibility: visible;
+
+  .loader {
+    width: 75px;
+    height: 75px;
+    border: 10px solid $bgLight;
+    border-radius: 50%;
+    border-top-color: $bgBtn;
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    animation: 1s spin infinite linear;
+  }
+
+  &.done {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
 .header {
   &__inner {
     background-color: $bgLight;
