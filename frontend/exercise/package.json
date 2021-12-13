@@ -12,9 +12,6 @@
     "browser-sync": "^2.27.7",
     "chart.js": "^3.6.2",
     "del": "^6.0.0",
-    "eslint": "^8.3.0",
-    "eslint-plugin-babel": "^5.3.1",
-    "eslint-plugin-react": "^7.27.1",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
     "gulp-concat": "^2.6.1",
@@ -24,9 +21,5 @@
     "jqeury": "0.0.1-security",
     "jquery": "^3.6.0",
     "sass": "^1.44.0"
-  },
-  "dependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-react-app": "^3.1.2"
   }
 }
