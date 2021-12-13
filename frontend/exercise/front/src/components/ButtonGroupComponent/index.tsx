@@ -3,14 +3,18 @@ import { Expense, InputEnum } from "../types";
 
 interface Props {
   setChoiceInput: (actionName: string) => void;
-  setExpenseById: (expense : Expense | null) => void
+  setExpenseById: (expense: Expense | null) => void;
 }
 
-const ButtonGroupComponent: React.FC<Props> = ({ setChoiceInput,setExpenseById }) => {
+const ButtonGroupComponent: React.FC<Props> = ({
+  setChoiceInput,
+  setExpenseById,
+}) => {
   const handleButton = (actionName: string) => {
     return () => {
       if (!(actionName === InputEnum.search)) setChoiceInput(actionName);
-      else setExpenseById(null);
+      else setChoiceInput(actionName);
+      setExpenseById(null);
     };
   };
 

@@ -1,13 +1,21 @@
 import { Badge, ListGroup } from "react-bootstrap";
-import { Expense } from "../types";
+import { Expense, Category } from "../types";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 interface Props {
   expenseById: Expense;
+  categories: Category[]
 }
 
-const SingleList: React.FC<Props> = ({ expenseById }) => {
+const ListSingle: React.FC<Props> = ({ expenseById, categories }) => {
 
+  const categoryToString = () => {
+    for (let category of categories) {
+      if (category._id === expenseById.category) {
+        return category.title
+      } else return expenseById.category
+    }
+  }
   return (
       <ListGroup as="ol">
         <ListGroup.Item
@@ -15,8 +23,8 @@ const SingleList: React.FC<Props> = ({ expenseById }) => {
           className="d-flex justify-content-between align-items-start"
         >
           <div>
-            <div className="fw-bold mb-2">{expenseById.description}</div>
-            <div className="text-secondary">{expenseById.category}</div>
+            <div className="fw-bold mb-2 d-flex align-self-start">{expenseById.description}</div>
+            <div className="text-secondary">{categoryToString()}</div>
           </div>
           <div>
             <h3>
@@ -24,11 +32,11 @@ const SingleList: React.FC<Props> = ({ expenseById }) => {
                 {expenseById.amount}
               </Badge>
             </h3>
-            <span>{expenseById.date}</span>
+            <span>{expenseById.date.split("T")[0]}</span>
           </div>
         </ListGroup.Item>
       </ListGroup>
   );
 };
 
-export default SingleList;
+export default ListSingle;

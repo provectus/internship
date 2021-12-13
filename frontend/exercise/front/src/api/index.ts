@@ -10,7 +10,8 @@ export const getCategories = async () => {
 };
 
 export const getExpenses = async () => {
-  return getFetch<Expense[]>(URL.EXPENSES);
+  const data = await getFetch<Expense[]>(URL.EXPENSES);
+  return data.slice(-100)
 };
 
 export const getExpenseById = async (id: string): Promise<Expense> => {
@@ -40,5 +41,34 @@ export const postFetch = async ({
       "Content-Type": "application/json;charset=utf-8",
     },
     body: JSON.stringify(body),
+  });
+};
+
+export const putFetch = async (id: string, {
+  price,
+  date,
+  shop
+}: Pick<PostValues, "price" | "date" | "shop">) => {
+  const newDate = new Date(date).toISOString();
+  const body = {
+    amount: Number(price),
+    date: newDate,
+    description: shop,
+  };
+  await fetch(`${SERVER_API}${URL.EXPENSES}/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+    body: JSON.stringify(body),
+  });
+};
+
+export const deleteFetch = async (id: string) => {
+  await fetch(`${SERVER_API}${URL.EXPENSES}/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
   });
 };

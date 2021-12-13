@@ -1,17 +1,14 @@
 import React, { useState } from "react";
-import SearchFormComponent from "../SearchForm";
+import SearchFormComponent from "../FormSearch";
 import { Category, Expense, InputEnum, PostValues, typeSearch } from "../types";
-import { Container, Row, Table } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import ButtonGroupComponent from "../ButtonGroupComponent";
-import AddFormComponent from "../AddForm";
+import AddFormComponent from "../FormAdd";
 import SingleList from "../ListSingle";
 import Plate from "../Plate";
 import ListComponent from "../ListComponent";
-
-const styleTable = {
-  border: "1px solid black",
-  margin: "2px",
-};
+import FormEdit from "../FormEdit";
+import FormDelete from "../FormDelete";
 
 interface Props {
   categories: Category[];
@@ -20,7 +17,9 @@ interface Props {
   currentCategory: string;
   postAndUpdate: (data: PostValues) => void;
   getSetExpenseById: (values: typeSearch) => void;
-  setExpenseById: (expense: Expense | null) => void
+  setExpenseById: (expense: Expense | null) => void;
+  putAndUpdate: (id: string, values: PostValues) => void;
+  deleteAndUpdate: (id: string) => void;
 }
 
 const TableComponnet: React.FC<Props> = ({
@@ -31,9 +30,11 @@ const TableComponnet: React.FC<Props> = ({
   postAndUpdate,
   getSetExpenseById,
   setExpenseById,
+  putAndUpdate,
+  deleteAndUpdate,
 }) => {
-  const [isToched, setIsTouched] = useState<boolean>(false);
   const [choiceInput, setChoiceInput] = useState<string>(InputEnum.search);
+  const [idForEdit, setIdForEdit] = useState<string>("");
 
   const returnForm = () => {
     if (choiceInput === InputEnum.add)
@@ -43,8 +44,12 @@ const TableComponnet: React.FC<Props> = ({
           postAndUpdate={postAndUpdate}
         />
       );
-    // if (choiceInput === InputEnum.edit) return <EditFormComponent />;
-    // if (choiceInput === InputEnum.delete) return <DeleteFormComponent />;
+    if (choiceInput === InputEnum.edit)
+      return <FormEdit putAndUpdate={putAndUpdate} idForEdit={idForEdit} />;
+    if (choiceInput === InputEnum.delete)
+      return (
+        <FormDelete deleteAndUpdate={deleteAndUpdate} idForEdit={idForEdit} />
+      );
     if (choiceInput === InputEnum.search)
       return <SearchFormComponent getSetExpenseById={getSetExpenseById} />;
   };
@@ -63,17 +68,20 @@ const TableComponnet: React.FC<Props> = ({
           <Plate expense={expenses[0]} />
         </Row>
 
-        
-          {expenseById ? (
-            <Row>
-              <SingleList expenseById={expenseById} />
-            </Row>
-          ) : (
-              <Row>
-              <ListComponent expenses={expenses} currentCategory={currentCategory}/>
-              </Row>
-          )}
-
+        {expenseById ? (
+          <Row>
+            <SingleList expenseById={expenseById} categories={categories} />
+          </Row>
+        ) : (
+          <Row>
+            <ListComponent
+              setIdForEdit={setIdForEdit}
+              expenses={expenses}
+              currentCategory={currentCategory}
+              categories={categories}
+            />
+          </Row>
+        )}
       </Container>
     </div>
   );

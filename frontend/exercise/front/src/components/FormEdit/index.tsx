@@ -4,7 +4,7 @@ import { Row, Col, FloatingLabel, Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import * as yup from "yup";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Category, PostValues } from "../types";
+import { PostValues } from "../types";
 
 const styleForm = {
   border: "1px solid grey",
@@ -12,8 +12,8 @@ const styleForm = {
 };
 
 interface Props {
-  categories: Category[];
-  postAndUpdate: (values: PostValues) => void;
+  idForEdit: string;
+  putAndUpdate: (id: string, values: PostValues) => void;
 }
 
 const { Formik } = formik;
@@ -22,41 +22,63 @@ const schema = yup.object().shape({
   price: yup.number().required(),
   date: yup.date().required(),
   shop: yup.string().required(),
-  category: yup.string().required(),
 });
 
-const AddFormComponent: React.FC<Props> = (props) => {
-  // const handleSubmit = (event: any) => {
-  //   const form = event.currentTarget;
-
-  //   event.preventDefault();
-  //   event.stopPropagation();
-  // };
-
+const FormEdit: React.FC<Props> = ({ idForEdit, putAndUpdate }) => {
   return (
     <Formik
       validationSchema={schema}
       onSubmit={(values) => {
-        // console.log(values);
-        return props.postAndUpdate(values);
+        return putAndUpdate(idForEdit, values);
       }}
       initialValues={{
         price: undefined,
         date: "",
         shop: "",
-        category: "617be036888f752511901458",
-        floatingSelectGrid: "",
       }}
     >
       {({ handleSubmit, handleChange, values, touched, errors }) => (
-        <Form noValidate style={styleForm} onSubmit={handleSubmit}>
-          <Row className="g-1">
-            <Col sm={3}>
-              <Form.Group controlId="validationFormik01">
-                <FloatingLabel
-                  controlId="floatingInputGrid"
-                  label="amount of costs(example: 500)"
-                >
+        <Form
+          noValidate
+          className="p-0"
+          style={styleForm}
+          // onKeyDown={(e) => {
+          //   if (e.key === "Enter") return handleSubmit;
+          // }}
+          onSubmit={handleSubmit}
+        >
+          <Row className="g-1" style={{ alignItems: "center" }}>
+            <Col sm="3">
+              {/* <Form.Group controlId="validationFormik01">
+                <FloatingLabel controlId="floatingInputGrid" label="id">
+                  <Form.Control
+                    style={{fontSize:".8rem"}}
+                    size="sm"
+                    type="text"
+                    name="id"
+                    value={values.id}
+                    onChange={handleChange}
+                    isValid={touched.price && !errors.price}
+                  />
+                </FloatingLabel>
+              </Form.Group> */}
+              <fieldset disabled>
+              <Form.Group>
+                <FloatingLabel controlId="floatingInputGrid" label="id">
+                  <Form.Control
+                   style={{fontSize:".8rem"}}
+                   size="sm"
+                   type="text"
+                   name="id"
+                   value={idForEdit}
+                  />
+                </FloatingLabel>
+              </Form.Group>
+              </fieldset>
+            </Col>
+            <Col sm="2">
+              <Form.Group controlId="validationFormik02">
+                <FloatingLabel controlId="floatingInputGrid" label="cost">
                   <Form.Control
                     size="sm"
                     type="text"
@@ -68,11 +90,12 @@ const AddFormComponent: React.FC<Props> = (props) => {
                 </FloatingLabel>
               </Form.Group>
             </Col>
-            <Col xs="auto">
-              <Form.Group controlId="validationFormik02">
+            <Col sm="3">
+              <Form.Group controlId="validationFormik03">
                 <FloatingLabel controlId="floatingInputGrid" label="Date">
                   <Form.Control
                     size="sm"
+                    style={{ fontSize: ".8rem" }}
                     type="datetime-local"
                     name="date"
                     value={values.date}
@@ -82,8 +105,8 @@ const AddFormComponent: React.FC<Props> = (props) => {
                 </FloatingLabel>
               </Form.Group>
             </Col>
-            <Col xs="auto">
-              <Form.Group controlId="validationFormik02">
+            <Col sm="2">
+              <Form.Group controlId="validationFormik04">
                 <FloatingLabel controlId="floatingInputGrid" label="Shop">
                   <Form.Control
                     size="sm"
@@ -97,26 +120,8 @@ const AddFormComponent: React.FC<Props> = (props) => {
               </Form.Group>
             </Col>
             <Col xs="auto">
-              <FloatingLabel
-                controlId="floatingSelectGrid"
-                label="Choose categories"
-              >
-                <Form.Select
-                  size="sm"
-                  aria-label="Floating label select example"
-                  // value={values.category}
-                  onChange={handleChange}
-                  isValid={touched.category && !errors.category}
-                >
-                  {props.categories.map((category: Category) => (
-                    <option value={category._id}>{category.title}</option>
-                  ))}
-                </Form.Select>
-              </FloatingLabel>
-            </Col>
-            <Col xs="auto">
               <Button size="lg" variant="primary" type="submit">
-                Submit
+                Edit
               </Button>
             </Col>
           </Row>
@@ -126,4 +131,4 @@ const AddFormComponent: React.FC<Props> = (props) => {
   );
 };
 
-export default AddFormComponent;
+export default FormEdit;

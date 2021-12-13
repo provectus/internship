@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row, Badge } from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { getCategories, getExpenseById, getExpenses, postFetch } from "./api";
+import "bootstrap/dist/css/bootstrap.min.css";
+import {
+  deleteFetch,
+  getCategories,
+  getExpenseById,
+  getExpenses,
+  postFetch,
+  putFetch,
+} from "./api";
 import "./App.css";
 import ListCategories from "./components/ListCategories";
 import TableComponnet from "./components/TableComponent";
 import { Category, Expense, PostValues } from "./components/types";
+import StatChart from "./components/StatChart";
+import StatSelect from "./components/StatSelect";
+import Stat from "./components/Stat";
 
 function App() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -24,7 +34,7 @@ function App() {
     const data = await getExpenses();
     setExpenses(data);
   };
-  const postAndUpdate = (values: PostValues) => {
+  const postAndUpdate = async (values: PostValues) => {
     setIsLoading(true);
     postFetch(values);
     setIsLoading(false);
@@ -33,41 +43,57 @@ function App() {
     const data = await getExpenseById(id);
     setExpenseById(data);
   };
+
+  const putAndUpdate = async (id: string, values: PostValues) => {
+    setIsLoading(true);
+    await putFetch(id, values);
+    setIsLoading(false);
+  };
+
+  const deleteAndUpdate = async (id: string) => {
+    setIsLoading(true);
+    await deleteFetch(id);
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     getSetCategories();
+  }, []);
+  useEffect(() => {
     getSetExpenses();
   }, [isLoading]);
-
   return (
     <div className="App">
-      <Container>
-        <Row>
-          <Col sm={3}>
-            <ListCategories
+      <Container className="d-flex justify-content-center p-0">
+        <Col sm={2}>
+          <ListCategories
+            categories={categories}
+            setCurrentCategory={setCurrentCategory}
+          />
+        </Col>
+
+        <Col sm={7}>
+          <Row></Row>
+          <Row>
+            {" "}
+            <TableComponnet
               categories={categories}
-              setCurrentCategory={setCurrentCategory}
+              expenses={expenses}
+              expenseById={expenseById}
+              currentCategory={currentCategory}
+              postAndUpdate={postAndUpdate}
+              getSetExpenseById={getSetExpenseById}
+              setExpenseById={setExpenseById}
+              putAndUpdate={putAndUpdate}
+              deleteAndUpdate={deleteAndUpdate}
             />
-          </Col>
-          <Col sm={8}>
-            <Row>
-              <h2>
-                <Badge bg="secondary">Сумма расходов</Badge>
-              </h2>
-            </Row>
-            <Row>
-              {" "}
-              <TableComponnet
-                categories={categories}
-                expenses={expenses}
-                expenseById={expenseById}
-                currentCategory={currentCategory}
-                postAndUpdate={postAndUpdate}
-                getSetExpenseById={getSetExpenseById}
-                setExpenseById={setExpenseById}
-              />
-            </Row>
-          </Col>
-        </Row>
+          </Row>
+        </Col>
+
+        <Col sm={2}>
+          <Stat expenses={ expenses }/>
+
+        </Col>
       </Container>
     </div>
   );

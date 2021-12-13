@@ -8,7 +8,7 @@ import { typeSearch } from "../types";
 const styleForm = {
   border: "1px solid grey",
   borderRadius: "5px",
-  paddingRight  : "5px"
+  paddingRight: "5px"
 };
 interface Props {
   getSetExpenseById: (values:typeSearch)=>void
@@ -29,11 +29,7 @@ const SearchFormComponent: React.FC<Props> = ({getSetExpenseById}) => {
     <div>
       <Formik
         validationSchema={schema}
-        onSubmit={(values: typeSearch) => {
-          // console.log(values);
-          getSetExpenseById(values)
-
-        }}
+        onSubmit={(values: typeSearch) => getSetExpenseById(values)}
         initialValues={{
           id: "617be036888f7525119014c9",
         }}
@@ -60,7 +56,7 @@ const SearchFormComponent: React.FC<Props> = ({getSetExpenseById}) => {
               </Col>
               <Col xs="auto">
                 <Button size="lg" variant="primary" type="submit">
-                  Submit
+                  Search
                 </Button>
               </Col>
             </Row>
