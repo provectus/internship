@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SearchFormComponent from "../FormSearch";
-import { Category, Expense, InputEnum, PostValues, typeSearch } from "../types";
+import { Category, Expense, InputEnum, PostValues, typeSearch } from "../../types";
 import { Container, Row } from "react-bootstrap";
 import ButtonGroupComponent from "../ButtonGroupComponent";
 import AddFormComponent from "../FormAdd";
@@ -22,7 +22,7 @@ interface Props {
   deleteAndUpdate: (id: string) => void;
 }
 
-const TableComponnet: React.FC<Props> = ({
+const TableComponet: React.FC<Props> = ({
   categories,
   expenses,
   expenseById,
@@ -86,4 +86,4 @@ const TableComponnet: React.FC<Props> = ({
     </div>
   );
 };
-export default TableComponnet;
+export default TableComponet;

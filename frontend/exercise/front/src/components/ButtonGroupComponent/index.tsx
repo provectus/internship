@@ -1,5 +1,5 @@
 import { Button, ButtonGroup } from "react-bootstrap";
-import { Expense, InputEnum } from "../types";
+import { Expense, InputEnum } from "../../types";
 
 interface Props {
   setChoiceInput: (actionName: string) => void;

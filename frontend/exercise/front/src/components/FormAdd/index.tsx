@@ -4,7 +4,7 @@ import { Row, Col, FloatingLabel, Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import * as yup from "yup";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Category, PostValues } from "../types";
+import { Category, PostValues } from "../../types";
 
 const styleForm = {
   border: "1px solid grey",

@@ -39,3 +39,8 @@ export enum InputEnum {
   edit = 'edit',
   delete = 'delete'
 }
+
+export interface CategoryAmount {
+  name: string;
+  value: number;
+}

@@ -1,5 +1,5 @@
 import { ListGroup } from "react-bootstrap";
-import { Expense } from "../types";
+import { Expense } from "../../types";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 interface Props {

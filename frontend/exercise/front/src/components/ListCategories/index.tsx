@@ -1,5 +1,5 @@
 import { ListGroup } from "react-bootstrap";
-import { Category } from "../types";
+import { Category } from "../../types";
 
 const style = {
   width: "15vw"

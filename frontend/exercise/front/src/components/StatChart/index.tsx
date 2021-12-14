@@ -1,21 +1,30 @@
 import React from "react";
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
-import { separeteByCategories } from "../../utils";
-import { Expense } from "../types";
+import { PieChart, Pie, Tooltip, Cell, ResponsiveContainer } from "recharts";
+import { separateByCategories } from "../../utils";
+import { Category, Expense } from "../../types";
 
-const data = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
+const COLORS = [
+  "#0d6efd",
+  "#6610f2",
+  "#6f42c1",
+  "#d63384",
+  "#dc3545",
+  "#fd7e14",
+  "#ffc107",
+  "#198754",
+  "#20c997",
+  "#0dcaf0",
 ];
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 interface Props {
-  expensesOfMonth: Expense[] | null
+  expensesOfMonth: Expense[] | null;
+  categories: Category[];
 }
 
-const StatChart: React.FC<Props> = ({expensesOfMonth}) => {
+const StatChart: React.FC<Props> = ({ expensesOfMonth, categories }) => {
+  const data = separateByCategories(expensesOfMonth, categories);
+
+  const onPieEnter = (_: any, index: number) => {};
   return (
     <PieChart width={300} height={250} onMouseEnter={() => {}}>
       <Pie
@@ -27,11 +36,14 @@ const StatChart: React.FC<Props> = ({expensesOfMonth}) => {
         fill="#8884d8"
         paddingAngle={2}
         dataKey="value"
+        onMouseEnter={onPieEnter}
       >
-        {expensesOfMonth && separeteByCategories(expensesOfMonth)!.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-        ))}
+        {data &&
+          data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          ))}
       </Pie>
+      <Tooltip />
     </PieChart>
   );
 };

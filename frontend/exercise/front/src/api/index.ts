@@ -1,4 +1,4 @@
-import { Expense, Category, PostValues, URL } from "../components/types";
+import { Expense, Category, PostValues, URL } from "../types";
 const SERVER_API = 'http://localhost:5000/'
 
 const getFetch = async <Type>(url: string): Promise<Type> => {
@@ -11,7 +11,7 @@ export const getCategories = async () => {
 
 export const getExpenses = async () => {
   const data = await getFetch<Expense[]>(URL.EXPENSES);
-  return data.slice(-100)
+  return data
 };
 
 export const getExpenseById = async (id: string): Promise<Expense> => {

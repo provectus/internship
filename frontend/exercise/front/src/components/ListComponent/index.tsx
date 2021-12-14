@@ -1,5 +1,5 @@
 import { Badge, ListGroup } from "react-bootstrap";
-import { Category, Expense } from "../types";
+import { Category, Expense } from "../../types";
 
 interface Props {
   expenses: Expense[];

@@ -20,10 +20,13 @@ interface Props {
 }
 
 const StatSelect: React.FC<Props> = ({ setSelectedMonth }) => {
-  const handleChange = ({ target: { value } }: { target: HTMLSelectElement }) => {
-    console.log(value);
+  const handleChange = ({
+    target: { value },
+  }: {
+    target: HTMLSelectElement;
+  }) => {
     setSelectedMonth(Number(value));
-  }
+  };
   return (
     <Form.Select size="sm" onChange={handleChange}>
       {months.map((month: string, index: number) => (

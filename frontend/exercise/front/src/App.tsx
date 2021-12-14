@@ -11,10 +11,8 @@ import {
 } from "./api";
 import "./App.css";
 import ListCategories from "./components/ListCategories";
-import TableComponnet from "./components/TableComponent";
-import { Category, Expense, PostValues } from "./components/types";
-import StatChart from "./components/StatChart";
-import StatSelect from "./components/StatSelect";
+import TableComponet from "./components/TableComponent";
+import { Category, Expense, PostValues } from "./types";
 import Stat from "./components/Stat";
 
 function App() {
@@ -76,7 +74,7 @@ function App() {
           <Row></Row>
           <Row>
             {" "}
-            <TableComponnet
+            <TableComponet
               categories={categories}
               expenses={expenses}
               expenseById={expenseById}
@@ -91,7 +89,8 @@ function App() {
         </Col>
 
         <Col sm={2}>
-          <Stat expenses={ expenses }/>
+          <Stat expenses={expenses}
+            categories={ categories}/>
 
         </Col>
       </Container>

@@ -2,7 +2,7 @@ import React from "react";
 import * as formik from "formik";
 import * as yup from "yup";
 import { Button, Col, FloatingLabel, Form, Row } from "react-bootstrap";
-import { typeSearch } from "../types";
+import { typeSearch } from "../../types";
 
 
 const styleForm = {

@@ -1,4 +1,4 @@
-import { Category, Expense } from "../components/types";
+import { CategoryAmount, Category, Expense } from "../types";
 
 export const expensesBySelectedMonth = (
   expenses: Expense[],
@@ -11,37 +11,37 @@ export const expensesBySelectedMonth = (
 
 export const sumByMonth = (expenses: Expense[] | null) => {
   if (expenses) {
-    const sum = expenses
-      .reduce((prev, current) => prev + current.amount, 0);
+    const sum = expenses.reduce((prev, current) => prev + current.amount, 0);
     return sum;
   }
 };
 
-export const separeteByCategories = (
-  expenses: Expense[] | null,
-) => {
-  if (expenses) {
-    const byCategories = [{
-      name: "",
-      value: 0
-    }]
-    expenses.forEach((expense) => {
-      for (let category of byCategories) {
-        if (category.name === expense.category) {
-          category.value = category.value + expense.amount
-        }
-        else byCategories.push({ name: expense.category, value: expense.amount })
+export const separateByCategories = (expenses: Expense[] | null, categories: Category[]) => {
+  if (!expenses) {
+    return;
+  }
+
+  const byCategories: CategoryAmount[] = [];
+  for (let expense of expenses) {
+    let found = false;
+
+    for (let category of byCategories) {
+      if (category.name === expense.category) {
+        category.value = category.value + expense.amount;
+        found = true;
+        break;
       }
     }
-    );
-    byCategories.shift()
-  return byCategories}
-
+    if (!found) {
+      byCategories.push({ name: expense.category, value: expense.amount });
+    }
+  }
+  for (let categoryAmount of byCategories) {
+    for (let category of categories) {
+      if (category._id === categoryAmount.name) {
+        categoryAmount.name = category.title;
+      } 
+    }
+  }
+  return byCategories
 };
-
-const data = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
-];
