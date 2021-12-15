@@ -3,13 +3,7 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-import axios from 'axios'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
-
 function HomeScreen() {
-    useEffect(() => {}, [])
-
     return (
         <Container>
             <Row className='justify-content-md-center my-5'>
