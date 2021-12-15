@@ -78,7 +78,7 @@ const FormEdit: React.FC<Props> = ({ idForEdit, putAndUpdate }) => {
             </Col>
             <Col sm="2">
               <Form.Group controlId="validationFormik02">
-                <FloatingLabel controlId="floatingInputGrid" label="cost">
+                <FloatingLabel controlId="floatingInputGrid" label="Cost">
                   <Form.Control
                     size="sm"
                     type="text"

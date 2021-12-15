@@ -50,7 +50,7 @@ const FormAdd: React.FC<Props> = (props) => {
           <Row className="g-1" style={{ alignItems: "center" }}>
             <Col sm={2}>
               <Form.Group controlId="validationFormik01">
-                <FloatingLabel controlId="floatingInputGrid" label="cost">
+                <FloatingLabel controlId="floatingInputGrid" label="Cost">
                   <Form.Control
                     size="sm"
                     type="text"

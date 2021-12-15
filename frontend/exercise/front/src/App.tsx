@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row, Badge } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   deleteFetch,
@@ -11,7 +11,7 @@ import {
 } from "./api";
 import "./App.css";
 import ListCategories from "./components/ListCategories";
-import TableComponet from "./components/TableComponent";
+import GroupButtonFormList from "./components/GroupButtonFormList";
 import { Category, Expense, PostValues } from "./types";
 import Stat from "./components/Stat";
 
@@ -20,9 +20,7 @@ function App() {
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [expenseById, setExpenseById] = useState<Expense | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [currentCategory, setCurrentCategory] = useState<string>(
-    "617be036888f752511901458"
-  ); //default category is Housing
+  const [currentCategory, setCurrentCategory] = useState<string>("");
 
   const getSetCategories = async (): Promise<void> => {
     const data = await getCategories();
@@ -74,7 +72,7 @@ function App() {
           <Row></Row>
           <Row>
             {" "}
-            <TableComponet
+            <GroupButtonFormList
               categories={categories}
               expenses={expenses}
               expenseById={expenseById}
@@ -89,9 +87,7 @@ function App() {
         </Col>
 
         <Col sm={2}>
-          <Stat expenses={expenses}
-            categories={ categories}/>
-
+          <Stat expenses={expenses} categories={categories} />
         </Col>
       </Container>
     </div>

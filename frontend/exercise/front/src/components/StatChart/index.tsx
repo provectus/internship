@@ -1,5 +1,5 @@
 import React from "react";
-import { PieChart, Pie, Tooltip, Cell, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Tooltip, Cell } from "recharts";
 import { separateByCategories } from "../../utils";
 import { Category, Expense } from "../../types";
 
@@ -24,7 +24,6 @@ interface Props {
 const StatChart: React.FC<Props> = ({ expensesOfMonth, categories }) => {
   const data = separateByCategories(expensesOfMonth, categories);
 
-  const onPieEnter = (_: any, index: number) => {};
   return (
     <PieChart width={300} height={250} onMouseEnter={() => {}}>
       <Pie
@@ -36,7 +35,6 @@ const StatChart: React.FC<Props> = ({ expensesOfMonth, categories }) => {
         fill="#8884d8"
         paddingAngle={2}
         dataKey="value"
-        onMouseEnter={onPieEnter}
       >
         {data &&
           data.map((entry, index) => (

@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import SearchFormComponent from "../FormSearch";
-import { Category, Expense, InputEnum, PostValues, typeSearch } from "../../types";
+import {
+  Category,
+  Expense,
+  InputEnum,
+  PostValues,
+  typeSearch,
+} from "../../types";
 import { Container, Row } from "react-bootstrap";
 import ButtonGroupComponent from "../ButtonGroupComponent";
 import AddFormComponent from "../FormAdd";
-import SingleList from "../ListSingle";
+import ListSingleExpense from "../ListSingleExpense";
 import Plate from "../Plate";
-import ListComponent from "../ListComponent";
+import ListExpenses from "../ListExpenses";
 import FormEdit from "../FormEdit";
 import FormDelete from "../FormDelete";
 
@@ -22,7 +28,7 @@ interface Props {
   deleteAndUpdate: (id: string) => void;
 }
 
-const TableComponet: React.FC<Props> = ({
+const GroupButtonFormList: React.FC<Props> = ({
   categories,
   expenses,
   expenseById,
@@ -70,11 +76,14 @@ const TableComponet: React.FC<Props> = ({
 
         {expenseById ? (
           <Row>
-            <SingleList expenseById={expenseById} categories={categories} />
+            <ListSingleExpense
+              expenseById={expenseById}
+              categories={categories}
+            />
           </Row>
         ) : (
           <Row>
-            <ListComponent
+            <ListExpenses
               setIdForEdit={setIdForEdit}
               expenses={expenses}
               currentCategory={currentCategory}
@@ -86,4 +95,4 @@ const TableComponet: React.FC<Props> = ({
     </div>
   );
 };
-export default TableComponet;
+export default GroupButtonFormList;

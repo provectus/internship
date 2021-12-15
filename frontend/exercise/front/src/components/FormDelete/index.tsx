@@ -13,7 +13,7 @@ interface Props {
 }
 
 const FormDelete: React.FC<Props> = ({ idForEdit, deleteAndUpdate }) => {
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     deleteAndUpdate(idForEdit)
   }
@@ -26,7 +26,7 @@ const FormDelete: React.FC<Props> = ({ idForEdit, deleteAndUpdate }) => {
                 <Form.Group>
                   <FloatingLabel
                     controlId="floatingInputGrid"
-                    label="delete by id"
+                    label="Delete by id"
                   >
                     <Form.Control
                       size="sm"

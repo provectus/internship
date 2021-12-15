@@ -21,7 +21,7 @@ const Stat: React.FC<Props> = ({ expenses, categories }) => {
 
   useEffect(
     () => setExpensesOfMonth(expensesBySelectedMonth(expenses, selectedMonth)),
-    [selectedMonth]
+    [selectedMonth, expenses]
   );
   return (
     <>
