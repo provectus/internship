@@ -1,5 +1,15 @@
 version: '3'
 services:
+  front:
+    build: ./front
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    volumes:
+      - ./front/:/usr/src/app
+      - /usr/src/app/node_modules
+      
   api:
     build: ./server
     env_file:
