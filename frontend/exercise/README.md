@@ -6,6 +6,10 @@
 ```
 cd ./internship/frontend/exercise
 ```
+#### Checkout git branch with completed test assignment
+```
+git checkout frontend_internship
+```
 #### Seed the database with the generated data
 ```
 docker-compose --profile seed up mongo-seed
