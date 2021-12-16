@@ -1,7 +1,7 @@
 import {Dispatch} from "redux";
 import {actions} from "../../actions";
 import axios from "axios";
-import {Category} from "../../../types/api";
+import {Category} from "../../../types/entities";
 import {getCategories} from "../../urls/categories";
 
 export const fetchCategories = () => async (dispatch: Dispatch) => {

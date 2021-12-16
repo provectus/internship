@@ -1,4 +1,4 @@
-import {Category, Expense} from "../../../types/api";
+import {Category, Expense, ExpensesWithCategories} from "../../../types/entities";
 import {actionStrings} from "../actionStrings";
 
 export const actions = {
@@ -16,7 +16,22 @@ export const actions = {
     convertExpenses: (payload: Category[]) => ({
         type: actionStrings.CONVERT_EXPENSES,
         payload
+    }),
+    calculateStatistics: (payload: ExpensesWithCategories) => ({
+        type: actionStrings.CALCULATE_STATISTICS,
+        payload
+    }),
+    deleteExpense: (payload: string) => ({
+        type: actionStrings.DELETE_EXPENSE,
+        payload
+    }),
+    updateExpense: (payload: {amount: number, date: string, description: string, _id: string}) => ({
+        type: actionStrings.UPDATE_EXPENSE,
+        payload
+    }),
+    addExpense: (payload: {categories: Category[], expense:Expense}) => ({
+        type: actionStrings.ADD_EXPENSE,
+        payload
     })
-
 
 }

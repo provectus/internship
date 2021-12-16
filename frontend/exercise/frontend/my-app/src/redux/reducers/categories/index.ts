@@ -1,4 +1,4 @@
-import {Category} from "../../../types/api";
+import {Category} from "../../../types/entities";
 import {actionStrings, actionTypes} from "../../actions/actionStrings";
 
 interface CategoriesState {

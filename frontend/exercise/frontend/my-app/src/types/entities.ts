@@ -9,8 +9,13 @@ export interface Expense {
     description: string;
     amount: number;
     date: string;
-    category: string;//==category._id
+    category: string;
     createdAt: string;
     updatedAt: string;
-    __v: number
+    __v: number;
+}
+
+export interface ExpensesWithCategories {
+    expenses: Expense[];
+    categories: Category[];
 }

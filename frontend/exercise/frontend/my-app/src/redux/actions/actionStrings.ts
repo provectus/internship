@@ -1,4 +1,4 @@
-import {Category, Expense} from "../../types/api";
+import {Category, Expense, ExpensesWithCategories} from "../../types/entities";
 
 export enum actionStrings {
     FETCH_CATEGORIES = "FETCH_CATEGORIES",
@@ -9,7 +9,12 @@ export enum actionStrings {
     FETCH_EXPENSES_ERROR = "FETCH_EXPENSES_ERROR",
     FETCH_EXPENSES_SUCCESS = "FETCH_EXPENSES_SUCCESS",
 
-    CONVERT_EXPENSES = "CONVERT_EXPENSES"
+    CONVERT_EXPENSES = "CONVERT_EXPENSES",
+    CALCULATE_STATISTICS = "CALCULATE_STATISTICS",
+
+    DELETE_EXPENSE = "DELETE_EXPENSE",
+    UPDATE_EXPENSE = "UPDATE_EXPENSE",
+    ADD_EXPENSE = "ADD_EXPENSE"
 }
 
 interface fetchCategoriesSuccess {
@@ -46,5 +51,24 @@ interface convertExpenses {
     payload: Category[]
 }
 
+interface calculateStatistics {
+    type: actionStrings.CALCULATE_STATISTICS;
+    payload: ExpensesWithCategories
+}
+
+interface deleteExpense {
+    type: actionStrings.DELETE_EXPENSE;
+    payload: string
+}
+interface updateExpense {
+    type: actionStrings.UPDATE_EXPENSE;
+    payload: {amount: number, _id: string, description: string, date: string}
+}
+interface addExpense {
+    type: actionStrings.ADD_EXPENSE;
+    payload: {categories: Category[], expense: Expense}
+}
 export type actionTypes = fetchCategories | fetchCategoriesError | fetchCategoriesSuccess |
-    fetchExpenses | fetchExpensesError | fetchExpensesSuccess | convertExpenses;
+    fetchExpenses | fetchExpensesError | fetchExpensesSuccess |
+    convertExpenses | calculateStatistics |
+    deleteExpense | updateExpense | addExpense;

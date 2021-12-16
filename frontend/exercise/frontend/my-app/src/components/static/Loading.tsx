@@ -1,9 +1,11 @@
 import React from "react";
-import "../../styles/Loading.css";
+import {CircularProgress} from "@mui/material";
 
 const Loading: React.FC = () => {
+
+    //use disableShrink if animation is lagging
     return (
-        <div className="loader">Loading...</div>
+        <CircularProgress size={"100px"}/>
     );
 };
 
