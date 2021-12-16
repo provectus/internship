@@ -6,7 +6,7 @@ const _api = axios.create({
 
 interface Expense {
   amount: number;
-  date: Date;
+  date: string;
   description: string;
 }
 
@@ -18,17 +18,37 @@ export const api = {
     return (await _api.get('/expenses')).data;
   },
 
-  async postExpense(expense: Expense, expenseCategory: string) {
-    return await _api.post('/expenses', {
-      category: expenseCategory,
-      ...expense,
-    });
+  async postExpense(expense: Expense, expenseCategoryId: string) {
+    console.log({ ...expense });
+    return await _api.post(
+      '/expenses',
+      {
+        category: expenseCategoryId,
+        ...expense,
+      },
+      {
+        headers: {
+          'content-type': 'application/json',
+          Accept: 'application/json',
+        },
+      }
+    );
   },
 
   async putExpense(id: string, expense: Expense) {
-    return await _api.put(`/expenses/${id}`, {
-      ...expense,
-    });
+    console.log({ ...expense });
+    return await _api.put(
+      `/expenses/${id}`,
+      {
+        ...expense,
+      },
+      {
+        headers: {
+          'content-type': 'application/json',
+          Accept: 'application/json',
+        },
+      }
+    );
   },
 
   async deleteExpense(id: string) {

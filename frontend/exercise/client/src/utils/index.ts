@@ -73,4 +73,12 @@ export const utils = {
   totalExpenses(expenses: Expense[]): number {
     return expenses.reduce((accum, expense) => accum + expense.amount, 0);
   },
+  expenseCategoryTitle(expense: Expense, categories: Category[]): string {
+    for (const category of categories) {
+      if (expense.category === category._id) {
+        return category.title;
+      }
+    }
+    return '';
+  },
 };

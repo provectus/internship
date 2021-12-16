@@ -8,6 +8,9 @@ interface Props {
   expenses: Array<Expense>;
   categories: Array<Category>;
   month: string;
+  onAddExpense: any;
+  onEditExpense: any;
+  onDeleteExpense: any;
 }
 
 export const Tabs = (props: Props) => {
@@ -26,7 +29,11 @@ export const Tabs = (props: Props) => {
           <Container fluid>
             <Row>
               <Col className='text-center'>
-                <AddExpenseButton size='lg' className='w-100 m-3'>
+                <AddExpenseButton
+                  size='lg'
+                  className='w-100 m-3'
+                  onClick={props.onAddExpense}
+                >
                   Add Expense
                 </AddExpenseButton>
               </Col>
@@ -37,6 +44,8 @@ export const Tabs = (props: Props) => {
                   categories={props.categories}
                   expenses={props.expenses}
                   month={props.month}
+                  onEditExpense={props.onEditExpense}
+                  onDeleteExpense={props.onDeleteExpense}
                 />
               </Col>
             </Row>

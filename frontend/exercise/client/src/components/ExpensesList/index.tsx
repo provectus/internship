@@ -8,6 +8,8 @@ interface Props {
   expenses: Array<Expense>;
   categories: Array<Category>;
   month: string;
+  onEditExpense: any;
+  onDeleteExpense: any;
 }
 
 export const ExpensesList = (props: Props) => {
@@ -20,17 +22,14 @@ export const ExpensesList = (props: Props) => {
       <ExpenseCategoryAccordionItem
         key={category._id}
         expenseCategory={category}
+        categoryTotalExpenses={utils.totalExpenses(categoryExpenses)}
       >
-        <h5>
-          Total Amount:{' '}
-          <span className='text-success'>
-            {utils.totalExpenses(categoryExpenses).toLocaleString()}
-          </span>
-        </h5>
-        <hr />
         <DayExpensesList
           expensesByDay={utils.expensesByDay(categoryExpenses)}
           month={props.month}
+          categories={props.categories}
+          onEditExpense={props.onEditExpense}
+          onDeleteExpense={props.onDeleteExpense}
         ></DayExpensesList>
       </ExpenseCategoryAccordionItem>
     );
