@@ -1,0 +1,52 @@
+.expense {
+  margin: 2px 0;
+  padding: 20px 85px 20px 50px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+
+
+  border-radius: 5px;
+
+  background: #FFFFFF;
+  border: 1px solid #34BE04;
+}
+
+.expense h2 {
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 37px;
+
+  color: #4B4B4B;
+
+}
+
+.expense div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.expense p {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 47px;
+
+  color: #4B4B4B;
+}
+
+.expense button{
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.expense button + button {
+  right: 12px;
+  top: unset;
+  bottom: 12px;
+}

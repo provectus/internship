@@ -1,0 +1,17 @@
+header {
+  padding: 30px 10%;
+
+  font-size: 24px;
+  line-height: 28px;
+  color: white;
+  text-align: left;
+
+  background: linear-gradient(180deg, #36CE00 0%, #31AB06 100%);
+  box-shadow: 0px 30px 40px rgba(0, 0, 0, 0.15);
+}
+
+header h1 {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 48px;
+}

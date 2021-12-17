@@ -45,27 +45,6 @@ main > div > div {
 
 }
 
-main span {
-  color: #31AB06;
-  text-decoration: none;
-}
-
 main ul {
   list-style: none;
-}
-
-.link-button {
-  width: 250px;
-  margin-bottom: 65px;
-  padding: 10px;
-
-  border: 2px solid #34BE04;
-  box-sizing: border-box;
-  border-radius: 8px;
-  
-  font-size: 16px;
-  line-height: 20px;
-  text-align: center;
-
-  color: #31AB06;
 }

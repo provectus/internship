@@ -1,39 +1,57 @@
 import './Expenses.css';
-import React, { useState } from 'react'
-import expensesService from '../../services/expensesService'
+import Expense from '../../components/Expense/Expense';
+import { Plus } from 'react-feather';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import expensesService from '../../services/expensesService';
 
-function Expenses() {
-  const [expenses, setExpenses] = useState(undefined)
+function Expenses({ setExpensesRoutes }) {
+  const [expenses, setExpenses] = useState([])
+  const [loading, setLoading] = useState(true)
 
-  async function getExpenses() {
+  async function fetchExpenses() {
     let data = await expensesService.getExpenses()
-    setExpenses(data)
+    if (loading) {
+      setExpenses(data)
+      setExpensesRoutes(expenses)
+    }
   }
 
   async function deleteExpense(id) {
     let resp = await expensesService.deleteExpense(id)
     console.log(resp)
-    getExpenses()
+    setLoading(true)
+    fetchExpenses()
   }
 
+  useEffect(() => {
+    fetchExpenses()
+    return () => { setLoading(false) }
+  })
+
   return (
-    <>
-      <header>
-        <h1>Expense Tracker</h1>
-        <p>Monitor your expenses efficiently</p>
-      </header>
-      <main>
-        <h1>Expenses List:</h1>
-        {!expenses && (<button type="button" onClick={getExpenses}>Show Expenses</button>)}
-        {!!expenses && (
+    <main>
+      <h1>History</h1>
+      <Link to="/statistic" style={{ textDecoration: "none" }}><div className="link-button">See Expenses Analysis</div></Link>
+      {!loading ? (
+        <>
+          <div>
+            <hr align="center" width="100%" size="1" color="#31AB06" />
+            <div>
+              <i><Plus size={20} /></i>
+              <Link to="/add-expense" style={{ textDecoration: "none" }}>
+                <span>Add new expense</span>
+              </Link>
+            </div>
+          </div>
           <ul>
             {expenses.map((expense) => (
-              <li key={expense._id}>{expense.description} {expense.amount} {new Date(expense.date).toLocaleDateString()} {new Date(expense.date).toLocaleTimeString()} <button type="button" onClick={() => deleteExpense(expense._id)}>x</button></li>
+              <Expense key={expense._id} id={expense._id} description={expense.description} amount={expense.amount} date={expense.date} onDeleteClick={() => deleteExpense(expense._id)} />
             ))}
           </ul>
-        )}
-      </main>
-    </>
+        </>
+      ) : (<p>Loading...</p>)}
+    </main>
   );
 }
 
