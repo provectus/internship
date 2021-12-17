@@ -1,5 +1,17 @@
 version: '3'
 services:
+  client:
+    build: ./client
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    command: npm start
+    depends_on:
+      - api
+    volumes:
+      - ./client/:/home/app/client
+      - /home/app/client/node_modules
+
   api:
     build: ./server
     env_file:
