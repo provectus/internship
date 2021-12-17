@@ -1,7 +1,22 @@
 import React, { useState } from 'react';
 import { PieChart, Pie, Sector } from 'recharts';
+import { SortedCategoryInterface } from '../../types'
 
-function renderActiveShape(props) {
+interface ActiveShapeProps {
+  cx: number,
+  cy: number,
+  midAngle: number,
+  innerRadius: number,
+  outerRadius: number,
+  startAngle: number,
+  endAngle: number,
+  fill: string,
+  payload: SortedCategoryInterface,
+  percent: number,
+  value: string,
+}
+
+function renderActiveShape(props: ActiveShapeProps) {
   const RADIAN = Math.PI / 180;
   const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value } = props;
   const sin = Math.sin(-RADIAN * midAngle);
@@ -47,10 +62,14 @@ function renderActiveShape(props) {
   );
 };
 
-function CategoriesPieChart({ data }) {
+interface CategoryChartProps {
+  data: SortedCategoryInterface[]
+}
+
+function CategoriesPieChart({ data }: CategoryChartProps) {
   const [activeIndex, setActiveIndex] = useState(0)
 
-  const onPieEnter = (_, index) => {
+  const onPieEnter = (_: any, index: number) => {
     setActiveIndex(index)
   };
 

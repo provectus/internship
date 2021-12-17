@@ -6,10 +6,11 @@ import Statistic from './routes/statistics/Statistic';
 import AddExpense from './routes/add-expense/AddExpense';
 import EditExpense from './routes/edit-expense/EditExpense';
 import expensesService from './services/expensesService';
+import { ExpenseInterface } from './types';
 
 function App() {
-  const [expenses, setExpenses] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [expenses, setExpenses] = useState<ExpenseInterface[] | []>([])
+  const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
     async function fetchExpenses() {
@@ -24,8 +25,8 @@ function App() {
     <Router>
       <Header />
       <Routes>
-        <Route exact path="/" element={<Expenses setExpensesRoutes={(expns) => { setExpenses(expns) }} />} />
-        <Route path="/expenses" element={<Expenses />} />
+        <Route path="/" element={<Expenses setExpensesRoutes={setExpenses} />} />
+        <Route path="/expenses" element={<Expenses setExpensesRoutes={setExpenses} />} />
         <Route path="/statistic" element={<Statistic />} />
         <Route path="/add-expense" element={<AddExpense />} />
         {expenses.map((expense) => (

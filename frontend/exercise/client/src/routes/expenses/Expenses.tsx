@@ -4,10 +4,15 @@ import { Plus } from 'react-feather';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import expensesService from '../../services/expensesService';
+import { ExpenseInterface } from '../../types';
 
-function Expenses({ setExpensesRoutes }) {
-  const [expenses, setExpenses] = useState([])
-  const [loading, setLoading] = useState(true)
+interface ExpensesProps {
+  setExpensesRoutes: React.Dispatch<React.SetStateAction<[] | ExpenseInterface[]>>
+}
+
+function Expenses({ setExpensesRoutes }: ExpensesProps) {
+  const [expenses, setExpenses] = useState<ExpenseInterface[] | []>([])
+  const [loading, setLoading] = useState<boolean>(true)
 
   async function fetchExpenses() {
     let data = await expensesService.getExpenses()
@@ -17,7 +22,7 @@ function Expenses({ setExpensesRoutes }) {
     }
   }
 
-  async function deleteExpense(id) {
+  async function deleteExpense(id: string) {
     let resp = await expensesService.deleteExpense(id)
     console.log(resp)
     setLoading(true)
@@ -36,7 +41,7 @@ function Expenses({ setExpensesRoutes }) {
       {!loading ? (
         <>
           <div>
-            <hr align="center" width="100%" size="1" color="#31AB06" />
+            <hr color="#31AB06" />
             <div>
               <i><Plus size={20} /></i>
               <Link to="/add-expense" style={{ textDecoration: "none" }}>

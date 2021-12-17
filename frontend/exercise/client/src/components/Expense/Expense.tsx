@@ -2,7 +2,15 @@ import './Expense.css';
 import { X, Edit2 } from 'react-feather';
 import { Link } from 'react-router-dom';
 
-function Expense(props) {
+interface ExpenseItemProps {
+  id: string,
+  description: string,
+  amount: number,
+  date: string,
+  onDeleteClick: ((event: React.MouseEvent<HTMLButtonElement>) => void) | undefined,
+}
+
+function Expense(props: ExpenseItemProps) {
   const { id, description, amount, date, onDeleteClick, ...rest } = props
 
   return (

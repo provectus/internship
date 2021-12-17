@@ -4,13 +4,19 @@ import React, { useState, useEffect } from 'react';
 import expensesService from '../../services/expensesService';
 import categoriesService from '../../services/categoriesService';
 import CategoriesPieChart from '../../components/CategoriesPieChart/CategoriesPieChart'
+import { ExpenseInterface, CategoryInterface, SortedCategoryInterface } from '../../types';
+
+interface DateInterface {
+  id: number,
+  month: Date,
+}
 
 function Statistic() {
-  const [expenses, setExpenses] = useState([])
-  const [categories, setCategories] = useState([])
-  const [sortedExpenses, setSortedExpenses] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [dateArray, setDateArray] = useState([])
+  const [expenses, setExpenses] = useState<ExpenseInterface[] | []>([])
+  const [categories, setCategories] = useState<CategoryInterface[] | []>([])
+  const [sortedExpenses, setSortedExpenses] = useState<SortedCategoryInterface[] | []>([])
+  const [loading, setLoading] = useState<Boolean>(true)
+  const [dateArray, setDateArray] = useState<DateInterface[] | []>([])
   const [chosenMonth, setChosenMonth] = useState(0)
   const [monthExpenses, setMonthExpenses] = useState(0)
 
@@ -23,7 +29,7 @@ function Statistic() {
   }
 
   function fetchMonths() {
-    let dates = expenses.map((expense) => new Date(expense.date))
+    let dates = expenses.map((expense) => new Date(expense.date).getTime())
 
     let datepointer = new Date(Math.min.apply(null, dates))
     let maxdate = new Date(Math.max.apply(null, dates))
@@ -61,9 +67,9 @@ function Statistic() {
     setMonthExpenses(sorted.reduce((sum, category) => (sum + category.amount), 0))
   }
 
-  function changeMonth(month) {
+  function changeMonth(month: string) {
     setLoading(true)
-    setChosenMonth(month)
+    setChosenMonth(Number(month))
   }
 
 
@@ -95,7 +101,7 @@ function Statistic() {
             <CategoriesPieChart data={sortedExpenses} />
             <ul>
               {sortedExpenses.map((category) => (
-                <Category key={category.id} id={category.id} title={category.title} amount={category.amount} content={category.content} />
+                <Category key={category.id} target={category} />
               ))}
             </ul>
           </>}

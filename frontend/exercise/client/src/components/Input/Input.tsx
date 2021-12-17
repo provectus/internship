@@ -1,20 +1,22 @@
 import React from 'react'
 import "./Input.css";
-import { useController } from 'react-hook-form'
+import { useController, Control, RegisterOptions } from 'react-hook-form'
+import { CategoryInterface } from '../../types'
 
-/**
- * Encapsulates registering react-hook-form input and displays errors
- * @param name
- * @param control
- * @param rules
- * @param rest
- * @returns {JSX.Element}
- * @constructor
- */
-function Input({ name, control, rules, type, options, ...rest }) {
+interface InputProps {
+  name: string,
+  control: Control<any> | undefined,
+  rules?: Exclude<RegisterOptions, 'valueAsNumber' | 'valueAsDate' | 'setValueAs'>;
+  type: string,
+  options?: CategoryInterface[],
+}
+
+
+function Input({ name, control, rules, type, options, ...rest }: InputProps) {
   const { field, fieldState } = useController({ name, control, rules })
 
   if (type === 'select') {
+    if (!options) options = []
     return (
       <div>
         <select placeholder={name} {...field} {...rest}>
