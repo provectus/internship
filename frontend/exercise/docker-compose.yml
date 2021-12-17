@@ -6,8 +6,9 @@ services:
       - '3000:3000'
     depends_on:
       - api
-    volumes:
-      - ./client:/usr/src/app
+    # volumes:
+    #   - ./client:/usr/src/app
+    #   - /usr/src/app/node_modules
 
   api:
     build: ./server
