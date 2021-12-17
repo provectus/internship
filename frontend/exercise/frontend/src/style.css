@@ -1,0 +1,57 @@
+.input-forms {
+    width : 100%;
+}
+
+.form-labels {
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.table-labels {
+    font-size: xx-large;
+    font-weight: bold;
+    text-align: center;
+}
+
+.input-buttons {
+    margin-top : 10px;
+}
+
+.tables {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pagination {
+    margin-left: 5.9em!important;
+    margin-top: 0!important;
+}
+
+.page-link {
+    color: white!important;
+    font-size: x-large;
+    background: #212529!important;
+}
+
+.expenses-table {
+    margin-bottom: 0!important;
+}
+
+.charts-wrapper {
+    margin-left: 270px;
+    margin-right: auto;
+}
+
+.chart-labels {
+    font-size: xx-large;
+    font-weight: bold;
+    margin-left: 500px;
+}
+
+.line {
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
