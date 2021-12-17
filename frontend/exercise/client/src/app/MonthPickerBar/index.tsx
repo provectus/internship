@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Col, Form, Navbar, Row } from 'react-bootstrap';
 
 interface Props {
@@ -8,10 +7,6 @@ interface Props {
 }
 
 export const MonthPickerBar = (props: Props) => {
-  const [currentMonthYear, setCurrentMonthYear] = useState(
-    props.currentMonthYear
-  );
-
   const selectRange = props.range.map((monthYear) => {
     return (
       <option key={monthYear} value={monthYear}>
@@ -24,12 +19,9 @@ export const MonthPickerBar = (props: Props) => {
       <Row>
         <Col xs='auto' className='text-center'>
           <Form.Select
-            value={currentMonthYear}
+            value={props.currentMonthYear}
             size='lg'
-            onChange={(e: any) => {
-              setCurrentMonthYear(e.target.value);
-              props.onChange(e);
-            }}
+            onChange={(e: any) => props.onChange(e)}
           >
             {selectRange}
           </Form.Select>
