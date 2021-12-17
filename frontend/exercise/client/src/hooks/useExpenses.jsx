@@ -36,6 +36,25 @@ const ExpensesProvider = ({ children }) => {
     async function deleteExpense(id) {
         try {
             await expensesService.delete(id)
+            getExpenses()
+        } catch (error) {
+            errorCatcher(error)
+        }
+    }
+
+    async function createExpense(data) {
+        try {
+            await expensesService.post(data)
+            getExpenses()
+        } catch (error) {
+            errorCatcher(error)
+        }
+    }
+
+    async function editExpense(id, data) {
+        try {
+            await expensesService.put(id, data)
+            getExpenses()
         } catch (error) {
             errorCatcher(error)
         }
@@ -43,12 +62,14 @@ const ExpensesProvider = ({ children }) => {
 
     function errorCatcher(error) {
         console.log(error.response)
-        // const { message } = error.response.data
-        setError("message")
+        const { message } = error.response.data
+        setError(message)
     }
 
     return (
-        <ExpenseContext.Provider value={{ expenses, deleteExpense }}>
+        <ExpenseContext.Provider
+            value={{ expenses, deleteExpense, createExpense, editExpense }}
+        >
             {children}
         </ExpenseContext.Provider>
     )

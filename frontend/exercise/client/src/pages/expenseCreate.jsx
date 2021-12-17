@@ -1,10 +1,11 @@
 import React, { useState } from "react"
+import { useHistory } from "react-router-dom"
 import TextField from "../common/form/textField"
 import SelectField from "../common/form/selectField"
 import { useCategories } from "../hooks/useCategories"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
-import expensesService from "../services/expenses.service"
+import { useExpenses } from "../hooks/useExpenses"
 
 const ExpenseCreate = () => {
     const [date, setDate] = useState(new Date())
@@ -16,11 +17,14 @@ const ExpenseCreate = () => {
     })
 
     const { category } = useCategories()
+    const { createExpense } = useExpenses()
 
     const categoryList = category.map((c) => ({
         label: c.title,
         value: c._id
     }))
+
+    const history = useHistory()
 
     const handleChange = (target) => {
         setData((prevState) => ({
@@ -36,7 +40,8 @@ const ExpenseCreate = () => {
             date: date.toISOString()
         }
         try {
-            await expensesService.post(newData)
+            await createExpense(newData)
+            history.push("/")
         } catch (error) {}
     }
 

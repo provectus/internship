@@ -18,7 +18,7 @@ const ExpensesList = () => {
     const { expenses, deleteExpense } = useExpenses()
     const { category } = useCategories()
 
-    const pageSize = 20
+    const pageSize = 30
 
     const sumAmount = (expensesAmount) => {
         let totalAmount = 0

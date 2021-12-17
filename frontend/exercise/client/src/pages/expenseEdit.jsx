@@ -1,13 +1,27 @@
 import React, { useState, useEffect } from "react"
+import { useHistory } from "react-router-dom"
 import PropTypes from "prop-types"
 import expensesService from "../services/expenses.service"
 import TextField from "../common/form/textField"
+import SelectField from "../common/form/selectField"
 import DatePicker from "react-datepicker"
+import { useExpenses } from "../hooks/useExpenses"
+import { useCategories } from "../hooks/useCategories"
 
 const ExpenseEdit = ({ id }) => {
     const [date, setDate] = useState(new Date())
     const [dataExpense, setDataExpense] = useState([])
-    console.log(date)
+
+    const { editExpense } = useExpenses()
+    const { category } = useCategories()
+
+    const categoryList = category.map((c) => ({
+        label: c.title,
+        value: c._id
+    }))
+
+    const history = useHistory()
+
     useEffect(() => {
         getExpensesById()
     }, [])
@@ -33,7 +47,8 @@ const ExpenseEdit = ({ id }) => {
             date: date.toISOString()
         }
         try {
-            await expensesService.put(id, newData)
+            await editExpense(id, newData)
+            history.push("/")
         } catch (error) {}
     }
 
@@ -65,6 +80,14 @@ const ExpenseEdit = ({ id }) => {
                             value={dataExpense.amount}
                             type="number"
                             onChange={handleChange}
+                        />
+                        <SelectField
+                            name="category"
+                            onChange={handleChange}
+                            value={dataExpense.category}
+                            label="Choose category"
+                            options={categoryList}
+                            defaultOption="Choose..."
                         />
                         <button
                             type="submit"
