@@ -1,5 +1,5 @@
 export const api = {
-    URL: "http://localhost",
+    URL: process.env.REACT_APP_BACKEND_URL,
     PORT: "5000",
     API: {
         EXPENSES: "expenses",
