@@ -17,7 +17,6 @@ const DisplayScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
     const [expenses,setexpenses] = useState([]);
     const [categories,setcategories] = useState([]);
     const [refreshKey, setRefreshKey] = useState(0);
-    const [code,setcode] = useState([0]);
 
     type Expense = {
         _id: string;

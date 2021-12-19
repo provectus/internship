@@ -1,25 +1,24 @@
 import { StatusBar } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, View, TextInput, Alert } from 'react-native';
+import { Button, StyleSheet, Text, View, TextInput } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { IStackScreenProps } from '../library/StackScreenProps';
-
+import DateTimePicker from 'react-datetime-picker';
 
 const UpdateScreen: React.FunctionComponent<IStackScreenProps> = ( props) => {
 
 
     const {id, amount, date, description, category} = props.route.params;
 
+    const [up_date, setdate] = useState(new Date(date));
+
     const [selectedCategory, setSelectedCategory] = useState(category);
     const [data, setData] = React.useState({
         amount: String(amount),
-        date: date,
         description: description,
         check_amountChange: false,
-        check_dateChange: false,
         check_desChange: false,
         isValidAmount: true,
-        isValidDate: true,
         isValidDescription: true,
     });
 
@@ -84,39 +83,9 @@ const UpdateScreen: React.FunctionComponent<IStackScreenProps> = ( props) => {
             });
         }  
     }
-    const DateChange = (val: string) => {
-        if( val.length > 0) {
-            setData({
-                ...data,
-                date: val,
-                check_dateChange: true,
-                isValidDate: true
-            });
-        } else {
-            setData({
-                ...data,
-                date: val,
-                check_dateChange: false,
-                isValidDate: false
-            });
-        }
-    }
-    const handleValidDate = (val: string) => {
-        if( val.length > 0) {
-            setData({
-                ...data,
-                isValidDate: true
-            });
-        } else {
-            setData({
-                ...data,
-                isValidDate: false
-            });
-        } 
-    }
 
 
-    const UpdateExpense = async (s_amount: string,des: string,newdate: string, categ: string) => {
+    const UpdateExpense = async (s_amount: string,des: string, categ: string) => {
 
 
         let amount = parseInt(s_amount)
@@ -130,7 +99,7 @@ const UpdateScreen: React.FunctionComponent<IStackScreenProps> = ( props) => {
           },
           body: JSON.stringify({
             "amount": amount,
-            "date": newdate,
+            "date": up_date,
             "description": des
             })
             }).then(response => {
@@ -182,19 +151,12 @@ const UpdateScreen: React.FunctionComponent<IStackScreenProps> = ( props) => {
                 { data.isValidDescription ? null : 
             <Text style={styles.errorMsg}>This filed cannot be empty</Text>
             }
-                <Text style={styles.customText}>Date should be entered in timezone format. Ex: 2021-12-16T15:10:03.077Z</Text>
-                <TextInput 
-                value = {data.date}
-                    placeholder="Date"
-                    style={styles.textInput}
-                    autoCapitalize="none"
-                    onChangeText={(val) => DateChange(val)}
-                    onEndEditing={(e)=>handleValidDate(e.nativeEvent.text)}
-                />
-                { data.isValidDate ? null : 
-            <Text style={styles.errorMsg}>This filed cannot be empty</Text>
-            }
-                <Text style={styles.customText}>Category</Text>
+                <Text style={styles.textInput}>Date</Text>
+                <DateTimePicker
+                        onChange={setdate}
+                        value={up_date}
+                    />
+                <Text style={styles.textInput}>Category</Text>
                 <Picker style={styles.Picker_style}
                     selectedValue={selectedCategory}
                     onValueChange={(itemValue, itemIndex) => setSelectedCategory(itemValue)}
@@ -211,7 +173,7 @@ const UpdateScreen: React.FunctionComponent<IStackScreenProps> = ( props) => {
                     <Picker.Item label="Hobbies" value="617be036888f752511901461" />
                 </Picker>
                 <View style={{margin:20}}>
-                    <Button title='Update expense' color='#009387' onPress={() => UpdateExpense(data.amount,data.description,data.date,selectedCategory)} />
+                    <Button title='Update expense' color='#009387' onPress={() => UpdateExpense(data.amount,data.description,selectedCategory)} />
                 </View>
 
         </View>
@@ -222,6 +184,8 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       marginTop: StatusBar.currentHeight || 0,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     baseText: {
       fontWeight: 'bold',
@@ -242,6 +206,7 @@ const styles = StyleSheet.create({
     textInput: {
         flex: 1,
         marginTop: 10,
+        marginBottom: 10,
         textAlign: "center",
         width: '100%',
         color: '#05375a',
