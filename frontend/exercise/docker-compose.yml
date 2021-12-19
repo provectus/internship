@@ -1,5 +1,16 @@
 version: '3'
 services:
+  react:
+    build: ./react-app
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    command: npm start
+    depends_on:
+      - api
+    volumes:
+      - ./react-app/://usr/app
+      - //usr/app/node_modules
   api:
     build: ./server
     env_file:
