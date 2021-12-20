@@ -7,6 +7,14 @@ import { useHistory } from "react-router-dom"
 import { useExpenses } from "../hooks/useExpenses"
 import FilterList from "../common/filterList"
 import { useCategories } from "../hooks/useCategories"
+import { graphicData } from "../utils/graphicsData"
+import {
+    FlexibleXYPlot,
+    VerticalBarSeries,
+    XAxis,
+    YAxis,
+    LabelSeries
+} from "react-vis"
 
 const ExpensesList = () => {
     const [currentPage, setCurrentPage] = useState(1)
@@ -50,7 +58,18 @@ const ExpensesList = () => {
 
     return (
         <div className="container">
-            <div className="d-flex justify-content-between align-items-center">
+            <div>
+                <h1>
+                    {`Total Amount: ${sumAmount(expenses).toLocaleString()}`}
+                </h1>
+                <h2>
+                    {`Total Amount for choosen category: ${sumAmount(
+                        filteredExpenses
+                    ).toLocaleString()}`}
+                </h2>
+            </div>
+
+            <div className="d-flex justify-content-around align-items-center btn-lg">
                 <div>
                     <button
                         className="btn btn-success"
@@ -59,17 +78,28 @@ const ExpensesList = () => {
                         Add new expense
                     </button>
                 </div>
+
                 <div>
-                    <h1>
-                        {`Total Amount: ${sumAmount(
-                            expenses
-                        ).toLocaleString()}`}
-                    </h1>
-                    <h2>
-                        {`Total Amount for choosen category: ${sumAmount(
-                            filteredExpenses
-                        ).toLocaleString()}`}
-                    </h2>
+                    <FlexibleXYPlot
+                        width={600}
+                        height={300}
+                        xType="ordinal"
+                        margin={{
+                            top: 50,
+                            bottom: 50,
+                            left: 100,
+                            right: 0
+                        }}
+                    >
+                        <VerticalBarSeries data={graphicData(expenses)} />
+                        <LabelSeries
+                            labelAnchorX="middle"
+                            labelAnchorY="text-after-edge"
+                            data={graphicData(expenses)}
+                        />
+                        <XAxis />
+                        <YAxis />
+                    </FlexibleXYPlot>
                 </div>
             </div>
 
