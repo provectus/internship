@@ -1,38 +1,45 @@
 version: '3'
 services:
   db:
-    image: "postgres:9.6.5"
+    image: "postgres:${DB_TAG:-9.6.5}"
+    ports:
+      - "5432:5432"
     volumes:
-      - "dbdata:/var/lib/postgresql/data"
-    env_file:
-      - env_file
+      - "dbdata:${DB_DIR:-/var/lib/postgresql/data}"
+    env_file: &environ_file
+      - ${ENV_FILE:-env_file}
     networks:
-      - db_nw
+      - ${DB_NW:-db_nw}
   flaskapp:
-    build: .
-    env_file:
-      - env_file
+    build: ${FLASK_DOCKERFILE:-.}
+    image: "${FLASKAPP_IMAGE:-example_flaskapp}:latest"
+    env_file: *environ_file
+    ports:
+      - "5090:5090"
     volumes:
-      - .:/opt/services/flaskapp/src
+      - .:${FLASK_DIR:-/opt/services/flaskapp/src}
     networks:
-      - db_nw
-      - web_nw
+      - ${DB_NW:-db_nw}
+      - ${WEB_NW:-web_nw}
     depends_on:
       - db
+    command: ${FLASK_CMD:-bash -c "
+      ./wait-for-it.sh db:5432 -- python -c 'import database; database.init_db()'
+      && python app.py"
+      }
   nginx:
-    image: "nginx:1.13.5"
+    image: "nginx:${NGINX_TAG:-1.13.5}"
     ports:
-      - "8080:80"
+      - "${PUB_PORT:-8080}:${NGINX_PORT:-80}"
     volumes:
-      - ./conf.d:/etc/nginx/conf.d
+      - ${SRC_CONFD:-./conf.d}:${NGINX_CONFD:-/etc/nginx/conf.d}
     networks:
-      - web_nw
+      - ${WEB_NW:-web_nw}
     depends_on: 
       - flaskapp
 networks:
-  db_nw:
-    driver: bridge
-  web_nw:
-    driver: bridge
+  db_nw: &bridgedriver
+    driver: overlay
+  web_nw: *bridgedriver
 volumes:
   dbdata:
