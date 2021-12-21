@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "RalewayRegular";
+  src: local("RalewayRegular"),
+    url("./fonts/Raleway-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+
+input[type=button]{
+  background-color: #24a0ed;
+  color: white;
+  border: none;
+  height: 50px;
+}
+
+input[type=submit]{
+  background-color: #24a0ed;
+  color: white;
+  border: none;
+  height: 50px;
+}

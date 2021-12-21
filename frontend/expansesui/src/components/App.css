@@ -1,0 +1,8 @@
+.toolbar{
+    display: flex;
+}
+
+.add-expenses{
+    margin-left: 1%;
+    width: 20%;
+}
