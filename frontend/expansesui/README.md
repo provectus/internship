@@ -1,8 +1,8 @@
-# User interface for expences
+# User Interface For Expences API
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Available Scripts To Run The UI
 
 In the project directory, you can run:
 
