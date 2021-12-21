@@ -1,4 +1,4 @@
-# User Interface For Expences API
+# User Interface For Expenses API
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
