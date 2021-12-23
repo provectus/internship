@@ -27,10 +27,13 @@ const StatSelect: React.FC<Props> = ({ setSelectedMonth }) => {
   }) => {
     setSelectedMonth(Number(value));
   };
+
   return (
-    <Form.Select size="sm" onChange={handleChange}>
+    <Form.Select size="sm" style={{ width: "15vw" }} onChange={handleChange}>
       {months.map((month: string, index: number) => (
-        <option value={index}>{month}</option>
+        <option key={month + index} value={index}>
+          {month}
+        </option>
       ))}
     </Form.Select>
   );

@@ -42,26 +42,10 @@ const FormEdit: React.FC<Props> = ({ idForEdit, putAndUpdate }) => {
           noValidate
           className="p-0"
           style={styleForm}
-          // onKeyDown={(e) => {
-          //   if (e.key === "Enter") return handleSubmit;
-          // }}
           onSubmit={handleSubmit}
         >
           <Row className="g-1" style={{ alignItems: "center" }}>
             <Col sm="3">
-              {/* <Form.Group controlId="validationFormik01">
-                <FloatingLabel controlId="floatingInputGrid" label="id">
-                  <Form.Control
-                    style={{fontSize:".8rem"}}
-                    size="sm"
-                    type="text"
-                    name="id"
-                    value={values.id}
-                    onChange={handleChange}
-                    isValid={touched.price && !errors.price}
-                  />
-                </FloatingLabel>
-              </Form.Group> */}
               <fieldset disabled>
               <Form.Group>
                 <FloatingLabel controlId="floatingInputGrid" label="id">
@@ -70,7 +54,8 @@ const FormEdit: React.FC<Props> = ({ idForEdit, putAndUpdate }) => {
                    size="sm"
                    type="text"
                    name="id"
-                   value={idForEdit}
+                      value={idForEdit}
+                      readOnly
                   />
                 </FloatingLabel>
               </Form.Group>

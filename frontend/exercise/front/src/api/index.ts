@@ -1,21 +1,21 @@
+import { SERVER_API } from "../constant";
 import { Expense, Category, PostValues, URL } from "../types";
-const SERVER_API = 'http://localhost:5000/'
 
 const getFetch = async <Type>(url: string): Promise<Type> => {
   const response = await fetch(`${SERVER_API}${url}`);
   return await response.json();
 };
 export const getCategories = async () => {
-  return getFetch<Category[]>(URL.CATEGORIES);
+  return await getFetch<Category[]>(URL.CATEGORIES);
 };
 
 export const getExpenses = async () => {
-  const data = await getFetch<Expense[]>(URL.EXPENSES);
-  return data
+  return await getFetch<Expense[]>(URL.EXPENSES);
+
 };
 
 export const getExpenseById = async (id: string): Promise<Expense> => {
-  return getFetch<Expense>(`${URL.EXPENSES}/${id}`);
+  return await getFetch<Expense>(`${URL.EXPENSES}/${id}`);
 };
 
 export const postFetch = async ({

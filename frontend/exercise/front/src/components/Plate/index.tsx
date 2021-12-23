@@ -8,32 +8,25 @@ interface Props {
 
 const Plate: React.FC<Props> = ({ expense }) => {
   const returnHeaderList = () => {
-    if(expense){
-    const filterArray = ["_id", "__v", "updatedAt", "createdAt"];
-    return Object.keys(expense)
-      .filter((key) => {
-        for (let filter of filterArray) {
-          if (key === filter) return false;
-        }
-        return true;
-      })
-      .map((key) => (
-        <ListGroup.Item key={key + Math.random().toString}>
-          {key}
+    if (expense) {
+      const filterArray = ["_id", "__v", "updatedAt", "createdAt"];
+      const plate = Object.keys(expense)
+        .filter((key) => {
+          for (let filter of filterArray) {
+            if (key === filter) return false;
+          }
+          return true;
+        })
+        .map((key) => <span>{key}</span>);
+      return (
+        <ListGroup.Item style={{width: "100%"}} className="d-flex justify-content-between align-self-center">
+          {plate}
         </ListGroup.Item>
-      ));
+      );
     }
   };
 
-  return (
-      <ListGroup
-        className="d-flex justify-content-between align-items-start"
-        horizontal
-      >
-        {returnHeaderList()}
-      </ListGroup>
-
-  );
+  return <ListGroup horizontal>{returnHeaderList()}</ListGroup>;
 };
 
 export default Plate;

@@ -32,7 +32,8 @@ const FormDelete: React.FC<Props> = ({ idForEdit, deleteAndUpdate }) => {
                       size="sm"
                       type="text"
                       name="id"
-                      value={idForEdit}
+                    value={idForEdit}
+                    readOnly
                     />
                   </FloatingLabel>
                 </Form.Group>

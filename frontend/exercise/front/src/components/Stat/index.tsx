@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
-import { Badge, Row } from "react-bootstrap";
-import {
-  expensesBySelectedMonth,
-  sumByMonth,
-} from "../../utils";
+import { Badge, Container, Row } from "react-bootstrap";
+import { expensesBySelectedMonth, sumByMonth } from "../../utils";
 import StatChart from "../StatChart";
 import StatSelect from "../StatSelect";
 import { Category, Expense } from "../../types";
@@ -25,25 +22,30 @@ const Stat: React.FC<Props> = ({ expenses, categories }) => {
   );
   return (
     <>
-      <Row>
-        <h2 className="p-0">
-          <Badge bg="secondary">Costs</Badge>
-        </h2>
-      </Row>
-      <Row className="d-flex justify-content-center text-muted">
-        in just a month{" "}
-      </Row>
-      <Row>
-        <h4>
-          <Badge bg="secondary">{` ${sumByMonth(expensesOfMonth)}$`}</Badge>
-        </h4>
-      </Row>
-      <Row>
-        <StatChart expensesOfMonth={expensesOfMonth} categories={categories} />
-      </Row>
-      <Row>
-        <StatSelect setSelectedMonth={setSelectedMonth} />
-      </Row>
+      <Container>
+        <Row>
+          <h2 className="p-0">
+            <Badge bg="secondary">Costs</Badge>
+          </h2>
+        </Row>
+        <Row className="d-flex justify-content-center text-muted">
+          in just a month{" "}
+        </Row>
+        <Row>
+          <h4>
+            <Badge bg="secondary">{` ${sumByMonth(expensesOfMonth)}$`}</Badge>
+          </h4>
+        </Row>
+        <Row className="d-flex justify-content-center">
+          <StatChart
+            expensesOfMonth={expensesOfMonth}
+            categories={categories}
+          />
+        </Row>
+        <Row className="d-flex justify-content-center">
+          <StatSelect setSelectedMonth={setSelectedMonth} />
+        </Row>
+      </Container>
     </>
   );
 };

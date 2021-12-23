@@ -1,3 +1,4 @@
+import React from "react";
 import { ListGroup } from "react-bootstrap";
 import { Category } from "../../types";
 
@@ -6,24 +7,27 @@ const style = {
 }
 interface Props {
   categories: Category[],
-  setCurrentCategory: (id: string)=>void
+  setCurrentCategory: (id: string) => void;
+  setDataFromSearchInput: (data: string) => void;
 }
-const ListCategories: React.FC<Props> = ({categories, setCurrentCategory}) => {
+const ListCategories: React.FC<Props> = React.memo(({ categories, setCurrentCategory, setDataFromSearchInput }) => {
+  const onClickHandler = (id:string) => ()=> {
+    setCurrentCategory(id);
+    setDataFromSearchInput("")
+  }
   return (
     <ListGroup style={style}>
       <ListGroup.Item disabled>Categories</ListGroup.Item>
       {categories.map((category: Category) => (
         <ListGroup.Item action variant="light"
           key={category._id + category.title}
-          onClick={() => {
-            setCurrentCategory(category._id);
-          }}
+          onClick={onClickHandler(category._id)}
         >
           {category.title}
         </ListGroup.Item>
       ))}
     </ListGroup>
   );
-};
+})
 
 export default ListCategories;

@@ -28,8 +28,8 @@ const StatChart: React.FC<Props> = ({ expensesOfMonth, categories }) => {
     <PieChart width={300} height={250} onMouseEnter={() => {}}>
       <Pie
         data={data}
-        cx={90}
-        cy={120}
+        cx={130}
+        cy={100}
         innerRadius={60}
         outerRadius={80}
         fill="#8884d8"
@@ -38,7 +38,9 @@ const StatChart: React.FC<Props> = ({ expensesOfMonth, categories }) => {
       >
         {data &&
           data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            <Cell
+            className="d-flex justify-content-center align-items-start"
+              key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
       </Pie>
       <Tooltip />

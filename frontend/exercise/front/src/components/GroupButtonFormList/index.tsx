@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import SearchFormComponent from "../FormSearch";
+import SearchForm from "../SearchForm";
+import AddForm from "../AddForm";
+import plus from "bootstrap-icons/icons/plus.svg";
 import {
   Category,
   Expense,
@@ -7,92 +9,54 @@ import {
   PostValues,
   typeSearch,
 } from "../../types";
-import { Container, Row } from "react-bootstrap";
-import ButtonGroupComponent from "../ButtonGroupComponent";
-import AddFormComponent from "../FormAdd";
-import ListSingleExpense from "../ListSingleExpense";
+import { Container, Row, Button, Col } from "react-bootstrap";
 import Plate from "../Plate";
 import ListExpenses from "../ListExpenses";
-import FormEdit from "../FormEdit";
-import FormDelete from "../FormDelete";
+import { useToggle } from "../../hooks/useToggle";
 
 interface Props {
   categories: Category[];
   expenses: Expense[];
-  expenseById: Expense | null;
-  currentCategory: string;
   postAndUpdate: (data: PostValues) => void;
-  getSetExpenseById: (values: typeSearch) => void;
-  setExpenseById: (expense: Expense | null) => void;
   putAndUpdate: (id: string, values: PostValues) => void;
   deleteAndUpdate: (id: string) => void;
+  setDataFromSearchInput: (data: string) => void;
 }
 
 const GroupButtonFormList: React.FC<Props> = ({
   categories,
   expenses,
-  expenseById,
-  currentCategory,
   postAndUpdate,
-  getSetExpenseById,
-  setExpenseById,
   putAndUpdate,
   deleteAndUpdate,
+  setDataFromSearchInput
 }) => {
-  const [choiceInput, setChoiceInput] = useState<string>(InputEnum.search);
-  const [idForEdit, setIdForEdit] = useState<string>("");
+  const [isAddForm, setIsAddForm] = useToggle(false);
 
   const returnForm = () => {
-    if (choiceInput === InputEnum.add)
-      return (
-        <AddFormComponent
-          categories={categories}
-          postAndUpdate={postAndUpdate}
-        />
-      );
-    if (choiceInput === InputEnum.edit)
-      return <FormEdit putAndUpdate={putAndUpdate} idForEdit={idForEdit} />;
-    if (choiceInput === InputEnum.delete)
-      return (
-        <FormDelete deleteAndUpdate={deleteAndUpdate} idForEdit={idForEdit} />
-      );
-    if (choiceInput === InputEnum.search)
-      return <SearchFormComponent getSetExpenseById={getSetExpenseById} />;
-  };
+    return (isAddForm ?
+      <AddForm setIsAddForm={setIsAddForm} categories={categories}
+        postAndUpdate={postAndUpdate} /> :
+      <SearchForm setIsAddForm={setIsAddForm } setDataFromSearchInput={setDataFromSearchInput} />)
+  }
 
   return (
-    <div>
+    <>
       <Container fluid="md">
         <Row>{returnForm()}</Row>
         <Row>
-          <ButtonGroupComponent
-            setChoiceInput={setChoiceInput}
-            setExpenseById={setExpenseById}
-          />
-        </Row>
-        <Row>
           <Plate expense={expenses[0]} />
         </Row>
-
-        {expenseById ? (
-          <Row>
-            <ListSingleExpense
-              expenseById={expenseById}
-              categories={categories}
-            />
-          </Row>
-        ) : (
-          <Row>
-            <ListExpenses
-              setIdForEdit={setIdForEdit}
-              expenses={expenses}
-              currentCategory={currentCategory}
-              categories={categories}
-            />
-          </Row>
-        )}
+        <Row>
+          <ListExpenses
+            expenses={expenses}
+            categories={categories}
+            putAndUpdate={putAndUpdate}
+            deleteAndUpdate={deleteAndUpdate}
+          />
+        </Row>
       </Container>
-    </div>
+    </>
   );
 };
 export default GroupButtonFormList;

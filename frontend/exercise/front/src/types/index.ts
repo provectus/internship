@@ -14,6 +14,7 @@ export interface Expense {
   createdAt: string;
   updatedAt: string;
   __v: number;
+  error?: string;
 }
 
 export interface PostValues {
@@ -30,7 +31,7 @@ export enum URL {
 }
 
 export interface typeSearch {
-  id: string
+  data: string|number
 }
 
 export enum InputEnum {

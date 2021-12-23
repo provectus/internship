@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import {
   deleteFetch,
   getCategories,
-  getExpenseById,
   getExpenses,
   postFetch,
   putFetch,
@@ -14,13 +13,51 @@ import ListCategories from "./components/ListCategories";
 import GroupButtonFormList from "./components/GroupButtonFormList";
 import { Category, Expense, PostValues } from "./types";
 import Stat from "./components/Stat";
+import { useCallbackStringState } from "./hooks/useCallbackStringState";
+import isNumber from "./utils/isNumber";
+
+
 
 function App() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [expenses, setExpenses] = useState<Expense[]>([]);
-  const [expenseById, setExpenseById] = useState<Expense | null>(null);
+  const [currentExpenses, setCurrentExpenses] = useState<Expense[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [currentCategory, setCurrentCategory] = useState<string>("");
+  const [currentCategory, setCurrentCategory] = useCallbackStringState("");
+  const [dataFromSearchInput, setDataFromSearchInput] =
+    useCallbackStringState("");
+
+  const preSetCurrentExpenses = () => {
+    let filteredExpenses = expenses;
+    if (currentCategory !== "" && !dataFromSearchInput) {
+      filteredExpenses = filteredExpenses.filter((expenseCategory: Expense) => {
+        return expenseCategory.category === currentCategory;
+      });
+    }
+    if (dataFromSearchInput) {
+      if (isNumber(dataFromSearchInput)) {
+        filteredExpenses = filteredExpenses.filter(
+          (expense) => expense.amount.toString().includes(dataFromSearchInput)
+        );
+      } else {
+        filteredExpenses = filteredExpenses.filter(
+          (expense) => expense.description.includes(dataFromSearchInput)
+        );
+      }
+    }
+    filteredExpenses.sort(
+      (a: { date: string }, b: { date: string }) =>
+        new Date(b.date).valueOf() - new Date(a.date).valueOf()
+    );
+    setCurrentExpenses(filteredExpenses);
+  };
+
+  const escHandle = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Escape") {
+      setCurrentCategory("");
+      setDataFromSearchInput("");
+    }
+  }
 
   const getSetCategories = async (): Promise<void> => {
     const data = await getCategories();
@@ -34,16 +71,13 @@ function App() {
     setIsLoading(true);
     postFetch(values);
     setIsLoading(false);
+    setCurrentCategory("");
   };
-  const getSetExpenseById = async ({ id }: { id: string }) => {
-    const data = await getExpenseById(id);
-    setExpenseById(data);
-  };
-
   const putAndUpdate = async (id: string, values: PostValues) => {
     setIsLoading(true);
     await putFetch(id, values);
     setIsLoading(false);
+    setCurrentCategory("");
   };
 
   const deleteAndUpdate = async (id: string) => {
@@ -56,37 +90,38 @@ function App() {
     getSetCategories();
   }, []);
   useEffect(() => {
-    getSetExpenses();
+    if (!isLoading) {
+      getSetExpenses();
+    }
   }, [isLoading]);
+  useEffect(() => {
+    preSetCurrentExpenses();
+  }, [currentCategory, expenses, dataFromSearchInput]);
+console.log("currentCat", currentCategory)
   return (
-    <div className="App">
+    <div className="App" onKeyDown={escHandle}>
       <Container className="d-flex justify-content-center p-0">
-        <Col sm={2}>
+        <Col sm={3}>
           <ListCategories
             categories={categories}
             setCurrentCategory={setCurrentCategory}
+            setDataFromSearchInput={setDataFromSearchInput}
           />
         </Col>
 
-        <Col sm={7}>
-          <Row></Row>
+        <Col sm={6}>
           <Row>
-            {" "}
             <GroupButtonFormList
               categories={categories}
-              expenses={expenses}
-              expenseById={expenseById}
-              currentCategory={currentCategory}
+              expenses={currentExpenses}
               postAndUpdate={postAndUpdate}
-              getSetExpenseById={getSetExpenseById}
-              setExpenseById={setExpenseById}
               putAndUpdate={putAndUpdate}
               deleteAndUpdate={deleteAndUpdate}
+              setDataFromSearchInput={setDataFromSearchInput}
             />
           </Row>
         </Col>
-
-        <Col sm={2}>
+        <Col sm={3}>
           <Stat expenses={expenses} categories={categories} />
         </Col>
       </Container>
