@@ -1,8 +1,5 @@
 # Provectus Internship Program 
 
-:point_right:  **Open a PR with your completed test assignment, and apply through the [Internship Application Form](https://www.surveymonkey.com/r/InternshipProvectus)!**
-
-
 <p align="center">
 <img src="./images/provectus-internship-feature-image.jpg" width="1200px" alt="provectus-internship-program-feature-image"/>&nbsp;
 </p>
@@ -14,17 +11,9 @@ This repository contains test assignments for Provectus Internship Program (PIP)
 
 ## Test Assignments
 
-Currently one specialization is available for internship. The Frontend recruitment is now closed, but you can do the task as a practice. 
-
-- **[DevOps](./devops)**
-- **[Frontend](./frontend)**
-- **[DataEng](./dataeng)**
-
 Pick one and follow the directions in its README.md file.
-The test task consists of 2 parts: theory and practice. 
-Make sure to complete both and open a PR. Then, fill in this form, add a link to your PR inside it and submit: 
-
-- **[Provectus Internship Application Form](https://www.surveymonkey.com/r/InternshipProvectus)**
+The test task can consists of 2 parts: theory and practice. 
+Make sure to complete both and open a PR.
 
 We will review your application and reply as soon as we can. 
 
@@ -33,9 +22,8 @@ We will review your application and reply as soon as we can.
 
 - Internship duration is 3 months
 - Internship is unpaid
-- Location: Kazan or online
-- For Kazan, it's recommended to come to office at least once a week for better teamwork
-- To apply, complete both parts of the test assignment (theory and practice) and apply using the [application form](https://www.surveymonkey.com/r/InternshipProvectus) 
+- Format: Remote
+- To apply, complete both parts of the test assignment (theory and practice)
 
 ## What Interns Get
 
@@ -50,19 +38,18 @@ We will review your application and reply as soon as we can.
 
 ## How to Apply 
 
-1. Decide on your specialization DevOps or Frontend
+1. Decide on your specialization
 2. Have a Github account & basic Git skills
 3. Fork & clone this repository 
 4. Complete the assignment in a separate branch
 5. Push the branch and open a PR to this repository
-6. Fill in the [application form](https://www.surveymonkey.com/r/InternshipProvectus), add a link to your PR, submit. 
 
 ## Provectus Opportunities
 
 For current internship and learning opportunities at Provectus and their starting dates, please check out the official Provectus Careers website: 
 
 - [Provectus Careers](https://careers.provectus.com/)
-- [Provectus Internship (Kazan)](https://careers.provectus.com/internship/)
+- [Provectus Internship](https://careers.provectus.com/internship/)
 - [Provectus NOC School](https://careers.provectus.com/noc-school2-provectus/)
 
 Or send an email to us at: **internship@provectus.com**
