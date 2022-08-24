@@ -1,0 +1,47 @@
+.category {
+  width: 100%;
+  margin: 2px 0;
+  padding: 20px 85px 20px 50px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  border-radius: 5px;
+
+  background: #FFFFFF;
+  border: 1px solid #34BE04;
+	outline: none;
+	cursor: pointer;
+}
+
+.category h2 {
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 37px;
+
+  color: #4B4B4B;
+
+}
+
+.category p {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 47px;
+
+  color: #4B4B4B;
+}
+
+.category i {
+  position: absolute;
+  right: 12px;
+}
+
+.category:focus {
+  outline: none;
+}
+
+.expenses {
+  padding-left: 50px;
+}
