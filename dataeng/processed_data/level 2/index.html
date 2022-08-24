@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+  <div id="csv"></div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    $.ajax({
+      url: 'output.csv',
+      dataType: 'text',
+    }).done(func);
+
+    function timeConverter(UNIX_timestamp) {
+      var a = new Date(UNIX_timestamp);
+      var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      var year = a.getFullYear();
+      var month = months[a.getMonth()];
+      var date = a.getDate();
+      var time = date + ' ' + month + ' ' + year;
+      return time
+    }
+
+    function func(data) {
+      var allRows = data.split(/\r?\n|\r/);
+      var table = '<table>';
+      for (var singleRow = 0; singleRow < allRows.length; singleRow++) {
+        if (singleRow === 0)
+          table += '<thead>';
+        table += '<tr>';
+        var rowCells = allRows[singleRow].split(',');
+        for (var rowCell = 0; rowCell < rowCells.length; rowCell++) {
+          if (singleRow === 0) {
+            table += '<th>';
+            table += rowCells[rowCell];
+            table += '</th>';
+          }
+          else {
+            if (rowCell == rowCells.length - 1) {
+              table += '<td><img src="'
+              table += rowCells[rowCell];
+              table += '"></td>';
+            }
+            else if (rowCell == rowCells.length - 2) {
+              table += '<td>';
+              table += timeConverter(parseInt(rowCells[rowCell]));
+              table += '</td>';
+            }
+            else {
+              table += '<td>';
+              table += rowCells[rowCell];
+              table += '</td>';
+            }
+          }
+        }
+        if (singleRow === 0) {
+          table += '</thead>';
+          table += '<tbody>';
+        }
+        table += '</tr>';
+      }
+      table += '</tbody>';
+      table += '</table>';
+      $('body').append(table);
+    }
+  </script>
+</body>
+
+</html>
