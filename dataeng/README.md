@@ -1,3 +1,4 @@
+# Check out my [Solution](solution.md)
 ### Prerequisites
 * Python 3.7 or greater
 * Docker 19.03 or greater
