@@ -1,6 +1,7 @@
 version: '3'
 services:
   api:
+    container_name: api
     build: ./server
     env_file:
       - ./server/dev.env
@@ -30,3 +31,10 @@ services:
       - mongodb
     volumes:
       - ./mongo-seed/dump:/dump
+
+  frontend:
+    build: ./frontend/my-app
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
