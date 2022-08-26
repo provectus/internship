@@ -1,0 +1,6 @@
+
+.table{
+    display: grid;
+    grid-template-columns: [one] 50px, [two] 50px, [three] 50px, [four] 50px, [five] 3px, [six] 1px;
+    grid-template-rows: auto;
+}
