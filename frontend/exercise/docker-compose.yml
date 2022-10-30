@@ -1,5 +1,18 @@
 version: '3'
 services:
+  app:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    command: npm start
+    volumes:
+      - ./app/:/usr/app
+      - /usr/app/node_modules
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+
   api:
     build: ./server
     env_file:
