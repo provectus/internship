@@ -1,0 +1,54 @@
+Resources:
+  Ec2Instance:
+    Type: AWS::EC2::Instance
+    Metadata:
+      "AWS::CloudFormation::Init":
+        configSets:
+          setup:
+            - install_server
+        install_server:
+          packages:
+            yum:
+              httpd: []
+          files:
+            "/var/www/html/index.html":
+              content: |
+                Hello world!
+              mode: 000644
+              owner: root
+              group: root
+          services:
+            sysvinit:
+              httpd:
+                enabled: true
+                ensureRunning: true
+    Properties:
+      ImageId: ami-03d5c68bab01f3496
+      InstanceType: t2.micro
+      SecurityGroups: !Ref InstanceSecurityGroup
+      KeyName: !Ref 'KeyName'
+      Tags:
+        - Key: Name
+          Value: Cloudformation
+      UserData:
+        # runs the cfn-init scripts
+        Fn::Base64:
+          !Sub |
+          #!/bin/bash -xe
+          yum update -y aws-cfn-bootstrap
+          /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource Instance --configsets setup --region ${AWS::Region}
+          /opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackName} --resource Instance --region ${AWS::Region}
+  InstanceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable ssh access.
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+Parameters:
+  KeyName:
+    Description: Name of an existing EC2 KeyPair.
+    Type: AWS::EC2::KeyPair::KeyName
+    ConstraintDescription: must be the name of an existing EC2 KeyPair.
