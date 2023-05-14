@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "history": "^5.1.0",
+    "react-router-dom": "^6.1.1"
+  }
+}
