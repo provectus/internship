@@ -3,9 +3,32 @@
 
 ## Questions
 * Mention the advantages and disadvantages of bash scripts
+
+> Advantages:
+  > * To automate the frequently performed operations
+  > * To run sequence of commands as a single command
+  > *  Easy to use
+  > *  Portable (It can be executed in any Unix-like operating systems without any modifications)
+>
+> Disadvantages:
+   > * Slow execution speed compared to any programming languages
+   > * A new process launched for almost every shell command executed
+
 * What types of variables are used in bash?
+
+>  Global variables and Local variables
+
 * What is pipes in shell script and how to use it?
+
+> Is used to connect the output from one command to the input of another
+
 * How to show unique values of the second column from the CSV comma-separated file and sort results with the alphabet?
+
+> Smth like this `cat addresses.csv | cut -d ',' -f2 | sort -a`, sorry, I don't have some experience with these kind of things
+
+#
+
+### OMG, IT TAKES THE WHOLE SATURDAY
 
 ## Task
 Create script which provide aggregated information about analysises and they datasets. Information about each analysis/deployment could be retrieved from `awscli.sh`:
